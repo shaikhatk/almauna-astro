@@ -1,0 +1,205 @@
+
+---
+interface Props {
+  apiKey?: string;
+  mapId?: string;
+  officeLocation: {
+    name: string;
+    address: string;
+    coords: { lat: number; lng: number };
+    mapUrl: string;
+    color: string;
+  };
+  warehouseLocation: {
+    name: string;
+    address: string;
+    coords: { lat: number; lng: number };
+    mapUrl: string;
+    color: string;
+  };
+}
+
+const { 
+  apiKey = 'AIzaSyCa6Dl5uhfYcobY8I_sexN6FQZItPeJ7HE',
+  mapId = 'map-container',
+  officeLocation,
+  warehouseLocation
+} = Astro.props;
+---
+
+<div id={mapId} class='w-[380px] h-[300px] md:h-[490px] rounded-lg overflow-hidden shadow-lg'>
+  <div id={`${mapId}-inner`} class='w-full h-full'></div>
+</div>
+
+<script define:vars={{ apiKey, mapId, officeLocation, warehouseLocation }}>
+  // Global flag to prevent multiple API loads
+  window.__googleMapsLoaded = window.__googleMapsLoaded || false;
+  window.__googleMapsCallbacks = window.__googleMapsCallbacks || [];
+
+  function createCustomMarker(map, location, color) {
+    const svgMarker = {
+      path: 'M0,-28 C-7.73,-28 -14,-21.73 -14,-14 C-14,-10.77 -13,-7.52 -11.35,-4.35 C-9.7,-1.18 -8.35,1.97 -8.35,1.97 L0,28 L8.35,1.97 C8.35,1.97 9.7,-1.18 11.35,-4.35 C13,-7.52 14,-10.77 14,-14 C14,-21.73 7.73,-28 0,-28 Z',
+      fillColor: color,
+      fillOpacity: 1,
+      strokeColor: '#fff',
+      strokeWeight: 2,
+      scale: 1.2,
+    };
+
+    const marker = new google.maps.Marker({
+      position: location.coords,
+      map: map,
+      title: location.name,
+      icon: svgMarker,
+      animation: google.maps.Animation.DROP,
+    });
+
+    return marker;
+  }
+
+  function createInfoWindow(location) {
+    return new google.maps.InfoWindow({
+      content: `
+        <div class="p-4 max-w-xs">
+          <h3 class="font-bold text-lg mb-2" style="color: ${location.color}">
+            ${location.name}
+          </h3>
+          <p class="text-sm text-gray-700">${location.address}</p>
+          <a href="${location.mapUrl}" target="_blank" rel="noopener noreferrer" class="text-sm mt-3 inline-block px-3 py-1 rounded" style="background-color: ${location.color}; color: white;">
+            View on Maps
+          </a>
+        </div>
+      `,
+      maxWidth: 300,
+    });
+  }
+
+  function initializeMap() {
+    const mapElement = document.getElementById(`${mapId}-inner`);
+    if (!mapElement) return;
+
+    // Clear previous map if it exists
+    mapElement.innerHTML = '';
+
+    const markersArray = [];
+    const infoWindowsArray = [];
+
+    // Calculate center point
+    const centerLat = (officeLocation.coords.lat + warehouseLocation.coords.lat) / 2;
+    const centerLng = (officeLocation.coords.lng + warehouseLocation.coords.lng) / 2;
+
+    // Create map
+    const mapInstance = new google.maps.Map(mapElement, {
+      zoom: 14,
+      center: { lat: centerLat, lng: centerLng },
+      mapTypeControl: true,
+      fullscreenControl: true,
+      streetViewControl: true,
+      zoomControl: true,
+      styles: [
+        {
+          featureType: 'all',
+          elementType: 'labels.text.fill',
+          stylers: [{ color: '#616161' }],
+        },
+      ],
+    });
+
+    // Create Office Marker
+    const officeMarker = createCustomMarker(mapInstance, officeLocation, officeLocation.color);
+    const officeInfoWindow = createInfoWindow(officeLocation);
+    infoWindowsArray.push(officeInfoWindow);
+
+    officeMarker.addListener('click', () => {
+      infoWindowsArray.forEach((iw) => iw.close());
+      officeInfoWindow.open(mapInstance, officeMarker);
+    });
+
+    // Create Warehouse Marker
+    const warehouseMarker = createCustomMarker(mapInstance, warehouseLocation, warehouseLocation.color);
+    const warehouseInfoWindow = createInfoWindow(warehouseLocation);
+    infoWindowsArray.push(warehouseInfoWindow);
+
+    warehouseMarker.addListener('click', () => {
+      infoWindowsArray.forEach((iw) => iw.close());
+      warehouseInfoWindow.open(mapInstance, warehouseMarker);
+    });
+
+    markersArray.push(officeMarker, warehouseMarker);
+
+    // Auto-open office info window on load
+    setTimeout(() => {
+      officeInfoWindow.open(mapInstance, officeMarker);
+    }, 500);
+
+    // Fit bounds to show both markers
+    const bounds = new google.maps.LatLngBounds();
+    bounds.extend(officeLocation.coords);
+    bounds.extend(warehouseLocation.coords);
+    mapInstance.fitBounds(bounds, 100);
+
+    // Store map instance for cleanup
+    window[`__mapInstance_${mapId}`] = mapInstance;
+    window[`__markers_${mapId}`] = markersArray;
+    window[`__infoWindows_${mapId}`] = infoWindowsArray;
+  }
+
+  function loadGoogleMapsScript() {
+    return new Promise((resolve) => {
+      // If already loaded, resolve immediately
+      if (window.__googleMapsLoaded) {
+        resolve();
+        return;
+      }
+
+      // If currently loading, add to callbacks
+      if (window.__googleMapsLoading) {
+        window.__googleMapsCallbacks.push(resolve);
+        return;
+      }
+
+      window.__googleMapsLoading = true;
+
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
+      script.async = true;
+      script.defer = true;
+
+      script.onload = () => {
+        window.__googleMapsLoaded = true;
+        window.__googleMapsLoading = false;
+        resolve();
+        // Execute all pending callbacks
+        window.__googleMapsCallbacks.forEach((cb) => cb());
+        window.__googleMapsCallbacks = [];
+      };
+
+      document.head.appendChild(script);
+    });
+  }
+
+  // Initialize map
+  async function setupMap() {
+    try {
+      await loadGoogleMapsScript();
+      initializeMap();
+    } catch (error) {
+      console.error('Error loading map:', error);
+      const mapElement = document.getElementById(`${mapId}-inner`);
+      if (mapElement) {
+        mapElement.innerHTML =
+          '<div class="flex items-center justify-center h-full text-red-600">Failed to load map</div>';
+      }
+    }
+  }
+
+  // Run setup when document is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMap);
+  } else {
+    setupMap();
+  }
+
+  // Re-initialize map on Astro page transitions
+  document.addEventListener('astro:page-load', setupMap);
+</script>

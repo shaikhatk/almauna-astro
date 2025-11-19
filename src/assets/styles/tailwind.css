@@ -18,6 +18,19 @@
   .text-muted {
     color: var(--aw-color-text-muted);
   }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Smooth scroll behavior for tabs container */
+  .tabs-scroll-container {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer components {

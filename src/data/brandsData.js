@@ -1,0 +1,96 @@
+import { products } from './productsData.js';
+
+export const brands = [
+  {
+    id: 'maharani',
+    name: 'Maharani',
+    description: 'Rice for diabetics',
+    brandTitle: 'Maharani',
+    brandLogoImage: '/src/assets/images/maharani/maharani-logo.png',
+    brandDescription: [
+      '<p><strong>Maharani</strong> is an Indian brand that stands out for blending traditional basmati excellence with modern dietary needs.</p></br>',
+      '<p>Al Mauna proudly serves as the exclusive distributor of their Diabetic-Friendly Basmati Rice, a specialized variety crafted for blood sugar management without sacrificing authentic taste or perfect texture.</p>',
+    ].join(''),
+    collectionTitle: 'Maharani collection',
+    catalog: 'https://maharanirice.in/',
+    products: products.filter((product) => product.brand.id === 'maharani'),
+  },
+  {
+    id: 'honig-ozbal',
+    name: 'Honig Ozbal',
+    description: 'Natural honey',
+    brandTitle: 'Honig Ozbal',
+    brandLogoImage: '/src/assets/images/honig-ozbal/honig-logo.png',
+    brandDescription: [
+      '<strong>Honig Ozbal</strong> is a premium German brand renowned for its high-quality honey products, sourced from environmentally protected regions and produced under strict European quality standards.<br /><br /> At Al Mauna Trading, we proudly distribute a curated selection of Honig Ozbal’s 100% pure honey to the Qatar and UAE markets.',
+    ].join(''),
+    collectionTitle: 'Honig Ozbal collection',
+    catalog: 'http://ozbal.eu/',
+    products: products.filter((product) => product.brand.id === 'honig-ozbal'),
+  },
+  {
+    id: 'nicoli-vitabella',
+    name: 'Nicoli Vitabella',
+    description: 'Cereals and granola',
+    brandTitle: 'Nicoli Vitabella',
+    brandLogoImage: '/src/assets/images/vitabella/vitabella-logo.png',
+    brandDescription: [
+      "<strong>Nicoli Vitabella</strong> specializes in nutritious cereals and granola made from premium grains and natural ingredients.<br /><br /> Al Mauna Trading brings the taste of Italy to Qatar with Vitabella's organic cornflakes. Elevate your breakfast with a wholesome and delicious choice, reflecting our commitment to quality and well-being.",
+    ].join(''),
+    collectionTitle: 'Nicoli Vitabella collection',
+    catalog: 'https://molinonicoli.it/en/vitabella/',
+    products: products.filter((product) => product.brand.id === 'nicoli-vitabella'),
+  },
+  {
+    id: 'tradekey',
+    name: 'Tradekey',
+    description: 'Corn oil',
+    brandTitle: 'Tradekey',
+    brandLogoImage: '/src/assets/images/tradekey/tradekey-logo.png',
+    brandDescription: [
+      '<strong>Tradekey Pure Corn Oil</strong>, produced by PalmTop Malaysia, is a household name in the edible oil industry. Known for its reliability, high purity, and excellent cooking performance, Tradekey has built a strong reputation across Asia and the Middle East.<br /><br /> As an official distributor, Al Mauna brings this trusted Malaysian brand closer to consumers and businesses in the UAE and Qatar.',
+    ].join(''),
+    collectionTitle: 'Tradekey collection',
+    catalog: 'https://www.palmtopvegeoil.com.my/pro_product_2.php',
+    products: products.filter((product) => product.brand.id === 'tradekey'),
+  },
+  {
+    id: 'april',
+    name: 'April',
+    description: 'Mayonnaise',
+    brandTitle: 'April',
+    brandLogoImage: '/src/assets/images/logo.png',
+    brandDescription: [
+      '<strong>April</strong> is a leading mayonnaise brand crafted with premium ingredients for authentic taste and quality.',
+    ].join(''),
+    collectionTitle: 'April collection',
+    catalog: 'https://maharanirice.in/',
+    products: products.filter((product) => product.brand.id === 'april'),
+  },
+  {
+    id: 'shraddha',
+    name: 'Shraddha',
+    description: 'Cow gee',
+    brandTitle: 'Shraddha',
+    brandLogoImage: '/src/assets/images/shradha/shradha-logo.png',
+    brandDescription: [
+      '<strong>Shraddha</strong> produces pure, traditional cow ghee using time-honored methods for authentic flavor and nutrition.Ghee is culinary gold. It is most versatile and imperishable Ghee.<br /><br /> Its use is universal, greasing, baking, frying roasting, mixing it with dough, used as spread , a side dish, for body care and much more. When used daily it helps to maintain well-being. ',
+    ].join(''),
+    collectionTitle: 'Shraddha collection',
+    catalog: 'https://www.shraddhafood.com/',
+    products: products.filter((product) => product.brand.id === 'shraddha'),
+  },
+  {
+    id: 'al-mauna',
+    name: 'Al Mauna',
+    description: 'Palestine virgin olive oil',
+    brandTitle: 'Al Mauna',
+    brandLogoImage: '/src/assets/images/logo.png',
+    brandDescription: [
+      'At <strong>Al Mauna</strong>, we are proud to present our flagship product — Palestinian Virgin Olive Oil. Sourced from centuries-old olive groves across Palestine, this oil is more than just a cooking ingredient; it is a symbol of heritage, resilience, and purity.<br /><br />Our Virgin Olive Oil is produced in compliance with GCC import standards and international food safety certifications. Each batch is tested for acidity, peroxide value, and taste profile, ensuring a consistently premium product.  ',
+    ].join(''),
+    collectionTitle: 'Al Mauna collection',
+    catalog: '#',
+    products: products.filter((product) => product.brand.id === 'al-mauna'),
+  },
+];

@@ -1,0 +1,177 @@
+---
+import Image from 'astro/components/Image.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = 'Built on trusted relationships',
+  subtitle = 'A growing community trusts Al Mauna for their premium food needs.',
+} = Astro.props;
+
+const topRowLogos = [
+  { src: '/src/assets/images/customers/Amlak-11.jpg', alt: 'Amlak' },
+  { src: '/src/assets/images/customers/cafenoir-12.png', alt: 'Cafe Noir' },
+  { src: '/src/assets/images/customers/Chocolatebash-1.jpg', alt: 'Chocolatebash' },
+  { src: '/src/assets/images/customers/ECGC-2.jpg', alt: 'ECGC' },
+  { src: '/src/assets/images/customers/ffc-3.jpg', alt: 'FFC' },
+  { src: '/src/assets/images/customers/novo-4.png', alt: 'Novo Cinemas' },
+];
+
+const bottomRowLogos = [
+  { src: '/src/assets/images/customers/QACC-5.jpg', alt: 'QACC' },
+  { src: '/src/assets/images/customers/QatarArmedForces-6.jpeg', alt: 'Qatar Armed Forces' },
+  { src: '/src/assets/images/customers/qncc-7.jpg', alt: 'QNCC' },
+  { src: '/src/assets/images/customers/sasso-8.jpg', alt: 'Sasso' },
+  { src: '/src/assets/images/customers/souqalbaladi-9.png', alt: 'Souq Al Baladi' },
+  { src: '/src/assets/images/customers/teatime-10.jpg', alt: 'Tea Time' },
+];
+
+const testimonials = [
+  {
+    quote:
+      "The customer focus at Al Mauna is exceptional. Their team goes above and beyond to understand our specific needs, making the entire distribution process incredibly smooth. They're more than a supplier; they're a true partner.",
+    author: 'Mohammed Al-Fardan',
+    position: 'Procurement Manager',
+    company: 'Grand Hypermarket',
+    image: '/src/assets/images/manager.jpg',
+  },
+  {
+    quote:
+      'Al Mauna Trading has been an invaluable partner for our restaurant. Their consistent quality sourcing and reliable delivery of premium ingredients means we never have to compromise on our menu. Truly a seamless experience!',
+    author: 'Chef Ahmed Al-Ghamdi',
+    position: 'Owner',
+    company: 'The Spice Route Restaurant',
+    image: '/src/assets/images/chef.jpg',
+  },
+];
+---
+
+<style>
+  @keyframes scrollRight {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-50% - 16px));
+    }
+  }
+
+  @keyframes scrollLeft {
+    0% {
+      transform: translateX(calc(-50% - 16px));
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .carousel-row-top {
+    animation: scrollRight 10s linear infinite;
+  }
+
+  .carousel-row-bottom {
+    animation: scrollLeft 10s linear infinite;
+  }
+
+  .carousel-row-top:hover,
+  .carousel-row-bottom:hover {
+    animation-play-state: paused;
+  }
+</style>
+
+<section class='pt-[96px] pb-[170px]'>
+  <div>
+    <!-- Header -->
+    <div class='text-center mb-[80px] max-w-6xl mx-auto'>
+      <h1 class='text-[32px] font-bold text-gradient'>{title}</h1>
+      <p class='text-[20px] pt-[8px]'>{subtitle}</p>
+    </div>
+
+    <!-- Carousel Container -->
+    <div class='mb-[96px] overflow-hidden'>
+      <!-- Top Row - Scrolling Right -->
+      <div class='mb-[32px]'>
+        <div class='flex gap-[64px] carousel-row-top'>
+          {
+            topRowLogos.map((logo) => (
+              <div class='flex-shrink-0 w-[200px] h-[200px] flex items-center justify-center bg-white'>
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
+              </div>
+            ))
+          }
+          {
+            topRowLogos.map((logo) => (
+              <div class='flex-shrink-0 w-[200px] h-[200px] flex items-center justify-center bg-white'>
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Bottom Row - Scrolling Left -->
+      <div>
+        <div class='flex gap-[64px] carousel-row-bottom'>
+          {
+            bottomRowLogos.map((logo) => (
+              <div class='flex-shrink-0 w-[200px] h-[200px] flex items-center justify-center bg-white'>
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
+              </div>
+            ))
+          }
+          {
+            bottomRowLogos.map((logo) => (
+              <div class='flex-shrink-0 w-[200px] h-[200px] flex items-center justify-center bg-white'>
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class='max-w-6xl mx-auto px-6'>
+      <div class='flex md:flex-row flex-col md:justify-between gap-[32px] md:gap-[96px]'>
+        {
+          testimonials.map((testimonial) => (
+            <div class='bg-gradient-to-br from-[#F6E9F2] to-[#F0E0F0] rounded-[16px] p-[32px]'>
+              <div class='flex justify-between items-start gap-[36px]'>
+                <div>
+                  <Image
+                    src='/src/assets/images/quotation.svg'
+                    alt='quotation-mark'
+                    width={56}
+                    height={56}
+                    class='w-[250px] h-[55px] '
+                  />
+                </div>
+
+                <div class='flex flex-col'>
+                  <p class='text-[20px] mb-[24px]'>{testimonial.quote}</p>
+                  <div class='flex justify-start items-center gap-[16px]'>
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.author}
+                      width={56}
+                      height={56}
+                      class='w-[96px] h-[96px] rounded-[64px] object-center object-cover'
+                    />
+                    <div>
+                      <p class='font-bold text-[20px] '>{testimonial.author}</p>
+                      <p class='text-[20px] '>{testimonial.position}</p>
+                      <p class='text-[20px]'>{testimonial.company}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

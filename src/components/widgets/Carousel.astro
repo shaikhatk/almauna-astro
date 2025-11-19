@@ -1,0 +1,317 @@
+
+---
+export interface Props {
+  slides: Array<{
+    id: string;
+    [key: string]: any;
+  }>;
+  autoPlayDelay?: number;
+  showControls?: boolean;
+  showDots?: boolean;
+  showSwipe?: boolean;
+  transitionDelay?: number;
+  dragThreshold?: number;
+}
+
+const {
+  slides,
+  autoPlayDelay = 5000,
+  showControls = true,
+  showDots = true,
+  showSwipe = true,
+  transitionDelay = 500,
+  dragThreshold = 50,
+} = Astro.props;
+
+const carouselId = `carousel-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class='carousel-container' data-carousel-id={carouselId}>
+  <!-- SLIDES CONTAINER -->
+  <div class='relative overflow-hidden bg-white rounded-lg cursor-grab active:cursor-grabbing md:h-[450px] h-[954px]'>
+    <div class='carousel-wrapper relative w-full h-full touch-pan-y'>
+      <slot name='slides' />
+    </div>
+  </div>
+
+  <!-- CAROUSEL CONTROLS -->
+  {
+    (showControls || showDots) && (
+      <div class='flex items-center justify-center gap-3 mt-8'>
+        {showControls && (
+          <button
+            class='carousel-prev-btn p-2 rounded-full border-2 border-[#75317A] text-[#75317A] hover:bg-[#75317A] hover:text-white transition-colors'
+            aria-label='Previous slide'
+          >
+            <svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 19l-7-7 7-7' />
+            </svg>
+          </button>
+        )}
+
+        {showDots && (
+          <div class='flex gap-2'>
+            <slot name='dots' />
+          </div>
+        )}
+
+        {showControls && (
+          <button
+            class='carousel-next-btn p-2 rounded-full border-2 border-[#75317A] text-[#75317A] hover:bg-[#75317A] hover:text-white transition-colors'
+            aria-label='Next slide'
+          >
+            <svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 5l7 7-7 7' />
+            </svg>
+          </button>
+        )}
+      </div>
+    )
+  }
+</div>
+
+<script define:vars={{ carouselId, autoPlayDelay, transitionDelay, dragThreshold, showSwipe }}>
+  class CarouselController {
+    constructor(containerId, config) {
+      this.containerId = containerId;
+      this.container = document.querySelector(`[data-carousel-id="${containerId}"]`);
+      this.currentSlide = 0;
+      this.autoPlayInterval = null;
+      this.autoPlayDelay = config.autoPlayDelay;
+      this.transitionDelay = config.transitionDelay;
+      this.dragThreshold = config.dragThreshold;
+      this.showSwipe = config.showSwipe;
+
+      this.slides = this.container.querySelectorAll('.carousel-slide');
+      this.dots = this.container.querySelectorAll('.carousel-dot');
+      this.prevBtn = this.container.querySelector('.carousel-prev-btn');
+      this.nextBtn = this.container.querySelector('.carousel-next-btn');
+      this.wrapper = this.container.querySelector('.carousel-wrapper');
+      this.totalSlides = this.slides.length;
+
+      // Swipe/Drag properties
+      this.touchStartX = 0;
+      this.touchEndX = 0;
+      this.isDragging = false;
+      this.dragStartX = 0;
+      this.dragOffset = 0;
+
+      // Debounce properties
+      this.isTransitioning = false;
+
+      if (this.totalSlides === 0) {
+        console.warn(`No carousel slides found for ${containerId}`);
+        return;
+      }
+
+      this.init();
+    }
+
+    init() {
+      this.attachEventListeners();
+      this.showSlide(0);
+      this.startAutoPlay();
+    }
+
+    attachEventListeners() {
+      if (this.showSwipe) {
+        // Touch events for mobile
+        this.wrapper?.addEventListener('touchstart', (e) => this.handleTouchStart(e), false);
+        this.wrapper?.addEventListener('touchend', (e) => this.handleTouchEnd(e), false);
+
+        // Mouse events for desktop drag
+        this.wrapper?.addEventListener('mousedown', (e) => this.handleMouseDown(e));
+        this.wrapper?.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+        this.wrapper?.addEventListener('mouseup', (e) => this.handleMouseUp(e));
+        this.wrapper?.addEventListener('mouseleave', (e) => this.handleMouseUp(e));
+      }
+
+      // Pause on hover
+      this.wrapper?.addEventListener('mouseenter', () => this.stopAutoPlay());
+      this.wrapper?.addEventListener('mouseleave', () => this.startAutoPlay());
+
+      // Button controls
+      this.prevBtn?.addEventListener('click', () => this.prevSlide());
+      this.nextBtn?.addEventListener('click', () => this.nextSlide());
+
+      // Dot controls
+      this.dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => this.goToSlide(index));
+      });
+    }
+
+    handleTouchStart(e) {
+      this.touchStartX = e.changedTouches[0].screenX;
+      this.stopAutoPlay();
+    }
+
+    handleTouchEnd(e) {
+      this.touchEndX = e.changedTouches[0].screenX;
+      this.handleSwipe();
+      this.startAutoPlay();
+    }
+
+    handleMouseDown(e) {
+      this.isDragging = true;
+      this.dragStartX = e.clientX;
+      this.wrapper.style.cursor = 'grabbing';
+      this.stopAutoPlay();
+    }
+
+    handleMouseMove(e) {
+      if (!this.isDragging) return;
+      this.dragOffset = e.clientX - this.dragStartX;
+    }
+
+    handleMouseUp(e) {
+      if (!this.isDragging) return;
+      this.isDragging = false;
+      this.wrapper.style.cursor = 'grab';
+
+      if (Math.abs(this.dragOffset) > this.dragThreshold) {
+        this.handleSwipe();
+      }
+      this.dragOffset = 0;
+      this.startAutoPlay();
+    }
+
+    handleSwipe() {
+      if (this.isTransitioning) return;
+
+      const diff = this.touchStartX - this.touchEndX;
+
+      if (Math.abs(diff) > this.dragThreshold) {
+        this.isTransitioning = true;
+
+        if (diff > 0) {
+          this.nextSlide();
+        } else {
+          this.prevSlide();
+        }
+
+        setTimeout(() => {
+          this.isTransitioning = false;
+        }, this.transitionDelay);
+      }
+    }
+
+    showSlide(index) {
+      this.slides.forEach((slide) => {
+        slide.style.display = 'none';
+        slide.classList.remove('active');
+      });
+
+      this.slides[index].style.display = 'flex';
+      this.slides[index].classList.add('active');
+
+      this.updateDots(index);
+      this.currentSlide = index;
+    }
+
+    updateDots(index) {
+      this.dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('active');
+          dot.style.backgroundColor = '#75317A';
+        } else {
+          dot.classList.remove('active');
+          dot.style.backgroundColor = 'transparent';
+        }
+      });
+    }
+
+    nextSlide() {
+      const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+      this.goToSlide(nextIndex);
+    }
+
+    prevSlide() {
+      const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+      this.goToSlide(prevIndex);
+    }
+
+    goToSlide(index) {
+      this.showSlide(index);
+      this.resetAutoPlay();
+    }
+
+    startAutoPlay() {
+      this.autoPlayInterval = setInterval(() => {
+        this.nextSlide();
+      }, this.autoPlayDelay);
+    }
+
+    stopAutoPlay() {
+      if (this.autoPlayInterval) {
+        clearInterval(this.autoPlayInterval);
+      }
+    }
+
+    resetAutoPlay() {
+      this.stopAutoPlay();
+      this.startAutoPlay();
+    }
+  }
+
+  // Initialize carousel when DOM is ready
+  function initCarousel() {
+    new CarouselController(carouselId, {
+      autoPlayDelay,
+      transitionDelay,
+      dragThreshold,
+      showSwipe,
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+</script>
+
+<style>
+  .carousel-slide {
+    display: none;
+    opacity: 0;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+  }
+
+  .carousel-wrapper {
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: grab;
+  }
+
+  .carousel-wrapper:active {
+    cursor: grabbing;
+  }
+
+  .carousel-slide {
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .carousel-dot {
+    background-color: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-dot.active {
+    background-color: #75317A;
+  }
+
+  .carousel-prev-btn,
+  .carousel-next-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-prev-btn:hover,
+  .carousel-next-btn:hover {
+    transform: scale(1.1);
+  }
+</style>

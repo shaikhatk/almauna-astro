@@ -1,0 +1,68 @@
+---
+import Carousel from './Carousel.astro';
+import { products } from '~/data/productsData';
+
+const featuredProducts = products
+  .filter((product) => product.feature === true)
+  .map((product, index) => ({
+    id: `product-${index}`,
+    image: product.image,
+    title: product.title,
+    subtitle: product.description,
+    description: product.description,
+    viewBtn: `View More From ${product.brand.id.charAt(0).toUpperCase() + product.brand.id.slice(1)}`,
+  }));
+---
+
+<div class='max-w-5xl mx-auto px-[32px] md:px-6'>
+  <Carousel slides={featuredProducts} autoPlayDelay={5000} showControls={false} showDots={true} showSwipe={true}>
+    <Fragment slot='slides'>
+      {
+        featuredProducts.map((product, index) => (
+          <div
+            class='carousel-slide absolute inset-0 flex items-center md:flex-row flex-col gap-[64px] p-8 md:p-12 transition-opacity duration-500 md:h-[450px] h-[954px]'
+            data-slide={index}
+          >
+            <img
+              src={product.image}
+              class='w-[299px] h-[400px] object-cover rounded-lg select-none'
+              alt={product.title}
+              loading='lazy'
+              draggable='false'
+            />
+
+            <div class='flex-1'>
+              <h2 class='text-[24px] font-bold text-gradient-tertiary'>{product.title}</h2>
+              <p class='text-[16px] pt-2 text-gray-600'>{product.subtitle}</p>
+              <p class='text-[20px] pt-[24px] text-gray-700'>{product.description}</p>
+
+              <div class='flex md:flex-row flex-col items-center gap-[24px] md:gap-4 mt-[32px]'>
+                <a
+                  href='/get-a-quote'
+                  class='bg-gradient-primary w-fit py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px] hover:shadow-lg transition-shadow'
+                >
+                  Get a Quote
+                </a>
+                <button class='py-[16px] px-[32px] w-fit border-2 border-[#75317A] rounded-[32px] text-[16px] text-[#75317A] font-bold hover:bg-[#75317A] hover:text-white transition-colors'>
+                  {product.viewBtn}
+                </button>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </Fragment>
+
+    <Fragment slot='dots'>
+      {
+        featuredProducts.map((_, index) => (
+          <button
+            class='carousel-dot w-3 h-3 rounded-full border-2 border-[#75317A] transition-all duration-300'
+            data-slide={index}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))
+      }
+    </Fragment>
+  </Carousel>
+</div>

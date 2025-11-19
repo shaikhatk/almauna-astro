@@ -1,0 +1,386 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Image from 'astro/components/Image.astro';
+import LocationMap from '~/components/widgets/LocationMap.astro';
+
+const metadata = {
+  title: 'dubai-branch',
+};
+
+const dubaiData = [
+  {
+    img: '/src/assets/images/db-1.png',
+    title: 'Regional reach, local insight',
+    desc: 'We bridge global supply with UAE consumer needs.',
+  },
+  {
+    img: '/src/assets/images/db-2.png',
+    title: 'Premium-only portfolio',
+    desc: 'Focused selection of high-quality, health-conscious brands.',
+  },
+  {
+    img: '/src/assets/images/db-3.png',
+    title: 'Operational excellence',
+    desc: 'Streamlined systems from customs to final delivery.',
+  },
+  {
+    img: '/src/assets/images/db-4.png',
+    title: 'Relationship-driven service',
+    desc: 'Flexible, dedicated support for every client.',
+  },
+  {
+    img: '/src/assets/images/db-5.png',
+    title: 'Future-ready growth',
+    desc: 'Scalable warehousing, expanding product lines, and an upcoming UAE online store.',
+  },
+];
+
+const countriesData = [
+  {
+    img: '/src/assets/images/Flags/Flag_Kenya.png',
+    title: 'Kenya',
+    desc: 'Nairobi, Mombasa',
+  },
+  {
+    img: '/src/assets/images/Flags/Flag_Nigeria.png',
+    title: 'Nigeria',
+    desc: 'Lagos, Abuja',
+  },
+  {
+    img: '/src/assets/images/Flags/Flag_Ghana.png',
+    title: 'Ghana',
+    desc: 'Accra',
+  },
+  {
+    img: '/src/assets/images/Flags/Flag_Tanzania.png',
+    title: 'Tanzania',
+    desc: 'Dar es Salaam',
+  },
+  {
+    img: '/src/assets/images/Flags/Flag_Uganda.png',
+    title: 'Uganda',
+    desc: 'Kampala',
+  },
+  {
+    img: '/src/assets/images/Flags/Flag_Ethiopia.png',
+    title: 'Ethiopia',
+    desc: 'Addis Ababa',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <main>
+    <section>
+      <div class='grid grid-cols-1 md:grid-cols-2'>
+        <div class='bg-gradient-primary py-[96px] px-6 md:pl-[44px] md:pr-[74px]'>
+          <h1 class='text-[32px] font-bold text-white'>Dubai Branch:<br /> our gateway to the GCC</h1>
+          <p class='text-[20px] pt-[32px] text-white'>
+            In 2025, Al Mauna Trading proudly opened its Dubai branch — a key step in bringing our trusted expertise
+            from Qatar to the heart of the UAE.
+            <br /><br />
+            From our base in Business Bay, we serve the country’s dynamic retail, hospitality, and wellness markets with
+            the same dedication to quality, innovation, and service that defines our brand. Our Dubai branch is also ISO
+            22000 certified, reflecting our commitment to the highest standards of food safety management — ensuring every
+            product we handle is stored, distributed, and delivered with care and compliance at every stage.
+          </p>
+        </div>
+        <Image
+          src='/src/assets/images/dubai-branch.png'
+          alt='Dubai Branch'
+          height={588}
+          width={388}
+          class='md:h-[588px] h-[334px] w-full object-cover objetc-center'
+        />
+      </div>
+    </section>
+    <section class='md:py-[96px] pt-[96px] pb-[45px] bg-gradient-secondary'>
+      <div class='max-w-5xl mx-auto px-6'>
+        <div class='text-center mb-[64px]'>
+          <h2 class='font-bold text-gradient text-[32px]'>Al Mauna Dubai: more than just a branch</h2>
+          <p class='text-[20px] pt-2'>It is a natural extension of a legacy built on trust and performance.</p>
+        </div>
+        <p class='text-[20px]'>
+          Since our beginnings in Qatar, we’ve grown into a trusted partner for sourcing and distributing premium food
+          and wellness products.<br /><br />Being in Business Bay allows us to stay connected with retailers, suppliers,
+          and logistics partners across the Emirates — ensuring fast, reliable, and tailored solutions.
+        </p>
+        <br />
+        <div class='flex flex-col md:flex-row md:justify-between'>
+          <div class='text-[20px]'>
+            We specialize in:
+            <br /><br />
+            <ul class='md:pl-[50px] pl-[20px] list-disc'>
+              <li>Importing globally recognized food and wellness brands</li>
+              <li>Wholesale distribution to retail, hospitality, and healthcare sectors</li>
+              <li>Regional warehousing and inventory management</li>
+              <li>Retail-ready supply chain and merchandising support</li>
+              <li>Customer-first service, tailored to UAE expectations</li>
+            </ul>
+            <br />
+            Our mission is simple: deliver value, from source to shelf.
+          </div>
+          <div class='flex justify-center pt-[24px] md:pt-0'>
+            <Image
+              src='/src/assets/images/iso.svg'
+              title='iso-image'
+              alt='iso-image'
+              height={250}
+              width={350}
+              class='md:h-[316px] md:w-[316px] h-[289px] w-[289px] object-cover object-center'
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class='py-[96px]'>
+      <div class='max-w-5xl mx-auto px-6'>
+        <div class='text-center mb-[64px]'>
+          <h2 class='font-bold text-gradient text-[32px]'>What we do in Dubai</h2>
+          <p class='text-[20px] pt-2'>
+            Our Dubai hub operates as a full-service supply and distribution center,<br class='md:block hidden' />
+            designed to meet the fast-paced demands of the UAE market.
+          </p>
+        </div>
+        <p class='text-[20px]'>Our core capabilities in Dubai include:</p>
+        <br />
+        <ul class='md:pl-[50px] pl-[20px] list-disc text-[20px]'>
+          <li><strong>Import & Clearance: </strong> Swift, compliant handling of global shipments into the UAE.</li>
+          <li>
+            <strong>Warehousing & Stock Management: </strong> Safe storage, smart organization, and real-time inventory control.
+          </li>
+          <li>
+            <strong>Wholesale Distribution: </strong> Direct delivery to retailers, pharmacies, organic stores, and HORECA
+            clients across all Emirates.
+          </li>
+          <li>
+            <strong>Retail Support: </strong> Merchandising, stock rotation, and product placement to boost visibility and
+            sales.
+          </li>
+          <li>
+            <strong>E-commerce Fulfillment: </strong> Launching soon, our online store will offer same-day and next-day delivery
+            across Dubai and beyond.
+          </li>
+          <li>
+            <strong>Client & Partner Support: </strong> Multilingual service for education, promotions, and restock planning.
+          </li>
+        </ul>
+        <br />
+        <p class='text-[20px]'>
+          From supermarkets and specialty shops to hotels and wellness chains, we ensure premium products reach shelves
+          fresh and on time.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class='py-[96px]'
+      style={{
+        backgroundImage: 'url(/src/assets/images/violet-bg.svg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div class='max-w-6xl mx-auto px-6'>
+        <div class='flex flex-col items-center'>
+          <h1 class='text-[32px] font-bold text-gradient-secondary text-center'>
+            Driven by purpose, inspired by vision
+          </h1>
+          <p class='text-[20px] pt-2 text-[#F6E9F2] text-center'>Quality in every step, ambition in every move.</p>
+        </div>
+
+        <div class='grid grid-cols-1 md:grid-cols-5 gap-[48px] md:gap-[28px] mt-[64px]'>
+          {
+            dubaiData.map((item, index) => (
+              <div key={index}>
+                <div class='flex relative items-center justify-center'>
+                  <div class='bg-gradient-tertiary rotate-[45deg] h-[80px] w-[80px] rounded-[8px]' />
+                  <Image
+                    src={item.img}
+                    height={111}
+                    width={96}
+                    class='w-[110px] h-[111px] absolute object-center object-cover'
+                    alt={item.title}
+                  />
+                </div>
+
+                <h1 class='text-[16px] font-bold text-gradient-secondary text-center pt-[20px] md:pt-[46px]'>
+                  {item.title}
+                </h1>
+
+                <p class='text-[14px] text-[#F6E9F2] text-center pt-1'>{item.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class='py-[96px] bg-gradient-secondary'>
+      <div class='max-w-6xl mx-auto px-6'>
+        <div class='md:mb-[64px]'>
+          <h2 class='font-bold text-gradient text-[32px] text-center'>Regional export from UAE</h2>
+          <p class='text-[20px] pt-2 text-center'>
+            Beyond the Emirates, our Dubai hub also serves as a gateway to key African markets. We deliver quality food
+            products with efficiency and flexibility on Kenya, Nigeria, Ghana, Tanzania, Uganda and Ethiopia.
+          </p>
+          <p class='text-[20px] mt-[64px]'>Key export destinations:</p>
+        </div>
+        <div class='md:grid hidden md:grid-cols-3 md:gap-[16px]'>
+          {
+            countriesData.map((item, index) => (
+              <div key={index} class='md:bg-white md:rounded-[8px] md:p-[24px] md:flex items-center justify-around '>
+                <Image
+                  src={item.img}
+                  alt={item.title}
+                  width={64}
+                  height={40}
+                  class='w-[64px] h-[64px] object-cover object-center md:block hidden'
+                />
+
+                <div>
+                  <p class='text-[20px] font-bold'>{item.title}</p>
+                  <p class='text-[20px]'>{item.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class='md:hidden'>
+          <ul class='md:pl-[50px] pl-[20px] list-disc text-[20px]'>
+            <li><strong>Kenya</strong> – Nairobi, Mombasa</li>
+            <li><strong>Nigeria</strong> – Abuja, Lagos</li>
+            <li><strong>Ghana</strong> – Accra, Tema</li>
+            <li><strong>Tanzania</strong> – Dar es Salaam, Mwanza</li>
+            <li><strong>Uganda</strong> – Kampala, Kampala</li>
+            <li><strong>Ethiopia</strong> – Addis Ababa, Mek'ele</li>
+          </ul>
+        </div>
+
+        <p class='text-[20px] mt-[48px] md:mt-[64px]'>Why African clients choose us:</p>
+        <br class='md:block hidden' />
+        <ul class='pl-[50px] list-disc text-[20px]'>
+          <li>Consolidated shipments from Jebel Ali</li>
+          <li>Competitive bulk pricing</li>
+          <li>Flexible labeling and packaging</li>
+          <li>Proven expertise in regional port clearances</li>
+        </ul>
+        <br />
+        <p class='text-[20px]'>
+          At Al Mauna Trading – Dubai, we’re here to connect global quality with local needs — today, and for the
+          future.
+        </p>
+      </div>
+    </section>
+
+    <section class='py-[96px] px-6'>
+      <div class='max-w-6xl mx-auto border rounded-[8px]'>
+        <div class='grid grid-cols-1 lg:grid-cols-3 gap-[48px]'>
+          <!-- Map Section -->
+          <div class='col-span-1'>
+            <LocationMap
+              mapId='map-container-dubai'
+              officeLocation={{
+                name: 'Office',
+                address: 'Office No: 2105-0184, The Binary by Omniyat, Business Bay, Dubai, United Arab Emirates',
+                coords: { lat: 25.1972, lng: 55.2744 },
+                mapUrl: 'https://maps.google.com/?q=The+Binary+by+Omniyat,+Business+Bay,+Dubai,+UAE',
+                color: '#dc2626',
+              }}
+              warehouseLocation={{
+                name: 'Warehouse',
+                address: 'Ocean Fair International, Dubai',
+                coords: { lat: 25.2048, lng: 55.2708 },
+                mapUrl: 'https://maps.google.com/?q=Ocean+Fair+International,+Dubai,+UAE',
+                color: '#2563eb',
+              }}
+            />
+          </div>
+
+          <!-- Contact Information Section -->
+          <div class='md:flex flex-row justify-between items-start col-span-2 px-6 md:pl-[40px] py-[48px]'>
+            <div>
+              <h2 class='text-[24px] text-gradient font-bold md:mb-[16px] mb-[32px]'>UAE Office</h2>
+              <!-- Office -->
+              <div>
+                <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>ADDRESS</h3>
+                <p class='text-[20px] text-[#B32482] underline mb-[16px]'>
+                  Office No: 2105-0184, The Binary by Omniyat,<br class='md:block hidden' /> Business Bay, Dubai, United
+                  Arab Emirates
+                </p>
+              </div>
+              <div class='mt-[16px] md:hidden'>
+                <a
+                  href='https://maps.google.com/?q=The+Binary+by+Omniyat,+Business+Bay,+Dubai,+UAE'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold'
+                >
+                  Get Directions
+                </a>
+              </div>
+
+              <!-- Warehouse -->
+              <div class='md:mt-[16px] mt-[32px]'>
+                <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>WAREHOUSE</h3>
+                <p class='text-[20px]'>Ocean Fair International, Dubai</p>
+              </div>
+
+              <!-- Phone -->
+              <div class='md:mt-[16px] mt-[32px]'>
+                <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>PHONE</h3>
+                <div>
+                  <a href='tel:+971504789777' class='text-[20px] text-[#B32482] underline'> +971504789777 </a>
+                  <a href='tel:+971425880070' class='text-[20px] text-[#B32482] underline'> +971425880070 </a>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class='md:mt-[16px] mt-[32px]'>
+                <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>E-MAIL</h3>
+                <a href='mailto:sales.uae@almauna.com' class='text-[20px] text-[#B32482] underline'>
+                  sales.uae@almauna.com
+                </a>
+              </div>
+
+              <!-- Opening Hours -->
+              <div class='md:mt-[16px] mt-[32px]'>
+                <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>OPENING HOURS</h3>
+                <p class='text-[20px]'>Mon – Fri: 8:00 AM – 5:00 PM</p>
+              </div>
+            </div>
+
+            <div class='md:mt-[60px] md:block hidden md:mr-[70px]'>
+              <a
+                href='https://maps.google.com/?q=The+Binary+by+Omniyat,+Business+Bay,+Dubai,+UAE'
+                target='_blank'
+                rel='noopener noreferrer'
+                class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold'
+              >
+                Get Directions
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class='pt-[96px] pb-[170px] bg-gradient-secondary'>
+      <div class='max-w-5xl mx-auto px-6'>
+        <h1 class='text-[32px] font-bold text-gradient text-center'>Your products, delivered with care</h1>
+        <p class='text-[20px] text-center mt-[8px]'>
+          Get a competitive quote and discover how Al Mauna can streamline your sourcing and distribution.
+        </p>
+        <div class='flex justify-center items-center mt-[48px]'>
+          <a
+            href='/get-a-quote'
+            class='bg-gradient-primary py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px]'
+            >Get a Quote</a
+          >
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -1,104 +1,166 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { SITE } from 'astrowind:config';
-import { getHomePermalink } from '~/utils/permalinks';
-
-interface Link {
-  text?: string;
-  href?: string;
-  ariaLabel?: string;
-  icon?: string;
-}
-
-interface Links {
-  title?: string;
-  links: Array<Link>;
-}
-
-export interface Props {
-  links: Array<Links>;
-  secondaryLinks: Array<Link>;
-  socialLinks: Array<Link>;
-  footNote?: string;
-  theme?: string;
-}
-
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
+const footerSections = [
+  {
+    title: 'AL MAUNA',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'About Us', href: '/about' },
+      { label: 'Dubai Branch', href: '/dubai-branch' },
+      { label: 'Contact Us', href: '/contact' },
+      { label: 'Careers', href: '#' },
+    ],
+  },
+  {
+    title: 'DIVISIONS',
+    links: [
+      { label: 'Import and Distribution', href: '/divisions#import' },
+      { label: 'Wholesale Solutions', href: '/divisions#wholesale' },
+      { label: 'Retail Distributions', href: '/divisions#retail' },
+      { label: 'Online Store', href: 'https://store.almauna.com/' },
+    ],
+  },
+  {
+    title: 'OUR BRANDS',
+    links: [
+      { label: 'Maharani', href: '#' },
+      { label: 'Honig Ozbal', href: '#' },
+      { label: 'Vitabella', href: '#' },
+    ],
+  },
+  {
+    title: 'QATAR OFFICE',
+    details: {
+      address: 'C Ring Road, Doha',
+      phones: ['+974 4441 6966', '+974 3356 0938'],
+      email: 'sales@almauna.com',
+    },
+  },
+  {
+    title: 'UAE OFFICE',
+    details: {
+      address: 'Business Bay, Dubai',
+      phones: ['+971 5047 89777', '+971 4258 8070'],
+      email: 'sales.uae@almauna.com',
+    },
+  },
+];
 ---
 
-<footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
-  <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+<footer class='bg-gradient-primary text-[14px] pt-[133px] pb-[25px] px-6 md:px-[44px]'>
   <div
-    class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+    style={{
+      backgroundImage: 'url(/src/assets/images/violet-bg.svg)',
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      borderRadius: '8px',
+    }}
+    class='z-10 mt-[-200px] mb-[58px] max-w-6xl mx-auto relative p-[32px] md:py-[49.5px] md:px-[48px] grid grid-cols-1 md:grid-cols-2'
   >
-    <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
-      <div class="col-span-12 lg:col-span-4">
-        <div class="mb-2">
-          <a class="inline-block font-bold text-xl" href={getHomePermalink()}>{SITE?.name}</a>
-        </div>
-        <div class="text-sm text-muted flex gap-1">
-          {
-            secondaryLinks.map(({ text, href }, index) => (
-              <>
-                {index !== 0 ? ' · ' : ''}
-                <a
-                  class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
-                  href={href}
-                  set:html={text}
-                />
-              </>
-            ))
-          }
-        </div>
-      </div>
-      {
-        links.map(({ title, links }) => (
-          <div class="col-span-6 md:col-span-3 lg:col-span-2">
-            <div class="dark:text-gray-300 font-medium mb-2">{title}</div>
-            {links && Array.isArray(links) && links.length > 0 && (
-              <ul class="text-sm">
-                {links.map(({ text, href, ariaLabel }) => (
-                  <li class="mb-2">
-                    <a
-                      class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
-                      href={href}
-                      aria-label={ariaLabel}
-                    >
-                      <Fragment set:html={text} />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))
-      }
+    <div>
+      <h2 class='text-[24px] font-bold text-white'>Subscribe to our newsletter</h2>
+      <p class='text-[16px] text-white pt-2'>Stay informed with our latest news and exclusive offers</p>
     </div>
-    <div class="md:flex md:items-center md:justify-between py-6 md:py-8">
-      {
-        socialLinks?.length ? (
-          <ul class="flex mb-4 md:order-1 -ml-2 md:ml-4 md:mb-0 rtl:ml-0 rtl:-mr-2 rtl:md:ml-0 rtl:md:mr-4">
-            {socialLinks.map(({ ariaLabel, href, text, icon }) => (
-              <li>
-                <a
-                  class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
-                  aria-label={ariaLabel}
-                  href={href}
-                >
-                  {icon && <Icon name={icon} class="w-5 h-5" />}
-                  <Fragment set:html={text} />
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          ''
-        )
-      }
-
-      <div class="text-sm mr-4 dark:text-muted">
-        <Fragment set:html={footNote} />
+    <div class='flex md:flex-row flex-col gap-[26px] md:gap-[32px]'>
+      <input
+        type='email'
+        placeholder='Type your best email address'
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          color: 'rgba(255, 255, 255, 1)',
+        }}
+        class='text-[14px] py-[15.5px] px-[16px] rounded-[8px] mt-[32px] md:mt-0 border border-pink-600 border-opacity-20 w-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-30 placeholder:text-white placeholder:opacity-50'
+      />
+      <div class='flex justify-center'>
+        <button class='bg-white text-[#712F76] w-[145px] text-[16px] font-bold px-[32px] py-[14.5px] rounded-[32px]'
+          >Subscribe</button
+        >
       </div>
     </div>
   </div>
+  <div class='mx-auto'>
+    <div class='md:hidden flex justify-between items-start'>
+      <img
+        src='/src/assets/images/footer-logo.webp'
+        alt='Al Mauna Logo'
+        class='w-[141px] h-[91px] object-cover object-center'
+      />
+      <div class='flex items-start'>
+        <a href='#' aria-label='Facebook'>
+          <img
+            src='/src/assets/images/facebook.svg'
+            alt='Facebook'
+            class='w-[44px] h-[44px] object-cover object-center'
+          />
+        </a>
+        <a href='#' aria-label='Instagram'>
+          <img
+            src='/src/assets/images/insta.svg'
+            alt='Instagram'
+            class='w-[44px] h-[44px] object-cover object-center'
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class='mx-auto mt-[32px] md:mt-0 grid grid-cols-2 gap-[32px] md:gap-0 md:grid-cols-6'>
+    <!-- Logo + Social -->
+    <div class='md:block hidden'>
+      <img
+        src='/src/assets/images/footer-logo.webp'
+        alt='Al Mauna Logo'
+        class='w-[141px] h-[91px] object-cover object-center'
+      />
+      <div class='flex mt-[32px] justify-start'>
+        <a href='#' aria-label='Facebook'>
+          <img
+            src='/src/assets/images/facebook.svg'
+            alt='Facebook'
+            class='w-[44px] h-[44px] object-cover object-center'
+          />
+        </a>
+        <a href='#' aria-label='Instagram'>
+          <img
+            src='/src/assets/images/insta.svg'
+            alt='Instagram'
+            class='w-[44px] h-[44px] object-cover object-center'
+          />
+        </a>
+      </div>
+    </div>
+
+    <!-- Dynamic Footer Columns -->
+    {
+      footerSections.map((section) => (
+        <div>
+          <h3 class='font-bold text-[#FFFFFF] text-[16px] text-opacity-[50%] mb-4'>{section.title}</h3>
+
+          {section.links ? (
+            <ul class='space-y-2 text-[16px] text-[#FFFFFF]'>
+              {section.links.map((link) => (
+                <li>
+                  <a href={link.href} class='hover:underline'>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div class='text-[16px] space-y-1 text-[#FFFFFF]'>
+              <p>{section.details.address}</p>
+              {section.details.phones.map((phone) => (
+                <p>{phone}</p>
+              ))}
+              <a href={`mailto:${section.details.email}`} class='hover:underline block'>
+                {section.details.email}
+              </a>
+            </div>
+          )}
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Copyright -->
+  <div class='mt-[25px] text-center text-[12px] text-[#C695BE]'>Copyright © 2025 Al Mauna. All rights reserved.</div>
 </footer>

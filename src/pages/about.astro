@@ -1,228 +1,221 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import Image from 'astro/components/Image.astro';
 
 const metadata = {
   title: 'About us',
 };
+
+const timelineData = [
+  {
+    year: '2016',
+    title: 'Our Core Operations in Qatar',
+    description: `Operating from our inception in 2016, Al Mauna Qatar stands as our foundational hub, specializing in comprehensive import, distribution, and wholesale services. Backed by a dedicated local team, optimized logistics, and robust partnerships, we consistently deliver timely and efficient supply solutions across diverse sectors throughout Qatar.`,
+    image: '/src/assets/images/timeline-1.png',
+  },
+  {
+    year: '2025',
+    title: 'Expanding Our Horizon: Dubai Operations',
+    description: `In 2025, Al Mauna significantly expanded its regional footprint with the establishment of our dynamic Dubai branch in the United Arab Emirates. This strategic move enhances our reach, allowing us to more effectively serve and empower clients across the entire UAE. With a prime office in Business Bay and a strategically located warehouse, we are fully poised to scale our operations and extend unparalleled service across the wider GCC region.`,
+    image: '/src/assets/images/timeline-2.png',
+    button: {
+      text: 'Meet the Dubai Branch',
+      link: '/dubai-branch',
+    },
+  },
+];
+
+const aboutData = [
+  {
+    img: '/src/assets/images/mission.svg',
+    title: 'Our mission',
+    desc: 'To enrich lives by providing top-quality products through a seamless and customer-centric trading experience.',
+  },
+  {
+    img: '/src/assets/images/vision.svg',
+    title: 'Our vision',
+    desc: 'To become a leading distributor in the GCC, known for our dedication to quality, transparency, and market innovation.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <main>
+    <section
+      style='background-image:linear-gradient(180deg, #75317A 0%, rgba(130, 46, 124, 0.784801) 52.96%, rgba(179, 36, 130, 0) 100%), url(/src/assets/images/aboutus-hero.png);  background-size: cover; background-position: center; height: 740px;'
+    >
+      <div class='flex flex-col items-center pt-[99px] px-6'>
+        <h1 class='text-[32px] font-bold text-white text-center'>
+          Al Mauna Trading:<br class='md:hidden' /> dedicated to excellence
+        </h1>
+        <p class='text-[20px] pt-2 text-[#F6E9F2] text-center'>
+          We are a regional leader committed to delivering diverse, high-quality<br class='md:block hidden' /> products with
+          unwavering professionalism and care since 2016.
+        </p>
+      </div>
+    </section>
+    <section class='py-[96px]'>
+      <div class='max-w-5xl mx-auto px-6 lg:px-0'>
+        <p class='text-[20px]'>
+          Established in 2016, Al Mauna Trading rapidly set out to become a leading food import and distribution company
+          in Qatar. Driven by a passionate and committed team, our core mission is to empower the region's food supply
+          chain by sourcing the best quality products from around the world at truly affordable prices. We proudly
+          represent and distribute top-tier international manufacturers, bringing their premium brands to consumers and
+          businesses across Qatar and the wider region.
+          <br /><br />
+          Despite being relatively new to the industry, Al Mauna has swiftly made an impact, connecting consumers with quality
+          brands at competitive prices. We continuously enhance our portfolio, focusing on introducing and distributing the
+          finest FMCG brands to the Qatari market.
+          <br /><br />
+          Our commitment extends beyond just products; we aim to provide exceptional service, ensuring our clients receive
+          high-quality goods at unbeatable value. We relentlessly strive to meet and exceed every customer's expectations,
+          building lasting trust through unwavering business ethics and professionalism. Al Mauna is dedicated to being the
+          definitive name for reliable food supplies in Qatar.
+        </p>
+      </div>
+    </section>
 
-  <Hero
-    tagline="About us"
-    image={{
-      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Caos Image',
-    }}
-  >
-    <Fragment slot="title">
-      Elevate your online presence with our <br />
-      <span class="text-accent dark:text-white"> Beautiful Website Templates</span>
-    </Fragment>
+    <section class='pt-[96px] pb-[170px] bg-gradient-secondary'>
+      <div class='max-w-4xl mx-auto px-6 lg:px-0'>
+        <h2 class='text-[32px] text-gradient font-bold text-center'>Meet our Executive Director</h2>
+        <div class='mt-[48px] flex md:flex-row flex-col gap-[48px]'>
+          <div class='flex justify-center items-center md:hidden'>
+            <Image
+              src='/src/assets/images/dr-faleh.jpg'
+              height={180}
+              width={180}
+              class='h-[180px] w-[180px] object-cover object-top'
+              alt='Dr. Faleh Mohamed Hussein Ali'
+            />
+          </div>
+          <Image
+            src='/src/assets/images/dr-faleh.jpg'
+            height={180}
+            width={180}
+            class='h-[180px] w-[180px] object-cover object-top md:block hidden'
+            alt='Dr. Faleh Mohamed Hussein Ali'
+          />
+          <div>
+            <h3 class='text-[24px] font-bold'>Dr. Faleh Mohamed Hussein Ali</h3>
+            <p class='text-[20px] mt-[9px]'>
+              Dr. Faleh worked as the assistant for Policy to the Minister of Health for 8 years, at the Supreme Council
+              of Health (SCH), Qatar's highest health authority. He guided national planning for health facilities,
+              services and workforce. He is also was responsible for policies on health financing, quality, patient
+              safety, cancer, e-health, facility licensing, and research governance. He oversaw the implementation of
+              the projects in the National Health Strategy 2011-2016, and personally lead the implementation of 13 of
+              the 40 projects.
+            </p>
+            <button class='bg-white py-[16px] px-[32px] mt-[32px] rounded-[32px] text-[#712F76] font-bold text-[16px]'
+              >Read more</button
+            >
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <Fragment slot="subtitle">
-      Donec efficitur, ipsum quis congue luctus, mauris magna convallis mauris, eu auctor nisi lectus non augue. Donec
-      quis lorem non massa vulputate efficitur ac at turpis. Sed tincidunt ex a nunc convallis, et lobortis nisi tempus.
-      Suspendisse vitae nisi eget tortor luctus maximus sed non lectus.
-    </Fragment>
-  </Hero>
+    <section class='py-[96px]'>
+      <div class='max-w-5xl mx-auto px-6'>
+        {/* Heading */}
+        <div class='text-center'>
+          <h2 class='font-bold text-gradient text-[32px]'>From Doha to Dubai: our strategic evolution</h2>
+          <p class='text-[20px] pt-2'>
+            Al Mauna Trading is defined by foundational development and strategic expansions.
+          </p>
+        </div>
 
-  <!-- Stats Widget ****************** -->
+        <div class='relative pl-24'>
+          {
+            timelineData.map((item, index) => (
+              <div key={index} class='relative '>
+                {/* Year Badge */}
+                <div class='absolute -left-24 top-0 bg-gradient-primary text-white text-[24px] font-bold px-[12px] py-[2px] rounded-[32px] flex justify-center items-center'>
+                  {item.year}
+                </div>
 
-  <Stats
-    title="Statistics about us"
-    stats={[
-      { title: 'Offices', amount: '4' },
-      { title: 'Employees', amount: '248' },
-      { title: 'Templates', amount: '12' },
-      { title: 'Awards', amount: '24' },
-    ]}
-  />
+                {/* Dotted line only between items */}
+                {index !== timelineData.length - 1 && (
+                  <div class='absolute md:left-[-55px] md:top-[42px] left-[-60px] top-[44px] md:h-[258px] h-[640px] border-l-4 border-dashed border-[#C26AA4] ' />
+                )}
 
-  <!-- Features3 Widget ************** -->
+                {/* Content + Image */}
+                <div class='grid md:grid-cols-2 gap-8 md:pl-10 pl-3 mt-[64px]'>
+                  <div>
+                    <h3 class='text-[24px] font-bold text-gradient'>{item.title}</h3>
+                    <p class='text-[20px] mt-2'>{item.description}</p>
 
-  <Features3
-    title="Our templates"
-    subtitle="Etiam scelerisque, enim eget vestibulum luctus, nibh mauris blandit nulla, nec vestibulum risus justo ut enim. Praesent lacinia diam et ante imperdiet euismod."
-    columns={3}
-    isBeforeContent={true}
-    items={[
-      {
-        title: 'Educational',
-        description:
-          'Morbi faucibus luctus quam, sit amet aliquet felis tempor id. Cras augue massa, ornare quis dignissim a, molestie vel nulla.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Interior Design',
-        description:
-          'Vivamus porttitor, tortor convallis aliquam pretium, turpis enim consectetur elit, vitae egestas purus erat ac nunc nulla.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Photography',
-        description:
-          'Duis sed lectus in nisl vehicula porttitor eget quis odio. Aliquam erat volutpat. Nulla eleifend nulla id sem fermentum.',
-        icon: 'tabler:template',
-      },
-    ]}
-  />
+                    {item.button && (
+                      <a
+                        href='/dubai-branch'
+                        class='mt-6 bg-white text-[#712F76] shadow-secondary text-[16px] px-6 py-3 font-bold rounded-[32px]'
+                      >
+                        {item.button.text}
+                      </a>
+                    )}
+                  </div>
 
-  <!-- Features3 Widget ************** -->
+                  <img src={item.image} class='w-[360px] h-[240px] ' alt='timeline-image' />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
 
-  <Features3
-    columns={3}
-    isAfterContent={true}
-    items={[
-      {
-        title: 'E-commerce',
-        description:
-          'Rutrum non odio at vehicula. Proin ipsum justo, dignissim in vehicula sit amet, dignissim id quam. Sed ac tincidunt sapien.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Blog',
-        description:
-          'Nullam efficitur volutpat sem sed fringilla. Suspendisse et enim eu orci volutpat laoreet ac vitae libero.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Business',
-        description:
-          'Morbi et elit finibus, facilisis justo ut, pharetra ipsum. Donec efficitur, ipsum quis congue luctus, mauris magna.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Suspendisse vitae nisi eget tortor luctus maximus sed non lectus. Cras malesuada pretium placerat. Nullam venenatis dolor a ante rhoncus.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Medical',
-        description:
-          'Vestibulum malesuada lacus id nibh posuere feugiat. Nam volutpat nulla a felis ultrices, id suscipit mauris congue. In hac habitasse platea dictumst.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus.',
-        icon: 'tabler:template',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Colorful Image',
-    }}
-  />
+    <section
+      class='py-[96px]'
+      style={{
+        backgroundImage: 'url(/src/assets/images/violet-bg.svg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div class='max-w-5xl mx-auto px-6'>
+        <div class='flex flex-col items-center'>
+          <h1 class='text-[32px] font-bold text-gradient-secondary text-center'>
+            Driven by purpose, inspired by vision
+          </h1>
+          <p class='text-[20px] text-[#F6E9F2] text-center pt-2'>Quality in every step, ambition in every move.</p>
+        </div>
 
-  <!-- Steps2 Widget ****************** -->
+        <div class='grid md:grid-cols-2 grid-cols-1 gap-[96px] mt-[64px]'>
+          {
+            aboutData.map((item, index) => (
+              <div key={index}>
+                <div class='flex items-center justify-center'>
+                  <Image
+                    src={item.img}
+                    height={148}
+                    width={148}
+                    class='w-[148px] h-[148px] object-center object-cover'
+                    alt={item.title}
+                  />
+                </div>
 
-  <Steps2
-    title="Our values"
-    subtitle="Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus. Nulla facilisi. Vestibulum malesuada lacus."
-    items={[
-      {
-        title: 'Customer-centric approach',
-        description:
-          'Donec id nibh neque. Quisque et fermentum tortor. Fusce vitae dolor a mauris dignissim commodo. Ut eleifend luctus condimentum.',
-      },
-      {
-        title: 'Constant Improvement',
-        description:
-          'Phasellus laoreet fermentum venenatis. Vivamus dapibus pulvinar arcu eget mattis. Fusce eget mauris leo.',
-      },
-      {
-        title: 'Ethical Practices',
-        description:
-          'Vestibulum imperdiet libero et lectus molestie, et maximus augue porta. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-      },
-    ]}
-  />
+                <h1 class='text-[32px] font-bold text-gradient-secondary text-center'>{item.title}</h1>
 
-  <!-- Steps2 Widget ****************** -->
+                <p class='text-[20px] text-[#F6E9F2] text-center mt-[16px]'>{item.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
 
-  <Steps2
-    title="Achievements"
-    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla, sed porttitor est nibh at nulla."
-    isReversed={true}
-    callToAction={{
-      text: 'See more',
-      href: '/',
-    }}
-    items={[
-      {
-        title: 'Global reach',
-        description: 'Nam malesuada urna in enim imperdiet tincidunt. Phasellus non tincidunt nisi, at elementum mi.',
-        icon: 'tabler:globe',
-      },
-      {
-        title: 'Positive customer feedback and reviews',
-        description:
-          'Cras semper nulla leo, eget laoreet erat cursus sed. Praesent faucibus massa in purus iaculis dictum.',
-        icon: 'tabler:message-star',
-      },
-      {
-        title: 'Awards and recognition as industry experts',
-        description:
-          'Phasellus lacinia cursus velit, eu malesuada magna pretium eu. Etiam aliquet tellus purus, blandit lobortis ex rhoncus vitae.',
-        icon: 'tabler:award',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Our locations"
-    tagline="Find us"
-    columns={4}
-    items={[
-      {
-        title: 'EE.UU',
-        description: '1234 Lorem Ipsum St, 12345, Miami',
-      },
-      {
-        title: 'Spain',
-        description: '5678 Lorem Ipsum St, 56789, Madrid',
-      },
-      {
-        title: 'Australia',
-        description: '9012 Lorem Ipsum St, 90123, Sydney',
-      },
-      {
-        title: 'Brazil',
-        description: '3456 Lorem Ipsum St, 34567, São Paulo',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Technical Support"
-    tagline="Contact us"
-    columns={2}
-    items={[
-      {
-        title: 'Chat with us',
-        description:
-          'Integer luctus laoreet libero, auctor varius purus rutrum sit amet. Ut nec molestie nisi, quis eleifend mi.',
-        icon: 'tabler:messages',
-      },
-      {
-        title: 'Call us',
-        description:
-          'Mauris faucibus finibus orci, in posuere elit viverra non. In hac habitasse platea dictumst. Cras lobortis metus a hendrerit congue.',
-        icon: 'tabler:headset',
-      },
-    ]}
-  />
+    <section class='pt-[96px] pb-[170px]'>
+      <div class='max-w-5xl mx-auto px-6'>
+        <h1 class='text-[32px] font-bold text-gradient text-center'>Get your quote today</h1>
+        <p class='text-[20px] text-center mt-[8px]'>
+          From retail to wholesale, we’ll design a plan that matches your scale, timing, and goals.
+        </p>
+        <div class='flex justify-center items-center mt-[48px]'>
+          <button
+            class='bg-gradient-primary py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px]'
+            >Get a Quote</button
+          >
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>

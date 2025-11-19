@@ -1,0 +1,185 @@
+---
+interface Props {
+  apiKey?: string;
+}
+
+const { apiKey = 'AIzaSyCa6Dl5uhfYcobY8I_sexN6FQZItPeJ7HE' } = Astro.props;
+
+const officeLocation = {
+  name: 'Office',
+  address: 'Office #37, Al Emadi Business Center, C Ring Road, Doha, Qatar',
+  coords: { lat: 25.2854, lng: 51.531 },
+  mapUrl: 'https://maps.google.com/?q=Al+Emadi+Business+Center,+C+Ring+Road,+Doha,+Qatar',
+  color: 'red',
+};
+
+const warehouseLocation = {
+  name: 'Warehouse',
+  address: 'Milaha Warehouse, Doha - Qatar',
+  coords: { lat: 25.265, lng: 51.518 },
+  mapUrl: 'https://maps.google.com/?q=Milaha+Warehouse,+Doha,+Qatar',
+  color: 'blue',
+};
+---
+
+<div id='map-container-qatar' class='w-[380px] h-[300px] md:h-[490px] rounded-lg overflow-hidden shadow-lg'>
+  <div id='map-qatar' class='w-full h-full'></div>
+</div>
+
+<script define:vars={{ apiKey, officeLocation, warehouseLocation }}>
+  // Custom map initialization without callback
+  let mapInstance = null;
+  const markersArray = [];
+  const infoWindowsArray = [];
+
+  function createCustomMarker(map, location, color) {
+    // Create SVG marker
+    const svgMarker = {
+      path: 'M0,-28 C-7.73,-28 -14,-21.73 -14,-14 C-14,-10.77 -13,-7.52 -11.35,-4.35 C-9.7,-1.18 -8.35,1.97 -8.35,1.97 L0,28 L8.35,1.97 C8.35,1.97 9.7,-1.18 11.35,-4.35 C13,-7.52 14,-10.77 14,-14 C14,-21.73 7.73,-28 0,-28 Z',
+      fillColor: color,
+      fillOpacity: 1,
+      strokeColor: '#fff',
+      strokeWeight: 2,
+      scale: 1.2,
+    };
+
+    const marker = new google.maps.Marker({
+      position: location.coords,
+      map: map,
+      title: location.name,
+      icon: svgMarker,
+      animation: google.maps.Animation.DROP,
+    });
+
+    return marker;
+  }
+
+  function createInfoWindow(location) {
+    return new google.maps.InfoWindow({
+      content: `
+        <div class="p-4 max-w-xs">
+          <h3 class="font-bold text-lg mb-2" style="color: ${location.color === 'red' ? '#dc2626' : '#2563eb'}">
+            ${location.name}
+          </h3>
+          <p class="text-sm text-gray-700">${location.address}</p>
+          <a href="${location.mapUrl}" target="_blank" rel="noopener noreferrer" class="text-sm mt-3 inline-block px-3 py-1 rounded" style="background-color: ${location.color === 'red' ? '#dc2626' : '#2563eb'}; color: white;">
+            View on Maps
+          </a>
+        </div>
+      `,
+      maxWidth: 300,
+    });
+  }
+
+  function closeAllInfoWindows() {
+    infoWindowsArray.forEach((infoWindow) => {
+      infoWindow.close();
+    });
+  }
+
+  function initializeMap() {
+    // Calculate center point
+    const centerLat = (officeLocation.coords.lat + warehouseLocation.coords.lat) / 2;
+    const centerLng = (officeLocation.coords.lng + warehouseLocation.coords.lng) / 2;
+
+    // Create map
+    mapInstance = new google.maps.Map(document.getElementById('map-qatar'), {
+      zoom: 14,
+      center: { lat: centerLat, lng: centerLng },
+      mapTypeControl: true,
+      fullscreenControl: true,
+      streetViewControl: true,
+      zoomControl: true,
+      styles: [
+        {
+          featureType: 'all',
+          elementType: 'labels.text.fill',
+          stylers: [{ color: '#616161' }],
+        },
+      ],
+    });
+
+    // Create Office Marker
+    const officeMarker = createCustomMarker(mapInstance, officeLocation, '#dc2626');
+    const officeInfoWindow = createInfoWindow(officeLocation);
+    infoWindowsArray.push(officeInfoWindow);
+
+    officeMarker.addListener('click', () => {
+      closeAllInfoWindows();
+      officeInfoWindow.open(mapInstance, officeMarker);
+    });
+
+    // Create Warehouse Marker
+    const warehouseMarker = createCustomMarker(mapInstance, warehouseLocation, '#2563eb');
+    const warehouseInfoWindow = createInfoWindow(warehouseLocation);
+    infoWindowsArray.push(warehouseInfoWindow);
+
+    warehouseMarker.addListener('click', () => {
+      closeAllInfoWindows();
+      warehouseInfoWindow.open(mapInstance, warehouseMarker);
+    });
+
+    markersArray.push(officeMarker, warehouseMarker);
+
+    // Auto-open office info window on load
+    setTimeout(() => {
+      officeInfoWindow.open(mapInstance, officeMarker);
+    }, 500);
+
+    // Fit bounds to show both markers
+    const bounds = new google.maps.LatLngBounds();
+    bounds.extend(officeLocation.coords);
+    bounds.extend(warehouseLocation.coords);
+    mapInstance.fitBounds(bounds, 100);
+  }
+
+  function loadGoogleMapsScript() {
+    return new Promise((resolve, reject) => {
+      // Check if Google Maps is already loaded
+      if (window.google && window.google.maps) {
+        resolve();
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
+      script.async = true;
+      script.defer = true;
+
+      script.onload = () => {
+        resolve();
+      };
+
+      script.onerror = () => {
+        reject(new Error('Failed to load Google Maps API'));
+      };
+
+      document.head.appendChild(script);
+    });
+  }
+
+  // Initialize map when DOM is ready
+  async function setupMap() {
+    try {
+      await loadGoogleMapsScript();
+      initializeMap();
+    } catch (error) {
+      console.error('Error loading map:', error);
+      document.getElementById('map-qatar').innerHTML =
+        '<div class="flex items-center justify-center h-full text-red-600">Failed to load map. Please try again later.</div>';
+    }
+  }
+
+  // Run setup when document is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupMap);
+  } else {
+    setupMap();
+  }
+
+  // Cleanup function
+  window.addEventListener('beforeunload', () => {
+    markersArray.forEach((marker) => marker.setMap(null));
+    infoWindowsArray.forEach((infoWindow) => infoWindow.close());
+  });
+</script>

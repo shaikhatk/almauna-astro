@@ -1,0 +1,283 @@
+
+---
+const slides = [
+  {
+    id: 1,
+    img: "/src/assets/images/Photography/hero-home.svg",
+    align: "center",
+    title: "Your trusted partner for premium international foods",
+    subtitle:
+      "We source a diverse selection of high-quality products from leading international brands and deliver it affordably in Qatar and the UAE region since 2016.",
+  },
+  {
+    id: 2,
+    img: "/src/assets/images/Photography/hero-home-2.jpg",
+    overlay:
+      "linear-gradient(90.07deg, #75317A 0.06%, rgba(130,46,124,0.78) 52.95%, rgba(179,36,130,0) 99.93%)",
+    align: "left",
+    title: "Our legacy: trusted logistics, premium brands",
+    subtitle:
+      "From day one, we've specialized in robust import, distribution, and wholesale, ensuring steady supply for every scale of business in Qatar.",
+  },
+  {
+    id: 3,
+    img: "/src/assets/images/Photography/hero-home-3.jpg",
+    overlay:
+      "linear-gradient(90.07deg, #75317A 0.06%, rgba(130,46,124,0.78) 52.95%, rgba(179,36,130,0) 99.93%)",
+    align: "left",
+    title: "New heights in supply: ISO certified quality",
+    subtitle:
+      "Our new ISO 22000–certified Dubai branch expands your reach with efficient, scalable supply solutions across the wider UAE region.",
+  },
+];
+const slideCount = slides.length;
+// Create infinite loop: original slides + clone of first slide at end
+const infiniteSlides = [...slides, slides[0]];
+const infiniteSlideCount = infiniteSlides.length;
+---
+
+<style>
+  /* Minimal helper styles using Tailwind utilities via @apply */
+  .dot {
+    @apply h-2 w-2 rounded-full bg-white/50 transition-all duration-300 cursor-pointer;
+  }
+  .dot.active {
+    @apply w-6 bg-white;
+  }
+  /* Prevent text selection while dragging */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+</style>
+
+<div
+  id="heroCarouselRoot"
+  class="relative w-full h-[728px] md:h-[720px] overflow-hidden no-select"
+>
+  <!-- track -->
+  <div
+    id="carouselTrack"
+    class="flex h-full"
+    style={`width: ${infiniteSlideCount * 100}%`}
+    aria-hidden="false"
+  >
+    {infiniteSlides.map((s) => (
+      <div
+        role="group"
+        aria-roledescription="slide"
+        class="w-full h-full flex-shrink-0 relative"
+        style={`background-image: url('${s.img}'); background-size: cover; background-position: center;`}
+      >
+        <!-- overlay -->
+        <div
+          class="absolute inset-0"
+          style={`background: ${s.overlay};`}
+        ></div>
+
+        <!-- content container: center for mobile and first slide, left for desktop others -->
+        <div
+          class={`relative z-10 h-full flex flex-col gap-6 text-white px-6 lg:px-24 ${
+            s.align === "center"
+              ? "items-center md:justify-center justify-start mt-[64px] md:mt-0 text-center"
+              : "md:items-start md:text-left items-center md:justify-center justify-start mt-[64px] md:mt-0 text-center"
+          }`}
+        >
+          <div class={`${s.align === "left" ? "md:max-w-[640px] max-w-[640px]" : "max-w-[960px]"}`}>
+            <h2
+              class={`font-bold ${
+                s.align === "center" ? "text-[32px] md:text-6xl lg:text-[64px]" : "text-[32px] md:text-5xl lg:text-[64px]"
+              }`}
+            >
+              {s.title}
+            </h2>
+
+            <p class="md:mt-[42px] mt-[32px] text-[20px] md:text-[24px]">
+              {s.subtitle}
+            </p>
+
+            <div class={`mt-[164px] md:mt-[96px] md:mb-0 flex md:flex-row flex-col gap-[18px] md:gap-[32px] ${s.align === "center" ? "justify-center items-center" : "md:justify-start items-center justify-center"}`}>
+              <a
+                href="/brands"
+                class="px-6 py-3 bg-white text-[#712F76] flex justify-center rounded-[32px] w-[235px] font-bold shadow-lg"
+                aria-label="Explore Our Products"
+              >
+                Explore Our Products
+              </a>
+
+              <a
+                href="tel:+123456789"
+                class="px-5 py-3 border border-white rounded-[32px] w-[118px] bg-white bg-opacity-[50%] font-bold text-white flex justify-center"
+                aria-label="Call Us"
+              >
+                Call Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Dots -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-30">
+    {slides.map((_, i) => (
+      <button
+        class="dot"
+        aria-label={`Go to slide ${i + 1}`}
+        data-index={i}
+      ></button>
+    ))}
+  </div>
+</div>
+
+<script>
+  (function () {
+    const root = document.getElementById("heroCarouselRoot");
+    const track = document.getElementById("carouselTrack");
+    const dots = Array.from(root.querySelectorAll(".dot"));
+    const total = dots.length; // Original slide count (3)
+    const infiniteTotal = total + 1; // With cloned slide (4)
+
+    let index = 0; // Current position in infinite track
+    let autoTimer = null;
+    const INTERVAL = 5000;
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+
+    function setSizes() {
+      const rootWidth = root.clientWidth;
+      track.style.width = `${rootWidth * infiniteTotal}px`;
+      [...track.children].forEach((child) => {
+        child.style.width = `${rootWidth}px`;
+      });
+      setTranslate(-index * rootWidth, false);
+    }
+
+    function setTranslate(x, animate = true) {
+      track.style.transition = animate ? "transform 700ms ease-in-out" : "none";
+      track.style.transform = `translateX(${x}px)`;
+      currentTranslate = x;
+      prevTranslate = x;
+      updateDots();
+    }
+
+    function updateDots() {
+      const displayIndex = index % total;
+      dots.forEach((d, i) => d.classList.toggle("active", i === displayIndex));
+    }
+
+    function goTo(i, animate = true) {
+      index = i;
+      const rootWidth = root.clientWidth;
+      setTranslate(-index * rootWidth, animate);
+    }
+
+    function handleInfiniteLoop() {
+      const rootWidth = root.clientWidth;
+      // When we reach the cloned slide at the end, jump back to start without animation
+      if (index === infiniteTotal - 1) {
+        setTimeout(() => {
+          goTo(0, false);
+        }, 700); // Match animation duration
+      }
+    }
+
+    function nextSlide() {
+      goTo(index + 1);
+      handleInfiniteLoop();
+    }
+
+    function prevSlide() {
+      // If at start, jump to cloned slide at end
+      if (index === 0) {
+        goTo(infiniteTotal - 1, false);
+        setTimeout(() => {
+          goTo(infiniteTotal - 2);
+        }, 50);
+      } else {
+        goTo(index - 1);
+      }
+    }
+
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(nextSlide, INTERVAL);
+    }
+
+    function stopAuto() {
+      clearInterval(autoTimer);
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        stopAuto();
+        const targetIndex = parseInt(dot.dataset.index);
+        goTo(targetIndex);
+        startAuto();
+      });
+    });
+
+    function pointerDown(clientX) {
+      isDragging = true;
+      startX = clientX;
+      prevTranslate = currentTranslate;
+      track.style.transition = "none";
+      stopAuto();
+    }
+
+    function pointerMove(clientX) {
+      if (!isDragging) return;
+      const dx = clientX - startX;
+      setTranslate(prevTranslate + dx, false);
+    }
+
+    function pointerUp(clientX) {
+      if (!isDragging) return;
+      isDragging = false;
+
+      const dx = clientX - startX;
+      const threshold = root.clientWidth * 0.12;
+
+      if (dx > threshold) prevSlide();
+      else if (dx < -threshold) nextSlide();
+      else goTo(index);
+
+      startAuto();
+    }
+
+    track.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      pointerDown(e.clientX);
+      window.addEventListener("mousemove", onMouseMove);
+      window.addEventListener("mouseup", onMouseUp, { once: true });
+    });
+
+    function onMouseMove(e) {
+      pointerMove(e.clientX);
+    }
+    function onMouseUp(e) {
+      pointerUp(e.clientX);
+      window.removeEventListener("mousemove", onMouseMove);
+    }
+
+    track.addEventListener("touchstart", (e) => pointerDown(e.touches[0].clientX), { passive: true });
+    track.addEventListener("touchmove", (e) => pointerMove(e.touches[0].clientX), { passive: true });
+    track.addEventListener("touchend", (e) => pointerUp(e.changedTouches[0].clientX));
+
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(setSizes, 120);
+    });
+
+    let resizeTimeout = null;
+
+    setSizes();
+    updateDots();
+    startAuto();
+  })();
+</script>

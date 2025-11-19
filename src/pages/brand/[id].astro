@@ -1,0 +1,149 @@
+
+---
+import { products } from '~/data/productsData';
+import { brands } from '~/data/brandsData';
+import Layout from '~/layouts/PageLayout.astro';
+import Image from 'astro/components/Image.astro';
+
+export async function getStaticPaths() {
+  return products.map((product) => ({
+    params: { id: product.id },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const brand = brands.find((b) => b.id === product.brand.id);
+
+if (!product) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout title={product.title} description={product.description}>
+  <section class="py-[48px] md:py-[96px]">
+    <div class="max-w-6xl mx-auto px-4">
+      <!-- Breadcrumb -->
+      <div class="mb-[32px] md:mb-[48px]">
+        <a href="/" class="text-[14px] md:text-[16px] text-gradient hover:underline">Home</a>
+        <span class="mx-[8px] text-[14px] md:text-[16px]">/</span>
+        <a href={`/?brand=${brand?.id}`} class="text-[14px] md:text-[16px] text-gradient hover:underline">
+          {brand?.name}
+        </a>
+        <span class="mx-[8px] text-[14px] md:text-[16px]">/</span>
+        <span class="text-[14px] md:text-[16px] text-[#1E1E1E]">{product.title}</span>
+      </div>
+
+      <!-- Product Details -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-[32px] md:gap-[48px]">
+        <!-- Product Image -->
+        <div class="flex items-center justify-center bg-gradient-secondary rounded-[8px] p-[24px] md:p-[48px]">
+          <Image
+            src={product.image}
+            alt={product.title}
+            height="400"
+            width="400"
+            class="h-auto w-full max-w-[400px] object-cover"
+          />
+        </div>
+
+        <!-- Product Info -->
+        <div class="flex flex-col justify-start">
+          <!-- Brand Info -->
+          {
+            brand && (
+              <div class="mb-[24px]">
+                <Image
+                  src={brand.brandLogoImage}
+                  alt={brand.brandTitle}
+                  height="50"
+                  width="150"
+                  class="h-[50px] w-[150px] object-cover mb-[16px]"
+                />
+                <p class="text-[14px] md:text-[16px] text-[#1E1E1E] text-opacity-[70%]">
+                  {brand.name}
+                </p>
+              </div>
+            )
+          }
+
+          <!-- Product Title -->
+          <h1 class="text-[28px] md:text-[40px] font-bold text-[#1E1E1E] mb-[16px] md:mb-[24px]">
+            {product.title}
+          </h1>
+
+          <!-- Product Description -->
+          {
+            product.description && (
+              <p class="text-[16px] md:text-[18px] text-[#1E1E1E] text-opacity-[80%] mb-[32px] md:mb-[48px] leading-relaxed">
+                {product.description}
+              </p>
+            )
+          }
+
+          <!-- Brand Description -->
+          {
+            brand && (
+              <div class="mb-[32px] md:mb-[48px] p-[16px] md:p-[24px] bg-gradient-secondary rounded-[8px]">
+                <h3 class="text-[18px] md:text-[20px] font-bold text-gradient mb-[12px]">
+                  About {brand.brandTitle}
+                </h3>
+                <div
+                  class="text-[14px] md:text-[16px] text-[#1E1E1E] text-opacity-[80%]"
+                  set:html={brand.brandDescription}
+                />
+              </div>
+            )
+          }
+
+          <!-- Action Buttons -->
+          <div class="flex flex-col md:flex-row gap-[12px] md:gap-[16px]">
+            <button
+              class="bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow"
+            >
+              Add to Cart
+            </button>
+            <button
+              class="bg-white py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-secondary rounded-[32px] text-[#712F76] font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow border border-[#712F76] border-opacity-[20%]"
+            >
+              Download Specs
+            </button>
+          </div>
+
+          <!-- Related Products -->
+          {
+            brand && brand.products.length > 1 && (
+              <div class="mt-[48px] md:mt-[64px] pt-[32px] md:pt-[48px] border-t border-[#1E1E1E] border-opacity-[10%]">
+                <h3 class="text-[20px] md:text-[24px] font-bold text-[#1E1E1E] mb-[24px]">
+                  More from {brand.brandTitle}
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-[16px] md:gap-[24px]">
+                  {brand.products
+                    .filter((p) => p.id !== product.id)
+                    .slice(0, 3)
+                    .map((relatedProduct) => (
+                      <a
+                        href={`/brand/${relatedProduct.id}`}
+                        class="bg-white rounded-[8px] p-[16px] md:p-[24px] shadow-secondary hover:shadow-lg transition-shadow group"
+                      >
+                        <Image
+                          src={relatedProduct.image}
+                          alt={relatedProduct.title}
+                          height="180"
+                          width="180"
+                          class="h-[140px] md:h-[180px] w-auto object-cover mb-[12px] md:mb-[16px] group-hover:scale-105 transition-transform"
+                        />
+                        <p class="text-[12px] md:text-[14px] text-[#1E1E1E] text-opacity-[80%] line-clamp-2 group-hover:text-gradient transition-colors">
+                          {relatedProduct.title}
+                        </p>
+                      </a>
+                    ))}
+                </div>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

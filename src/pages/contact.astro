@@ -1,8 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import LocationMap from '~/components/widgets/LocationMap.astro';
 
 const metadata = {
   title: 'Contact',
@@ -10,70 +8,249 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
+  <main>
+    <section class='bg-gradient-secondary py-[96px]'>
+      <div class='max-w-5xl mx-auto px-6'>
+        <h2 class='text-center text-[32px] text-gradient font-bold'>Contact us</h2>
+        <p class='text-center text-[20px] pt-2'>
+          We’re here to connect. Reach us anytime through our offices or send us a message.
+        </p>
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+        <form class='max-w-md mx-auto pt-[40px] space-y-2'>
+          <input
+            type='text'
+            placeholder='Full name'
+            class='w-full px-4 py-3 focus:outline-none border border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
+          />
 
-  <ContactUs
-    id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
-  />
+          <input
+            type='text'
+            placeholder='Company name'
+            class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
+          />
 
-  <!-- Features2 Widget ************** -->
+          <input
+            type='email'
+            placeholder='E-mail'
+            class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
+          />
 
-  <Features2
-    title="We are here to help!"
-    items={[
-      {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
-      },
-      {
-        title: 'Contact sales',
-        description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
-      },
-      {
-        title: 'Technical support',
-        description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Email',
-        description: 'contact@support.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
-        icon: 'tabler:map-pin',
-      },
-    ]}
-  />
+          <input
+            type='text'
+            placeholder='Phone number'
+            class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
+          />
+          <textarea
+            placeholder='Message'
+            rows='5'
+            class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
+          ></textarea>
+
+          <div class='flex justify-center pt-[32px]'>
+            <button
+              type='submit'
+              class='px-8 py-3 rounded-[32px] focus:outline-none text-white font-bold text-[16px] bg-gradient-primary shadow-md hover:opacity-90'
+            >
+              Send Message
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class='pt-[64px] pb-[170px]'>
+      <div class='max-w-6xl mx-auto px-6'>
+        <div>
+          <h2 class='text-center text-[32px] text-gradient font-bold'>Al Mauna Offices</h2>
+          <p class='text-center text-[20px] pt-2'>
+            We have multiple branches across the MENA region, ensuring accessibility and convenience for our customers.
+            Visit your nearest branch to connect with our team.
+          </p>
+        </div>
+        <div class='mt-[64px]'>
+          <div class='flex flex-col gap-[32px]'>
+            <div class='grid grid-cols-1 lg:grid-cols-3 gap-[48px] border rounded-[8px]'>
+              <!-- Map Section -->
+              <div class='col-span-1'>
+                <LocationMap
+                  mapId='map-container-qatar'
+                  officeLocation={{
+                    name: 'Office',
+                    address: 'Office #37, Al Emadi Business Center, C Ring Road, Doha, Qatar',
+                    coords: { lat: 25.2854, lng: 51.531 },
+                    mapUrl: 'https://maps.google.com/?q=Al+Emadi+Business+Center,+C+Ring+Road,+Doha,+Qatar',
+                    color: '#dc2626',
+                  }}
+                  warehouseLocation={{
+                    name: 'Warehouse',
+                    address: 'Milaha Warehouse, Doha - Qatar',
+                    coords: { lat: 25.265, lng: 51.518 },
+                    mapUrl: 'https://maps.google.com/?q=Milaha+Warehouse,+Doha,+Qatar',
+                    color: '#2563eb',
+                  }}
+                />
+              </div>
+
+              <!-- Contact Information Section -->
+
+              <div
+                class='md:flex flex-row justify-between items-start col-span-2 px-6 pb-[48px] md:pl-[40px] md:py-[48px]'
+              >
+                <div>
+                  <h2 class='text-[24px] text-gradient font-bold md:mb-[16px] mb-[32px]'>Qatar Office</h2>
+                  <!-- Office -->
+                  <div>
+                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>ADDRESS</h3>
+                    <p class='text-[20px] text-[#B32482] underline mb-[16px]'>
+                      Office #37, Al Emadi Business Center,<br class='md:block hidden' /> C Ring Road, Doha, Qatar
+                    </p>
+                  </div>
+                  <div class='mt-[16px] md:hidden'>
+                    <a
+                      href='https://maps.google.com/?q=Al+Emadi+Business+Center,+C+Ring+Road,+Doha,+Qatar'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold'
+                    >
+                      Get Directions
+                    </a>
+                  </div>
+
+                  <!-- Warehouse -->
+                  <div class='md:mt-[16px] mt-[32px]'>
+                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>WAREHOUSE</h3>
+                    <p class='text-[20px]'>Milaha Warehouse, Doha - Qatar</p>
+                  </div>
+
+                  <!-- Phone -->
+                  <div class='md:mt-[16px] mt-[32px]'>
+                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>PHONE</h3>
+                    <div>
+                      <a href='tel:+97444416966' class='text-[20px] text-[#B32482] underline'> +974 4441 6966 </a>
+                      <a href='tel:+97433560938' class='text-[20px] text-[#B32482] underline'> +974 3356 0938 </a>
+                    </div>
+                  </div>
+
+                  <!-- Email -->
+                  <div class='md:mt-[16px] mt-[32px]'>
+                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>E-MAIL</h3>
+                    <a href='mailto:sales@almauna.com' class='text-[20px] text-[#B32482] underline'>
+                      sales@almauna.com
+                    </a>
+                  </div>
+
+                  <!-- Opening Hours -->
+                  <div class='md:mt-[16px] mt-[32px]'>
+                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>OPENING HOURS</h3>
+                    <p class='text-[20px]'>Sat – Thu: 8:00 AM – 5:00 PM</p>
+                  </div>
+                </div>
+
+                <div class='md:mt-[60px] md:block hidden md:mr-[70px]'>
+                  <a
+                    href='https://maps.google.com/?q=Al+Emadi+Business+Center,+C+Ring+Road,+Doha,+Qatar'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold'
+                  >
+                    Get Directions
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class='grid grid-cols-1 lg:grid-cols-3 gap-[48px] border rounded-[8px]'>
+              <!-- Map Section -->
+              <div class='col-span-1'>
+                <LocationMap
+                  mapId='map-container-dubai'
+                  officeLocation={{
+                    name: 'Office',
+                    address: 'Office No: 2105-0184, The Binary by Omniyat, Business Bay, Dubai, United Arab Emirates',
+                    coords: { lat: 25.1972, lng: 55.2744 },
+                    mapUrl: 'https://maps.google.com/?q=The+Binary+by+Omniyat,+Business+Bay,+Dubai,+UAE',
+                    color: '#dc2626',
+                  }}
+                  warehouseLocation={{
+                    name: 'Warehouse',
+                    address: 'Ocean Fair International, Dubai',
+                    coords: { lat: 25.2048, lng: 55.2708 },
+                    mapUrl: 'https://maps.google.com/?q=Ocean+Fair+International,+Dubai,+UAE',
+                    color: '#2563eb',
+                  }}
+                />
+              </div>
+
+              <!-- Contact Information Section -->
+              <div
+                class='md:flex flex-row justify-between items-start col-span-2 px-6 md:pl-[40px] pb-[48px] md:py-[48px]'
+              >
+                <div>
+                  <h2 class='text-[24px] text-gradient font-bold md:mb-[16px] mb-[32px]'>UAE Office</h2>
+                  <!-- Office -->
+                  <div>
+                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>ADDRESS</h3>
+                    <p class='text-[20px] text-[#B32482] underline mb-[16px]'>
+                      Office No: 2105-0184, The Binary by Omniyat,<br class='md:block hidden' /> Business Bay, Dubai, United
+                      Arab Emirates
+                    </p>
+                  </div>
+                  <div class='mt-[16px] md:hidden'>
+                    <a
+                      href='https://maps.google.com/?q=The+Binary+by+Omniyat,+Business+Bay,+Dubai,+UAE'
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold'
+                    >
+                      Get Directions
+                    </a>
+                  </div>
+
+                  <!-- Warehouse -->
+                  <div class='md:mt-[16px] mt-[32px]'>
+                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>WAREHOUSE</h3>
+                    <p class='text-[20px]'>Ocean Fair International, Dubai</p>
+                  </div>
+
+                  <!-- Phone -->
+                  <div class='md:mt-[16px] mt-[32px]'>
+                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>PHONE</h3>
+                    <div>
+                      <a href='tel:+971504789777' class='text-[20px] text-[#B32482] underline'> +971504789777 </a>
+                      <a href='tel:+971425880070' class='text-[20px] text-[#B32482] underline'> +971425880070 </a>
+                    </div>
+                  </div>
+
+                  <!-- Email -->
+                  <div class='md:mt-[16px] mt-[32px]'>
+                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>E-MAIL</h3>
+                    <a href='mailto:sales.uae@almauna.com' class='text-[20px] text-[#B32482] underline'>
+                      sales.uae@almauna.com
+                    </a>
+                  </div>
+
+                  <!-- Opening Hours -->
+                  <div class='md:mt-[16px] mt-[32px]'>
+                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>OPENING HOURS</h3>
+                    <p class='text-[20px]'>Mon – Fri: 8:00 AM – 5:00 PM</p>
+                  </div>
+                </div>
+
+                <div class='md:mt-[60px] md:block hidden md:mr-[70px]'>
+                  <a
+                    href='https://maps.google.com/?q=The+Binary+by+Omniyat,+Business+Bay,+Dubai,+UAE'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold'
+                  >
+                    Get Directions
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>

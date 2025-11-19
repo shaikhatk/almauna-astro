@@ -1,0 +1,14 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import BrandTabsWidget from '~/components/widgets/BrandTabsWidget.astro';
+import { brands } from '~/data/brandsData';
+
+// Default selected brand = first brand
+const selectedBrand = Astro.url.searchParams.get('brand') || brands[0].id;
+---
+
+<Layout metadata={{ title: 'Brands' }}>
+  <main>
+    <BrandTabsWidget selectedBrandId={selectedBrand} />
+  </main>
+</Layout>
