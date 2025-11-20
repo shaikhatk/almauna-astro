@@ -2,6 +2,7 @@ import { getRssString } from '@astrojs/rss';
 
 import { SITE, METADATA, APP_BLOG } from 'astrowind:config';
 import { getPermalink } from '~/utils/permalinks';
+import { fetchPosts } from '~/utils/blog';
 
 export const GET = async () => {
   if (!APP_BLOG.isEnabled) {
@@ -11,8 +12,10 @@ export const GET = async () => {
     });
   }
 
+  const posts = await fetchPosts();
+
   const rss = await getRssString({
-    title: `${SITE.name}’s Blog`,
+    title: `${SITE.name}'s Blog`,
     description: METADATA?.description || '',
     site: import.meta.env.SITE,
 
