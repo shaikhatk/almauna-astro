@@ -11,7 +11,7 @@ const {
   subtitle = 'A growing community trusts Al Mauna for their premium food needs.',
 } = Astro.props;
 
-const topRowLogos = [
+const topRowLogosData = [
   { src: '/src/assets/images/customers/Amlak-11.jpg', alt: 'Amlak' },
   { src: '/src/assets/images/customers/cafenoir-12.png', alt: 'Cafe Noir' },
   { src: '/src/assets/images/customers/Chocolatebash-1.jpg', alt: 'Chocolatebash' },
@@ -20,7 +20,7 @@ const topRowLogos = [
   { src: '/src/assets/images/customers/novo-4.png', alt: 'Novo Cinemas' },
 ];
 
-const bottomRowLogos = [
+const bottomRowLogosData = [
   { src: '/src/assets/images/customers/QACC-5.jpg', alt: 'QACC' },
   { src: '/src/assets/images/customers/QatarArmedForces-6.jpeg', alt: 'Qatar Armed Forces' },
   { src: '/src/assets/images/customers/qncc-7.jpg', alt: 'QNCC' },
@@ -28,6 +28,10 @@ const bottomRowLogos = [
   { src: '/src/assets/images/customers/souqalbaladi-9.png', alt: 'Souq Al Baladi' },
   { src: '/src/assets/images/customers/teatime-10.jpg', alt: 'Tea Time' },
 ];
+
+// Duplicate the arrays to create seamless loop effect
+const topRowLogos = [...topRowLogosData, ...topRowLogosData];
+const bottomRowLogos = [...bottomRowLogosData, ...bottomRowLogosData];
 
 const testimonials = [
   {
@@ -102,26 +106,12 @@ const testimonials = [
               </div>
             ))
           }
-          {
-            topRowLogos.map((logo) => (
-              <div class='flex-shrink-0 w-[200px] h-[200px] flex items-center justify-center bg-white'>
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
-              </div>
-            ))
-          }
         </div>
       </div>
 
       <!-- Bottom Row - Scrolling Left -->
       <div>
         <div class='flex gap-[64px] carousel-row-bottom'>
-          {
-            bottomRowLogos.map((logo) => (
-              <div class='flex-shrink-0 w-[200px] h-[200px] flex items-center justify-center bg-white'>
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
-              </div>
-            ))
-          }
           {
             bottomRowLogos.map((logo) => (
               <div class='flex-shrink-0 w-[200px] h-[200px] flex items-center justify-center bg-white'>

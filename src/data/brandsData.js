@@ -59,12 +59,12 @@ export const brands = [
     name: 'April',
     description: 'Mayonnaise',
     brandTitle: 'April',
-    brandLogoImage: '/src/assets/images/logo.png',
+    brandLogoImage: '/src/assets/images/april-mayo/april-logo.png',
     brandDescription: [
       '<strong>April</strong> is a leading mayonnaise brand crafted with premium ingredients for authentic taste and quality.',
     ].join(''),
     collectionTitle: 'April collection',
-    catalog: 'https://maharanirice.in/',
+    catalog: 'https://store.almauna.com/',
     products: products.filter((product) => product.brand.id === 'april'),
   },
   {

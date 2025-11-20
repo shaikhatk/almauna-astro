@@ -1,0 +1,67 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Image from 'astro/components/Image.astro';
+
+const metadata = {
+  title: 'Executive director',
+};
+---
+
+<Layout metadata={metadata}>
+  <main>
+    <section class='bg-gradient-secondary pt-[96px] pb-[170px]'>
+      <div class='max-w-5xl mx-auto px-6'>
+        <h2 class='text-[32px] text-gradient font-bold text-center'>Meet our Executive Director</h2>
+        <div class='mt-[48px] md:mt-[64px] flex md:flex-row flex-col gap-[48px]'>
+          <div class='flex justify-center items-center md:hidden'>
+            <Image
+              src='/src/assets/images/dr-faleh.jpg'
+              height={180}
+              width={180}
+              class='h-[250px] w-[250px] object-cover object-top'
+              alt='Dr. Faleh Mohamed Hussein Ali'
+            />
+          </div>
+          <Image
+            src='/src/assets/images/dr-faleh.jpg'
+            height={180}
+            width={180}
+            class='h-[380px] w-[306px] object-cover object-top md:block hidden rounded-[8px]'
+            alt='Dr. Faleh Mohamed Hussein Ali'
+          />
+          <div>
+            <h3 class='text-[24px] font-bold'>Dr. Faleh Mohamed Hussein Ali</h3>
+            <p class='text-[20px] mt-[16px]'>
+              Dr. Faleh worked as the assistant for Policy to the Minister of Health for 8 years, at the Supreme Council
+              of Health (SCH), Qatar's highest health authority. He guided national planning for health facilities,
+              services and workforce. He is also was responsible for policies on health financing, quality, patient
+              safety, cancer, e-health, facility licensing, and research governance. He oversaw the implementation of
+              the projects in the National Health Strategy 2011-2016, and personally lead the implementation of 13 of
+              the 40 projects.<br /><br />
+              Dr. Faleh also worked for 4 years as Acting Chief Executive Officer of the National Health Insurance Company,
+              a government-owned private company responsible for the implementation and administration of Seha, the National
+              Health Insurance Scheme.<br /><br /> In addition to that, Dr. Faleh served on several governmental boards and
+              advisory committees. He was appointed Vice Chair of the Board of Directors of the Qatar Council for Healthcare
+              Practitioners, an arm’s-length body established to consolidate the licensing of health professionals. He helds
+              similar posts in the fields of education, statistics, demography, humanitarian law, sports and information
+              technology. He also served as a board member in the board of directors of Malomatia, an IT company owned by
+              Qatar Investment Authority. He is a partner in several established companies and has established two startups
+              as an individual.<br /><br /> Dr. Faleh has a strong academic interest. He is Visiting Lecturer and Doctoral
+              Candidate on health financing at Imperial College London.<br /><br /> He is author of a number of peer-reviewed
+              journal articles and books. He served on academic and scientific advisory groups at Qatar University, Qatar
+              Foundation,and Imperial College London. Prior to turning to administration, he held health management posts
+              for over a decade. He led the commissioning of the Cuban Hospital as its Chief Executive Officer from 2009-2012.
+              For around ten years prior, he held executive posts at Hamad General, Rumailah and the Psychiatric Hospitals.
+              He holds a Master of Science in Health Management, from the Tanaka Business School, Imperial College London.
+              After graduating from the Royal College of Surgeons in Ireland in 1993 with a bachelor degree in Medicine,
+              he began his career as a clinician working for around ten years as an orthopedic surgeon and emergency physician
+              at Hamad General Hospital, Qatar’s largest hospital.<br /><br /> Dr. Faleh is characterised by a strong commitment
+              to community engagement. For many years he volunteered in medical affairs and international relief with the
+              Qatar Red Crescent Society, a member of the International Federation of Red Cross and Red Crescent Societies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

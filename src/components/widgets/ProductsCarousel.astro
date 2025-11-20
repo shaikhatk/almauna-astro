@@ -6,35 +6,46 @@ const featuredProducts = products
   .filter((product) => product.feature === true)
   .map((product, index) => ({
     id: `product-${index}`,
+    productId: product.id,
     image: product.image,
     title: product.title,
-    subtitle: product.description,
+    subtitle: product.subtitle,
     description: product.description,
+    brandId: product.brand.id,
     viewBtn: `View More From ${product.brand.id.charAt(0).toUpperCase() + product.brand.id.slice(1)}`,
   }));
 ---
 
-<div class='max-w-5xl mx-auto px-[32px] md:px-6'>
-  <Carousel slides={featuredProducts} autoPlayDelay={5000} showControls={false} showDots={true} showSwipe={true}>
+<div class='max-w-5xl mx-auto px-6' data-products-carousel>
+  <Carousel
+    slides={featuredProducts}
+    autoPlayDelay={3000}
+    showControls={false}
+    showDots={false}
+    showSwipe={true}
+    data-carousel-instance
+  >
     <Fragment slot='slides'>
       {
         featuredProducts.map((product, index) => (
           <div
-            class='carousel-slide absolute inset-0 flex items-center md:flex-row flex-col gap-[64px] p-8 md:p-12 transition-opacity duration-500 md:h-[450px] h-[954px]'
-            data-slide={index}
+            class='carousel-slide w-full flex items-center md:flex-row flex-col gap-[64px] p-0 md:p-12 md:h-[450px] h-[953px]'
+            data-slide-index={index}
           >
-            <img
-              src={product.image}
-              class='w-[299px] h-[400px] object-cover rounded-lg select-none'
-              alt={product.title}
-              loading='lazy'
-              draggable='false'
-            />
+            <div class='flex-shrink-0'>
+              <img
+                src={product.image}
+                class='w-[299px] h-[400px] object-cover select-none'
+                alt={product.title}
+                loading='lazy'
+                draggable='false'
+              />
+            </div>
 
             <div class='flex-1'>
               <h2 class='text-[24px] font-bold text-gradient-tertiary'>{product.title}</h2>
-              <p class='text-[16px] pt-2 text-gray-600'>{product.subtitle}</p>
-              <p class='text-[20px] pt-[24px] text-gray-700'>{product.description}</p>
+              <p class='text-[18px] mt-[16px]'>{product.subtitle}</p>
+              <p class='text-[20px] pt-[24px] '>{product.description}</p>
 
               <div class='flex md:flex-row flex-col items-center gap-[24px] md:gap-4 mt-[32px]'>
                 <a
@@ -43,26 +54,191 @@ const featuredProducts = products
                 >
                   Get a Quote
                 </a>
-                <button class='py-[16px] px-[32px] w-fit border-2 border-[#75317A] rounded-[32px] text-[16px] text-[#75317A] font-bold hover:bg-[#75317A] hover:text-white transition-colors'>
+                <a
+                  href={`/brand/${product.brandId}/${product.productId}`}
+                  class='py-[16px] px-[32px] w-fit border-2 border-[#75317A] rounded-[32px] text-[16px] text-[#75317A] font-bold hover:bg-[#75317A] hover:text-white transition-colors'
+                >
                   {product.viewBtn}
-                </button>
+                </a>
               </div>
             </div>
           </div>
         ))
       }
     </Fragment>
-
-    <Fragment slot='dots'>
-      {
-        featuredProducts.map((_, index) => (
-          <button
-            class='carousel-dot w-3 h-3 rounded-full border-2 border-[#75317A] transition-all duration-300'
-            data-slide={index}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))
-      }
-    </Fragment>
   </Carousel>
+
+  <div class='flex justify-center gap-3' data-dots-container>
+    {
+      featuredProducts.map((_, index) => (
+        <button
+          class='carousel-dot h-3 rounded-full border-2 border-gray-400 bg-opacity-[50%] bg-gray-300 w-3'
+          data-dot-index={index}
+          data-active={index === 0 ? 'true' : 'false'}
+          aria-label={`Go to slide ${index + 1}`}
+          type='button'
+        />
+      ))
+    }
+  </div>
 </div>
+
+<script>
+  class ProductsCarouselController {
+    private currentSlide: number = 0;
+    private totalSlides: number = 0;
+    private autoPlayInterval: ReturnType<typeof setInterval> | null = null;
+    private pollInterval: ReturnType<typeof setInterval> | null = null;
+    private container: HTMLElement | null = null;
+    private slides: NodeListOf<HTMLElement> | null = null;
+    private dots: NodeListOf<HTMLElement> | null = null;
+    private lastVisibleIndex: number = -1;
+
+    constructor() {
+      this.init();
+    }
+
+    private init(): void {
+      this.container = document.querySelector('[data-products-carousel]');
+      if (!this.container) return;
+
+      this.slides = this.container.querySelectorAll('.carousel-slide');
+      this.dots = this.container.querySelectorAll('.carousel-dot');
+      this.totalSlides = this.slides?.length || 0;
+
+      if (this.totalSlides === 0) return;
+
+      this.setupDotListeners();
+      this.setupHoverListeners();
+      this.startPolling();
+    }
+
+    private setupDotListeners(): void {
+      this.dots?.forEach((dot, index) => {
+        dot.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.goToSlide(index);
+        });
+      });
+    }
+
+    private setupHoverListeners(): void {
+      this.container?.addEventListener('mouseenter', () => this.stopAutoPlay());
+      this.container?.addEventListener('mouseleave', () => this.startAutoPlay());
+    }
+
+    private startPolling(): void {
+      this.pollInterval = setInterval(() => {
+        this.checkVisibleSlide();
+      }, 100);
+    }
+
+    private stopPolling(): void {
+      if (this.pollInterval) {
+        clearInterval(this.pollInterval);
+        this.pollInterval = null;
+      }
+    }
+
+    private checkVisibleSlide(): void {
+      let visibleIndex = -1;
+
+      this.slides?.forEach((slide, index) => {
+        const rect = slide.getBoundingClientRect();
+        const isVisible =
+          slide.offsetParent !== null &&
+          (slide.style.display === 'flex' || slide.style.display === '' || getComputedStyle(slide).display === 'flex');
+
+        if (isVisible) {
+          visibleIndex = index;
+        }
+      });
+
+      if (visibleIndex !== -1 && visibleIndex !== this.lastVisibleIndex) {
+        this.lastVisibleIndex = visibleIndex;
+        this.currentSlide = visibleIndex;
+        this.updateDots(visibleIndex);
+      }
+    }
+
+    private updateDots(activeIndex: number): void {
+      this.dots?.forEach((dot, index) => {
+        const isActive = index === activeIndex;
+        dot.setAttribute('data-active', isActive ? 'true' : 'false');
+      });
+    }
+
+    private goToSlide(index: number): void {
+      this.currentSlide = index;
+      this.lastVisibleIndex = index;
+      this.updateDots(index);
+
+      // Hide all slides and show the selected one
+      this.slides?.forEach((slide, i) => {
+        slide.style.display = i === index ? 'flex' : 'none';
+      });
+
+      this.resetAutoPlay();
+    }
+
+    private nextSlide(): void {
+      const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+      this.goToSlide(nextIndex);
+    }
+
+    private startAutoPlay(): void {
+      this.stopAutoPlay();
+      this.autoPlayInterval = setInterval(() => this.nextSlide(), 8000);
+    }
+
+    private stopAutoPlay(): void {
+      if (this.autoPlayInterval) {
+        clearInterval(this.autoPlayInterval);
+        this.autoPlayInterval = null;
+      }
+    }
+
+    private resetAutoPlay(): void {
+      this.stopAutoPlay();
+      this.startAutoPlay();
+    }
+
+    public destroy(): void {
+      this.stopAutoPlay();
+      this.stopPolling();
+    }
+  }
+
+  let controller: ProductsCarouselController | null = null;
+
+  function initCarousel() {
+    if (controller) {
+      controller.destroy();
+    }
+    controller = new ProductsCarouselController();
+  }
+
+  // Initialize carousel when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCarousel);
+  } else {
+    initCarousel();
+  }
+
+  // Reinitialize on Astro navigation
+  document.addEventListener('astro:after-swap', initCarousel);
+</script>
+
+<style>
+  :global(.carousel-slide) {
+    display: none;
+  }
+
+  :global(.carousel-dot[data-active='true']) {
+    @apply w-12 bg-[#808080BF] bg-opacity-[75%] transition-all duration-300;
+  }
+
+  :global(.carousel-dot[data-active='false']) {
+    @apply w-3  bg-[#808080BF] bg-opacity-[50%] transition-all duration-300;
+  }
+</style>

@@ -44,7 +44,7 @@ const aboutData = [
     <section
       style='background-image:linear-gradient(180deg, #75317A 0%, rgba(130, 46, 124, 0.784801) 52.96%, rgba(179, 36, 130, 0) 100%), url(/src/assets/images/aboutus-hero.png);  background-size: cover; background-position: center; height: 740px;'
     >
-      <div class='flex flex-col items-center pt-[99px] px-6'>
+      <div class='flex flex-col items-center pt-[96px] px-6'>
         <h1 class='text-[32px] font-bold text-white text-center'>
           Al Mauna Trading:<br class='md:hidden' /> dedicated to excellence
         </h1>
@@ -76,7 +76,7 @@ const aboutData = [
     </section>
 
     <section class='pt-[96px] pb-[170px] bg-gradient-secondary'>
-      <div class='max-w-4xl mx-auto px-6 lg:px-0'>
+      <div class='max-w-5xl mx-auto px-6 lg:px-0'>
         <h2 class='text-[32px] text-gradient font-bold text-center'>Meet our Executive Director</h2>
         <div class='mt-[48px] flex md:flex-row flex-col gap-[48px]'>
           <div class='flex justify-center items-center md:hidden'>
@@ -97,7 +97,7 @@ const aboutData = [
           />
           <div>
             <h3 class='text-[24px] font-bold'>Dr. Faleh Mohamed Hussein Ali</h3>
-            <p class='text-[20px] mt-[9px]'>
+            <p class='text-[20px] mt-[9px] mb-[32px]'>
               Dr. Faleh worked as the assistant for Policy to the Minister of Health for 8 years, at the Supreme Council
               of Health (SCH), Qatar's highest health authority. He guided national planning for health facilities,
               services and workforce. He is also was responsible for policies on health financing, quality, patient
@@ -105,15 +105,23 @@ const aboutData = [
               the projects in the National Health Strategy 2011-2016, and personally lead the implementation of 13 of
               the 40 projects.
             </p>
-            <button class='bg-white py-[16px] px-[32px] mt-[32px] rounded-[32px] text-[#712F76] font-bold text-[16px]'
-              >Read more</button
+            <a href='/director' class='bg-white py-[16px] px-[32px] rounded-[32px] text-[#712F76] font-bold text-[16px]'
+              >Read more</a
             >
           </div>
         </div>
       </div>
     </section>
 
-    <section class='py-[96px]'>
+    <section
+      style={{
+        backgroundImage: 'url(/src/assets/images/about-bg.svg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+      class='py-[96px] md:[background-image:url(/src/assets/images/about-bg.svg)] [background-image:none]'
+    >
       <div class='max-w-5xl mx-auto px-6'>
         {/* Heading */}
         <div class='text-center'>
@@ -134,19 +142,19 @@ const aboutData = [
 
                 {/* Dotted line only between items */}
                 {index !== timelineData.length - 1 && (
-                  <div class='absolute md:left-[-55px] md:top-[42px] left-[-60px] top-[44px] md:h-[258px] h-[640px] border-l-4 border-dashed border-[#C26AA4] ' />
+                  <div class='absolute md:left-[-55px] md:top-[42px] left-[-60px] top-[44px] md:h-[280px] h-[700px] border-l-4 border-dashed border-[#C26AA4] ' />
                 )}
 
                 {/* Content + Image */}
                 <div class='grid md:grid-cols-2 gap-8 md:pl-10 pl-3 mt-[64px]'>
                   <div>
                     <h3 class='text-[24px] font-bold text-gradient'>{item.title}</h3>
-                    <p class='text-[20px] mt-2'>{item.description}</p>
+                    <p class='text-[20px] mt-2 mb-[32px]'>{item.description}</p>
 
                     {item.button && (
                       <a
                         href='/dubai-branch'
-                        class='mt-6 bg-white text-[#712F76] shadow-secondary text-[16px] px-6 py-3 font-bold rounded-[32px]'
+                        class='bg-white text-[#712F76] shadow-secondary text-[16px] px-6 py-3 font-bold rounded-[32px]'
                       >
                         {item.button.text}
                       </a>
@@ -210,9 +218,10 @@ const aboutData = [
           From retail to wholesale, we’ll design a plan that matches your scale, timing, and goals.
         </p>
         <div class='flex justify-center items-center mt-[48px]'>
-          <button
+          <a
+            href='/get-a-quote'
             class='bg-gradient-primary py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px]'
-            >Get a Quote</button
+            >Get a Quote</a
           >
         </div>
       </div>

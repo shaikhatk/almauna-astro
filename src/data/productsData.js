@@ -15,6 +15,7 @@ export const products = [
       'Packed in hygienic, food-grade packaging',
     ],
     feature: true,
+    subtitle: 'Low glycemic index . Classic aroma . Easy to digest',
     brand: {
       id: 'maharani',
     },
@@ -33,7 +34,8 @@ export const products = [
       'Easy to cook and digest',
       'Packed in hygienic, food-grade packaging',
     ],
-    feature: true,
+    feature: false,
+    subtitle: 'Low glycemic index . Classic aroma . Easy to digest',
     brand: {
       id: 'maharani',
     },
@@ -52,6 +54,7 @@ export const products = [
       'Easy to cook and digest',
       'Packed in hygienic, food-grade packaging',
     ],
+    subtitle: 'Low glycemic index . Classic aroma . Easy to digest',
     brand: {
       id: 'maharani',
     },
@@ -70,7 +73,8 @@ export const products = [
       'Easy to cook and digest',
       'Packed in hygienic, food-grade packaging',
     ],
-    feature: true,
+    feature: false,
+    subtitle: 'Low glycemic index . Classic aroma . Easy to digest',
     brand: {
       id: 'maharani',
     },
@@ -92,6 +96,8 @@ export const products = [
       'Smooth texture, golden color, and deep floral flavor',
       'Hygienically packed to preserve freshness and quality',
     ],
+    feature: true,
+    subtitle: '100% Natural . Golden color . Deep floral flavor',
     brand: {
       id: 'honig-ozbal',
     },
@@ -200,6 +206,8 @@ export const products = [
     description: 'Vitabella Organic & Gluten free corn flakes 225g',
     packaging: '225g',
     amount: '1',
+    feature: true,
+    subtitle: 'Organic . Gluten free',
     brand: {
       id: 'nicoli-vitabella',
     },
@@ -275,6 +283,8 @@ export const products = [
       'Light, Neutral Taste – Preserves the authentic flavors of your dishes.',
       'Healthier Choice – Cholesterol-free, rich in polyunsaturated fats, and naturally light on digestion.',
     ],
+    feature: true,
+    subtitle: '100% Pure corn oil . High-heat stability . Cholestrol free',
     brand: {
       id: 'tradekey',
     },
@@ -368,6 +378,8 @@ export const products = [
       'Shraddha Premium A2 Ghee is  made through Vedic process of making Ghee from the Gir Cow milk. From procuring the milk to making ghee, at all stages, the process are maintained as per ancient indian vedic method so the virtue of the ghee are maintained.',
     packaging: '1L',
     amount: '1',
+    feature: true,
+    subtitle: 'A2 Ghee . Classic aroma . Healthy',
     brand: {
       id: 'shraddha',
     },
@@ -375,13 +387,122 @@ export const products = [
 
   // Al mauna Products
   {
-    id: 'palestine-olive-oil',
-    title: 'PAlestine olive oil',
+    id: 'palestine-olive-oil-250ml',
+    title: 'Palestine olive oil 250ml',
     image: '/src/assets/images/palestine-olive-oil/olive-oil.png',
+    feature: true,
+    subtitle: '100% Virgin olive oil . Palestinian origin . Rich flavour',
     description:
-      'Shraddha Premium A2 Ghee is  made through Vedic process of making Ghee from the Gir Cow milk. From procuring the milk to making ghee, at all stages, the process are maintained as per ancient indian vedic method so the virtue of the ghee are maintained.',
+      'Al Mauna Virgin Olive Oil 250ml is offered in multiple sizes tailored to both household and Horeca needs.Hand-harvested and cold-pressed by local farmers, every drop captures the authentic taste and timeless tradition of Palestinian olive culture.',
+    packaging: '250ml',
+    amount: '1',
+    quality: [
+      '100% Virgin Olive Oil – Extracted through cold-pressing methods without chemical processing.',
+      'Authentic Palestinian Origin – Supporting smallholder farmers and preserving a heritage of olive cultivation.',
+      'Rich Flavor Profile – Fruity and aromatic with a peppery finish, perfect for dressings, dips, and healthy cooking.',
+      'Nutritional Excellence – Naturally rich in antioxidants, Vitamin E, and heart-healthy fats.',
+      'Premium Packaging – Available in glass bottles and metal tins that protect freshness and quality.',
+    ],
+    brand: {
+      id: 'al-mauna',
+    },
+  },
+  {
+    id: 'palestine-olive-oil-500ml',
+    title: 'Palestine olive oil 500ml',
+    image: '/src/assets/images/palestine-olive-oil/olive-oil.png',
+    subtitle: '100% Virgin olive oil . Palestinian origin . Rich flavour',
+    description:
+      'Al Mauna Virgin Olive Oil 500ml is offered in multiple sizes tailored to both household and Horeca needs.Hand-harvested and cold-pressed by local farmers, every drop captures the authentic taste and timeless tradition of Palestinian olive culture.',
+    packaging: '500ml',
+    amount: '1',
+    quality: [
+      '100% Virgin Olive Oil – Extracted through cold-pressing methods without chemical processing.',
+      'Authentic Palestinian Origin – Supporting smallholder farmers and preserving a heritage of olive cultivation.',
+      'Rich Flavor Profile – Fruity and aromatic with a peppery finish, perfect for dressings, dips, and healthy cooking.',
+      'Nutritional Excellence – Naturally rich in antioxidants, Vitamin E, and heart-healthy fats.',
+      'Premium Packaging – Available in glass bottles and metal tins that protect freshness and quality.',
+    ],
+    brand: {
+      id: 'al-mauna',
+    },
+  },
+  {
+    id: 'palestine-olive-oil-1l',
+    title: 'Palestine olive oil 1L',
+    image: '/src/assets/images/palestine-olive-oil/olive-oil.png',
+    subtitle: '100% Virgin olive oil . Palestinian origin . Rich flavour',
+    description:
+      'Al Mauna Virgin Olive Oil 1L is offered in multiple sizes tailored to both household and Horeca needs.Hand-harvested and cold-pressed by local farmers, every drop captures the authentic taste and timeless tradition of Palestinian olive culture.',
     packaging: '1L',
     amount: '1',
+    quality: [
+      '100% Virgin Olive Oil – Extracted through cold-pressing methods without chemical processing.',
+      'Authentic Palestinian Origin – Supporting smallholder farmers and preserving a heritage of olive cultivation.',
+      'Rich Flavor Profile – Fruity and aromatic with a peppery finish, perfect for dressings, dips, and healthy cooking.',
+      'Nutritional Excellence – Naturally rich in antioxidants, Vitamin E, and heart-healthy fats.',
+      'Premium Packaging – Available in glass bottles and metal tins that protect freshness and quality.',
+    ],
+    brand: {
+      id: 'al-mauna',
+    },
+  },
+  {
+    id: 'palestine-olive-oil-3l',
+    title: 'Palestine olive oil 3L',
+    image: '/src/assets/images/palestine-olive-oil/olive-oil.png',
+    subtitle: '100% Virgin olive oil . Palestinian origin . Rich flavour',
+    description:
+      'Al Mauna Virgin Olive Oil 3L is offered in multiple sizes tailored to both household and Horeca needs.Hand-harvested and cold-pressed by local farmers, every drop captures the authentic taste and timeless tradition of Palestinian olive culture.',
+    packaging: '3L',
+    amount: '1',
+    quality: [
+      '100% Virgin Olive Oil – Extracted through cold-pressing methods without chemical processing.',
+      'Authentic Palestinian Origin – Supporting smallholder farmers and preserving a heritage of olive cultivation.',
+      'Rich Flavor Profile – Fruity and aromatic with a peppery finish, perfect for dressings, dips, and healthy cooking.',
+      'Nutritional Excellence – Naturally rich in antioxidants, Vitamin E, and heart-healthy fats.',
+      'Premium Packaging – Available in glass bottles and metal tins that protect freshness and quality.',
+    ],
+    brand: {
+      id: 'al-mauna',
+    },
+  },
+  {
+    id: 'palestine-olive-oil-4l',
+    title: 'Palestine olive oil 4L',
+    image: '/src/assets/images/palestine-olive-oil/olive-oil.png',
+    subtitle: '100% Virgin olive oil . Palestinian origin . Rich flavour',
+    description:
+      'Al Mauna Virgin Olive Oil 4L is offered in multiple sizes tailored to both household and Horeca needs.Hand-harvested and cold-pressed by local farmers, every drop captures the authentic taste and timeless tradition of Palestinian olive culture.',
+    packaging: '4L',
+    amount: '1',
+    quality: [
+      '100% Virgin Olive Oil – Extracted through cold-pressing methods without chemical processing.',
+      'Authentic Palestinian Origin – Supporting smallholder farmers and preserving a heritage of olive cultivation.',
+      'Rich Flavor Profile – Fruity and aromatic with a peppery finish, perfect for dressings, dips, and healthy cooking.',
+      'Nutritional Excellence – Naturally rich in antioxidants, Vitamin E, and heart-healthy fats.',
+      'Premium Packaging – Available in glass bottles and metal tins that protect freshness and quality.',
+    ],
+    brand: {
+      id: 'al-mauna',
+    },
+  },
+  {
+    id: 'palestine-olive-oil-5l',
+    title: 'Palestine olive oil 5L',
+    image: '/src/assets/images/palestine-olive-oil/olive-oil.png',
+    subtitle: '100% Virgin olive oil . Palestinian origin . Rich flavour',
+    description:
+      'Al Mauna Virgin Olive Oil 5L is offered in multiple sizes tailored to both household and Horeca needs.Hand-harvested and cold-pressed by local farmers, every drop captures the authentic taste and timeless tradition of Palestinian olive culture.',
+    packaging: '5L',
+    amount: '1',
+    quality: [
+      '100% Virgin Olive Oil – Extracted through cold-pressing methods without chemical processing.',
+      'Authentic Palestinian Origin – Supporting smallholder farmers and preserving a heritage of olive cultivation.',
+      'Rich Flavor Profile – Fruity and aromatic with a peppery finish, perfect for dressings, dips, and healthy cooking.',
+      'Nutritional Excellence – Naturally rich in antioxidants, Vitamin E, and heart-healthy fats.',
+      'Premium Packaging – Available in glass bottles and metal tins that protect freshness and quality.',
+    ],
     brand: {
       id: 'al-mauna',
     },
