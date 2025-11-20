@@ -3,120 +3,138 @@ import { Image } from 'astro:assets';
 ---
 
 <header
-  class='sticky top-0 z-40 flex-none w-full transition-all duration-100 ease-in-out bg-white dark:bg-slate-900 shadow-sm'
+  class="sticky top-0 z-40 flex-none w-full transition-all duration-100 ease-in-out bg-white dark:bg-slate-900 shadow-sm"
 >
-  <div class='container mx-auto px-4 max-w-5xl'>
-    <div class='flex items-center justify-between py-4'>
+  <div class="container mx-auto px-4 max-w-5xl">
+    <div class="flex items-center justify-between py-4">
       <!-- Left Navigation (Desktop) -->
-      <ul class='hidden lg:flex text-[14px] font-bold gap-[48px]'>
-        <li><a href='/' class='hover:font-bold hover:text-gradient transition'>Home</a></li>
-        <li><a href='/about' class='hover:font-bold hover:text-gradient transition'>About Us</a></li>
+      <ul class="hidden lg:flex text-[14px] font-bold gap-[48px]">
+        <li><a href="/" class="hover:font-bold hover:text-gradient transition">Home</a></li>
+        <li><a href="/about" class="hover:font-bold hover:text-gradient transition">About Us</a></li>
         <li>
-          <a href='/brands?brand=maharani' class='hover:font-bold hover:text-gradient transition'
-            >Brands and Products</a>
+          <a href="/brands?brand=maharani" class="hover:font-bold hover:text-gradient transition">Brands and Products</a
+          >
         </li>
       </ul>
 
       <!-- Logo -->
-      <div class='flex-shrink-0'>
-        <Image src='/src/assets/images/logo.png' alt='Logo' width='100' height='100' class='w-[208px] h-[44.6px]' />
+      <div class="flex-shrink-0">
+        <Image src="/src/assets/images/logo.png" alt="Logo" width="100" height="100" class="w-[208px] h-[44.6px]" />
       </div>
 
       <!-- Right Navigation (Desktop) -->
-      <ul class='hidden lg:flex text-[14px] font-bold gap-[48px]'>
+      <ul class="hidden lg:flex text-[14px] font-bold gap-[48px]">
         <li>
-          <a href='https://store.almauna.com/' class='hover:font-bold hover:text-gradient transition'>Online Store</a>
+          <a href="https://store.almauna.com/" class="hover:font-bold hover:text-gradient transition">Online Store</a>
         </li>
-        <li><a href='/dubai-branch' class='hover:font-bold hover:text-gradient transition'>Dubai Branch</a></li>
-        <li><a href='/contact' class='hover:font-bold hover:text-gradient transition'>Contact Us</a></li>
+        <li><a href="/dubai-branch" class="hover:font-bold hover:text-gradient transition">Dubai Branch</a></li>
+        <li><a href="/contact" class="hover:font-bold hover:text-gradient transition">Contact Us</a></li>
       </ul>
 
       <!-- Hamburger Menu Button (Mobile) -->
       <button
-        id='menu-toggle'
-        class='lg:hidden flex flex-col gap-1.5 p-2'
-        aria-label='Toggle menu'
-        aria-expanded='false'
+        id="menu-toggle"
+        class="lg:hidden flex flex-col gap-1.5 p-2"
+        aria-label="Toggle menu"
+        aria-expanded="false"
       >
-        <span class='w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block'></span>
-        <span class='w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block'></span>
-        <span class='w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block'></span>
+        <span class="w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block"></span>
+        <span class="w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block"></span>
+        <span class="w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block"></span>
       </button>
     </div>
 
     <!-- Mobile Menu -->
-    <nav id='mobile-menu' class='hidden lg:hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out'>
-      <ul class='flex flex-col text-[14px] font-bold gap-4 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4'>
-        <li><a href='/' class='block hover:text-gradient transition'>Home</a></li>
-        <li><a href='/about' class='block hover:text-gradient transition'>About Us</a></li>
-        <li><a href='/brands?brand=maharani' class='block hover:text-gradient transition'>Brands and Products</a></li>
-        <li><a href='https://store.almauna.com/' target="_blank" class='block hover:text-gradient transition'>Online Store</a></li>
-        <li><a href='/dubai-branch' class='block hover:text-gradient transition'>Dubai Branch</a></li>
-        <li><a href='/contact' class='block hover:text-gradient transition'>Contact Us</a></li>
+    <nav id="mobile-menu" class="hidden lg:hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+      <ul class="flex flex-col text-[14px] font-bold gap-4 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+        <li><a href="/" class="block hover:text-gradient transition">Home</a></li>
+        <li><a href="/about" class="block hover:text-gradient transition">About Us</a></li>
+        <li><a href="/brands?brand=maharani" class="block hover:text-gradient transition">Brands and Products</a></li>
+        <li>
+          <a href="https://store.almauna.com/" target="_blank" class="block hover:text-gradient transition"
+            >Online Store</a
+          >
+        </li>
+        <li><a href="/dubai-branch" class="block hover:text-gradient transition">Dubai Branch</a></li>
+        <li><a href="/contact" class="block hover:text-gradient transition">Contact Us</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const hamburgerLines = menuToggle?.querySelectorAll('span');
-  const menuLinks = mobileMenu?.querySelectorAll('a');
+  function initializeHeader() {
+    const menuToggle = document.getElementById('menu-toggle');
 
-  menuToggle?.addEventListener('click', () => {
-    const isOpen = mobileMenu?.classList.contains('hidden');
+    // Remove old event listeners by cloning and replacing
+    const newMenuToggle = menuToggle?.cloneNode(true) as HTMLElement;
+    menuToggle?.parentNode?.replaceChild(newMenuToggle, menuToggle);
 
-    if (isOpen) {
-      // Open menu
-      mobileMenu?.classList.remove('hidden');
-      setTimeout(() => {
-        if (mobileMenu) {
-          mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+    const updatedMenuToggle = document.getElementById('menu-toggle');
+    const updatedMobileMenu = document.getElementById('mobile-menu');
+    const updatedHamburgerLines = updatedMenuToggle?.querySelectorAll('span');
+    const updatedMenuLinks = updatedMobileMenu?.querySelectorAll('a');
+
+    updatedMenuToggle?.addEventListener('click', () => {
+      const isOpen = updatedMobileMenu?.classList.contains('hidden');
+
+      if (isOpen) {
+        // Open menu
+        updatedMobileMenu?.classList.remove('hidden');
+        setTimeout(() => {
+          if (updatedMobileMenu) {
+            updatedMobileMenu.style.maxHeight = updatedMobileMenu.scrollHeight + 'px';
+          }
+        }, 0);
+        updatedMenuToggle.setAttribute('aria-expanded', 'true');
+
+        // Animate hamburger to X
+        updatedHamburgerLines?.[0].classList.add('rotate-45', 'translate-y-2');
+        updatedHamburgerLines?.[1].classList.add('opacity-0');
+        updatedHamburgerLines?.[2].classList.add('-rotate-45', '-translate-y-2');
+      } else {
+        // Close menu
+        if (updatedMobileMenu) {
+          updatedMobileMenu.style.maxHeight = '0';
         }
-      }, 0);
-      menuToggle.setAttribute('aria-expanded', 'true');
+        setTimeout(() => {
+          updatedMobileMenu?.classList.add('hidden');
+        }, 300);
+        updatedMenuToggle.setAttribute('aria-expanded', 'false');
 
-      // Animate hamburger to X
-      hamburgerLines?.[0].classList.add('rotate-45', 'translate-y-2');
-      hamburgerLines?.[1].classList.add('opacity-0');
-      hamburgerLines?.[2].classList.add('-rotate-45', '-translate-y-2');
-    } else {
-      // Close menu
-      if (mobileMenu) {
-        mobileMenu.style.maxHeight = '0';
+        // Animate X back to hamburger
+        updatedHamburgerLines?.[0].classList.remove('rotate-45', 'translate-y-2');
+        updatedHamburgerLines?.[1].classList.remove('opacity-0');
+        updatedHamburgerLines?.[2].classList.remove('-rotate-45', '-translate-y-2');
       }
-      setTimeout(() => {
-        mobileMenu?.classList.add('hidden');
-      }, 300);
-      menuToggle.setAttribute('aria-expanded', 'false');
-
-      // Animate X back to hamburger
-      hamburgerLines?.[0].classList.remove('rotate-45', 'translate-y-2');
-      hamburgerLines?.[1].classList.remove('opacity-0');
-      hamburgerLines?.[2].classList.remove('-rotate-45', '-translate-y-2');
-    }
-  });
-  menuLinks?.forEach((link) => {
-    link.addEventListener('click', () => {
-      if (mobileMenu) {
-        mobileMenu.style.maxHeight = '0';
-      }
-      setTimeout(() => {
-        mobileMenu?.classList.add('hidden');
-      }, 300);
-      menuToggle?.setAttribute('aria-expanded', 'false');
-
-      hamburgerLines?.[0].classList.remove('rotate-45', 'translate-y-2');
-      hamburgerLines?.[1].classList.remove('opacity-0');
-      hamburgerLines?.[2].classList.remove('-rotate-45', '-translate-y-2');
     });
-  });
-  // Initialize on page load
-  initializeHeader();
 
-  // Listen for reinitialize event from global script
-  document.addEventListener('component:reinitialize', initializeHeader);
+    updatedMenuLinks?.forEach((link) => {
+      link.addEventListener('click', () => {
+        if (updatedMobileMenu) {
+          updatedMobileMenu.style.maxHeight = '0';
+        }
+        setTimeout(() => {
+          updatedMobileMenu?.classList.add('hidden');
+        }, 300);
+        updatedMenuToggle?.setAttribute('aria-expanded', 'false');
+
+        updatedHamburgerLines?.[0].classList.remove('rotate-45', 'translate-y-2');
+        updatedHamburgerLines?.[1].classList.remove('opacity-0');
+        updatedHamburgerLines?.[2].classList.remove('-rotate-45', '-translate-y-2');
+      });
+    });
+  }
+
+  // Initialize on initial page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeHeader);
+  } else {
+    initializeHeader();
+  }
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener('astro:page-load', initializeHeader);
 </script>
 
 <style>

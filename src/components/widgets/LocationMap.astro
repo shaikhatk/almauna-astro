@@ -1,4 +1,3 @@
-
 ---
 interface Props {
   apiKey?: string;
@@ -19,16 +18,16 @@ interface Props {
   };
 }
 
-const { 
+const {
   apiKey = 'AIzaSyCa6Dl5uhfYcobY8I_sexN6FQZItPeJ7HE',
   mapId = 'map-container',
   officeLocation,
-  warehouseLocation
+  warehouseLocation,
 } = Astro.props;
 ---
 
-<div id={mapId} class='w-[380px] h-[300px] md:h-[490px] rounded-lg overflow-hidden shadow-lg'>
-  <div id={`${mapId}-inner`} class='w-full h-full'></div>
+<div id={mapId} class="w-[380px] h-[300px] md:h-[490px] rounded-lg overflow-hidden shadow-lg">
+  <div id={`${mapId}-inner`} class="w-full h-full"></div>
 </div>
 
 <script define:vars={{ apiKey, mapId, officeLocation, warehouseLocation }}>

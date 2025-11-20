@@ -10,11 +10,11 @@ const { selectedBrandId = brands[0]?.id } = Astro.props;
 const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
 ---
 
-<div class='brand-tabs-widget' data-default-brand={selectedBrandId}>
+<div class="brand-tabs-widget" data-default-brand={selectedBrandId}>
   <!-- BRAND TABS HEADER -->
-  <section class='bg-gradient-secondary pt-[32px]'>
+  <section class="bg-gradient-secondary pt-[32px]">
     <div
-      class='tabs-scroll-container flex justify-start md:justify-center items-center max-w-5xl mx-auto px-4 overflow-x-auto md:overflow-x-visible scrollbar-hide'
+      class="tabs-scroll-container flex justify-start md:justify-center items-center max-w-5xl mx-auto px-4 overflow-x-auto md:overflow-x-visible scrollbar-hide"
     >
       {
         brands.map((brand) => {
@@ -32,7 +32,7 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
               data-catalog={brand.catalog}
               data-products={JSON.stringify(brand.products)}
               aria-selected={isActive}
-              role='tab'
+              role="tab"
             >
               <h2
                 class={`text-[14px] md:text-[16px] font-semibold whitespace-nowrap ${isActive ? 'text-white' : 'text-[#1E1E1E]'}`}
@@ -52,36 +52,36 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
   </section>
 
   <!-- BRAND DETAILS -->
-  <section class='pt-[64px]'>
-    <div class='max-w-6xl mx-auto px-4'>
-      <div class='flex justify-center items-center'>
+  <section class="pt-[64px]">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex justify-center items-center">
         <Image
-          id='widget-brand-logo'
+          id="widget-brand-logo"
           src={selectedBrand.brandLogoImage}
           alt={selectedBrand.brandTitle}
-          height='66'
-          width='200'
-          class='h-auto w-[206px] object-cover'
+          height="66"
+          width="200"
+          class="h-auto w-[206px] object-cover"
         />
       </div>
 
-      <div class='text-[16px] md:text-[20px] text-center mt-[24px] md:mt-[32px] mb-[96px]'>
-        <span id='widget-brand-description'>
+      <div class="text-[16px] md:text-[20px] text-center mt-[24px] md:mt-[32px] mb-[96px]">
+        <span id="widget-brand-description">
           <p>{selectedBrand.brandDescription}</p>
         </span>
       </div>
     </div>
 
     <!-- COLLECTION SECTION -->
-    <section class='py-[48px] md:py-[96px] bg-gradient-secondary'>
-      <div class='max-w-7xl mx-auto px-4'>
-        <h2 id='widget-collection-title' class='text-[24px] md:text-[32px] text-gradient font-bold text-center'>
+    <section class="py-[48px] md:py-[96px] bg-gradient-secondary">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 id="widget-collection-title" class="text-[24px] md:text-[32px] text-gradient font-bold text-center">
           {selectedBrand.collectionTitle}
         </h2>
 
         <div
-          id='widget-products-container'
-          class='flex flex-col items-center md:grid md:grid-cols-4 gap-[24px] md:gap-[24px] mt-[48px]'
+          id="widget-products-container"
+          class="flex flex-col items-center md:grid md:grid-cols-4 gap-[24px] md:gap-[24px] mt-[48px]"
         >
           {
             selectedBrand.products.map((product) => {
@@ -92,18 +92,18 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
               return (
                 <a
                   href={`/brand/${selectedBrand.id}/${productId}`}
-                  class='bg-white rounded-[8px] p-[24px] md:p-[24px] shadow-secondary h-[350px] w-[290px] hover:shadow-lg transition-shadow group'
+                  class="bg-white rounded-[8px] p-[24px] md:p-[24px] shadow-secondary h-[350px] w-[290px] hover:shadow-lg transition-shadow group"
                 >
-                  <div class='flex justify-center items-center'>
+                  <div class="flex justify-center items-center">
                     <Image
                       src={product.image}
                       alt={product.title}
-                      height='240'
-                      width='180'
-                      class='w-[180px] h-[240px] object-cover object-center group-hover:scale-105 transition-transform'
+                      height="240"
+                      width="180"
+                      class="w-[180px] h-[240px] object-cover object-center group-hover:scale-105 transition-transform"
                     />
                   </div>
-                  <p class='text-[14px] md:text-[16px] mt-[16px] md:mt-[24px] text-wrap text-center group-hover:text-gradient transition-colors'>
+                  <p class="text-[14px] md:text-[16px] mt-[16px] md:mt-[24px] text-wrap text-center group-hover:text-gradient transition-colors">
                     {product.title}
                   </p>
                 </a>
@@ -113,21 +113,21 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
         </div>
 
         <div
-          class='flex md:flex-row flex-col justify-center items-center gap-[10px] mt-[32px] md:mt-[48px] flex-wrap px-4'
+          class="flex md:flex-row flex-col justify-center items-center gap-[10px] mt-[32px] md:mt-[48px] flex-wrap px-4"
         >
           <a
-            id='widget-catalog-link'
+            id="widget-catalog-link"
             href={selectedBrand.catalog}
-            target='_blank'
-            class='bg-white py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-secondary rounded-[32px] text-[#712F76] font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow whitespace-nowrap'
+            target="_blank"
+            class="bg-white py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-secondary rounded-[32px] text-[#712F76] font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow whitespace-nowrap"
           >
-            Download <span id='widget-catalog-brand-name'>{selectedBrand.brandTitle}</span> Catalog
+            Download <span id="widget-catalog-brand-name">{selectedBrand.brandTitle}</span> Catalog
           </a>
 
           <a
-            href='https://store.almauna.com/'
-            target='_blank'
-            class='bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow whitespace-nowrap'
+            href="https://store.almauna.com/"
+            target="_blank"
+            class="bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow whitespace-nowrap"
           >
             Shop Online
           </a>
@@ -136,18 +136,18 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
     </section>
 
     <!-- WHOLESALE / DISTRIBUTION -->
-    <section class='pt-[48px] md:pt-[96px] pb-[96px] md:pb-[170px]'>
-      <div class='max-w-5xl mx-auto px-4'>
-        <h1 class='text-[24px] md:text-[32px] font-bold text-gradient text-center'>
+    <section class="pt-[48px] md:pt-[96px] pb-[96px] md:pb-[170px]">
+      <div class="max-w-5xl mx-auto px-4">
+        <h1 class="text-[24px] md:text-[32px] font-bold text-gradient text-center">
           Looking for wholesale or distribution?
         </h1>
-        <p class='text-[16px] md:text-[20px] text-center mt-[8px]'>
-          Partner with us to bring <span id='widget-wholesale-brand-name'>{selectedBrand.brandTitle}</span> to your shelves.
+        <p class="text-[16px] md:text-[20px] text-center mt-[8px]">
+          Partner with us to bring <span id="widget-wholesale-brand-name">{selectedBrand.brandTitle}</span> to your shelves.
         </p>
-        <div class='flex justify-center items-center mt-[32px] md:mt-[48px]'>
+        <div class="flex justify-center items-center mt-[32px] md:mt-[48px]">
           <a
-            href='/get-a-quote'
-            class='bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow'
+            href="/get-a-quote"
+            class="bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow"
           >
             Get a Quote
           </a>
@@ -333,7 +333,7 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
           try {
             const descriptionArray = JSON.parse(description);
             brandDescription.innerHTML = descriptionArray.map((para: string) => `<p>${para}</p>`).join('');
-          } catch (error) {
+          } catch {
             brandDescription.innerHTML = `<p>${description}</p>`;
           }
         }
@@ -341,7 +341,16 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
         // Update products with fade animation
         if (productsContainer && productsJson) {
           try {
-            const products = JSON.parse(productsJson);
+            interface Product {
+              id: string;
+              title: string;
+              image: string;
+              brand: {
+                id: string;
+              };
+            }
+
+            const products: Product[] = JSON.parse(productsJson);
             console.log('Products on tab change:', products);
 
             // Fade out
@@ -349,7 +358,7 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
             productsContainer.style.transition = 'opacity 0.3s ease-in-out';
 
             productsContainer.innerHTML = products
-              .map((product: any) => {
+              .map((product: Product) => {
                 const productId = product.id
                   .toLowerCase()
                   .replace(/\s+/g, '-')
@@ -372,8 +381,8 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
 
             // Fade in
             productsContainer.style.opacity = '1';
-          } catch (error) {
-            console.error('Error parsing products:', error);
+          } catch {
+            console.error('Error parsing products');
           }
         }
       }
@@ -381,7 +390,7 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
 
     // Initialize the widget when the DOM is loaded
     function initializeBrandWidget() {
-      const widget = document.querySelector('.brand-tabs-widget');
+      const widget = document.querySelector('.brand-tabs-widget') as HTMLElement;
       if (widget) {
         new BrandTabsWidget(widget);
       }

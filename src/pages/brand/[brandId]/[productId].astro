@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const { brandId, productId } = Astro.params;
+const { brandId } = Astro.params;
 const { product } = Astro.props;
 const brand = brands.find((b) => b.id === brandId);
 
@@ -34,31 +34,31 @@ const relatedProducts = brand.products.filter((p) => p.title !== product.title).
 <Layout metadata={{ title: product.title, description: product.description }}>
   <main>
     <!-- Hero Section with Product Details -->
-    <section class='bg-gradient-secondary'>
-      <div class='max-w-6xl mx-auto flex md:flex-row flex-col justify-between items-center md:gap-[64px]'>
-        <div class='md:py-[96px] py-[64px] order-2 md:order-1 px-6'>
-          <h1 class='text-[32px] font-bold text-gradient'>{product.title}</h1>
-          <p class='text-[20px] text-black text-opacity-[50%] pt-2 font-bold'>{brand.brandTitle}</p>
-          <p class='text-[20px] pt-[24px]'>
+    <section class="bg-gradient-secondary">
+      <div class="max-w-6xl mx-auto flex md:flex-row flex-col justify-between items-center md:gap-[64px]">
+        <div class="md:py-[96px] py-[64px] order-2 md:order-1 px-6">
+          <h1 class="text-[32px] font-bold text-gradient">{product.title}</h1>
+          <p class="text-[20px] text-black text-opacity-[50%] pt-2 font-bold">{brand.brandTitle}</p>
+          <p class="text-[20px] pt-[24px]">
             {product.description}
           </p>
-          <div class='flex gap-[96px] justify-start pt-[32px] md:pt-[96px]'>
+          <div class="flex gap-[96px] justify-start pt-[32px] md:pt-[96px]">
             <div>
-              <p class='text-[20px] text-black text-opacity-[50%] pt-2 font-bold'>PACKAGING</p>
-              <p class='text-[20px] pt-2'>{product.packaging}</p>
+              <p class="text-[20px] text-black text-opacity-[50%] pt-2 font-bold">PACKAGING</p>
+              <p class="text-[20px] pt-2">{product.packaging}</p>
             </div>
             <div>
-              <p class='text-[20px] text-black text-opacity-[50%] pt-2 font-bold'>AMOUNT</p>
-              <p class='text-[20px] pt-2'>{product.amount}</p>
+              <p class="text-[20px] text-black text-opacity-[50%] pt-2 font-bold">AMOUNT</p>
+              <p class="text-[20px] pt-2">{product.amount}</p>
             </div>
           </div>
         </div>
         <Image
           src={product.image}
           alt={product.title}
-          width='600'
-          height='400'
-          class='object-cover w-auto h-[483px] md:h-[639px] order-1 md:order-2'
+          width="600"
+          height="400"
+          class="object-cover w-auto h-[483px] md:h-[639px] order-1 md:order-2"
         />
       </div>
     </section>
@@ -66,18 +66,18 @@ const relatedProducts = brand.products.filter((p) => p.title !== product.title).
     <!-- Product Features Section -->
     {
       product.quality ? (
-        <section class='py-[96px]'>
-          <div class='max-w-5xl mx-auto px-6'>
-            <h1 class='text-[32px] font-bold text-gradient'>Product features</h1>
-            <ul class='text-[20px] pt-[48px] list-disc pl-[20px]'>
+        <section class="py-[96px]">
+          <div class="max-w-5xl mx-auto px-6">
+            <h1 class="text-[32px] font-bold text-gradient">Product features</h1>
+            <ul class="text-[20px] pt-[48px] list-disc pl-[20px]">
               {product.quality?.map((feature) => (
                 <li>{feature}</li>
               ))}
             </ul>
-            <div class='flex justify-start items-center mt-[48px]'>
+            <div class="flex justify-start items-center mt-[48px]">
               <a
-                href='/get-a-quote'
-                class='bg-gradient-primary py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px]'
+                href="/get-a-quote"
+                class="bg-gradient-primary py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px]"
               >
                 Get a Quote
               </a>
@@ -91,7 +91,7 @@ const relatedProducts = brand.products.filter((p) => p.title !== product.title).
 
     <!-- Brand Highlight Section -->
     <section
-      class='py-[96px]'
+      class="py-[96px]"
       style={{
         backgroundImage: 'url(/src/assets/images/violet-bg.svg)',
         backgroundRepeat: 'no-repeat',
@@ -99,32 +99,32 @@ const relatedProducts = brand.products.filter((p) => p.title !== product.title).
         backgroundPosition: 'center',
       }}
     >
-      <div class='max-w-5xl mx-auto px-6 flex md:flex-row flex-col justify-between items-center gap-[48px]'>
-        <div class='order-2 md:order-1'>
-          <h1 class='text-[32px] font-bold text-gradient-secondary'>Why choose {brand.brandTitle}?</h1>
-          <ul class='text-[20px] pt-[48px] text-white mb-[48px]'>
+      <div class="max-w-5xl mx-auto px-6 flex md:flex-row flex-col justify-between items-center gap-[48px]">
+        <div class="order-2 md:order-1">
+          <h1 class="text-[32px] font-bold text-gradient-secondary">Why choose {brand.brandTitle}?</h1>
+          <ul class="text-[20px] pt-[48px] text-white mb-[48px]">
             <li>• Premium Quality: Carefully selected and tested products</li>
             <li>• Authentic: Direct sourcing from trusted suppliers</li>
             <li>• Reliable: Consistent excellence in every product</li>
             <li>• Customer Focused: Dedicated to your satisfaction</li>
           </ul>
-          <div class='flex justify-center md:block'>
+          <div class="flex justify-center md:block">
             <a
-              href='https://store.almauna.com/'
-              target='_blank'
-              rel='noopener noreferrer'
-              class='bg-white text-[#712F76] text-[16px] font-bold px-[32px] py-[14.5px] rounded-[32px]'
+              href="https://store.almauna.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white text-[#712F76] text-[16px] font-bold px-[32px] py-[14.5px] rounded-[32px]"
             >
               Shop Online
             </a>
           </div>
         </div>
         <Image
-          src='/src/assets/images/high-quality.svg'
+          src="/src/assets/images/high-quality.svg"
           height={233}
           width={233}
-          class='w-[233px] h-[233px] object-center object-cover order-1 md:order-2'
-          alt='product-detail'
+          class="w-[233px] h-[233px] object-center object-cover order-1 md:order-2"
+          alt="product-detail"
         />
       </div>
     </section>
@@ -132,32 +132,32 @@ const relatedProducts = brand.products.filter((p) => p.title !== product.title).
     <!-- Related Products Section -->
     {
       relatedProducts.length > 0 && (
-        <section class='py-[64px] md:pt-[96px] pb-[170px]'>
-          <div class='max-w-7xl mx-auto px-6'>
-            <h2 class='text-[24px] md:text-[32px] text-gradient font-bold text-center'>Other products for you</h2>
-            <p class='text-[16px] md:text-[20px] text-center mt-[16px] md:mt-[8px]'>
+        <section class="py-[64px] md:pt-[96px] pb-[170px]">
+          <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-[24px] md:text-[32px] text-gradient font-bold text-center">Other products for you</h2>
+            <p class="text-[16px] md:text-[20px] text-center mt-[16px] md:mt-[8px]">
               From daily staples to gourmet delights, our selection is truly diverse.
             </p>
 
-            <div class='md:grid flex flex-col items-center  md:grid-cols-4 gap-[24px] md:gap-[24px] mt-[64px]'>
+            <div class="md:grid flex flex-col items-center  md:grid-cols-4 gap-[24px] md:gap-[24px] mt-[64px]">
               {relatedProducts.map((relatedProduct) => (
                 <a
                   href={`/brand/${brand.id}/${relatedProduct.id
                     .toLowerCase()
                     .replace(/\s+/g, '-')
                     .replace(/[^\w-]/g, '')}`}
-                  class='bg-white rounded-[8px] p-[16px] w-[290px] h-[350px] md:p-[24px] shadow-secondary hover:shadow-lg transition-shadow group'
+                  class="bg-white rounded-[8px] p-[16px] w-[290px] h-[350px] md:p-[24px] shadow-secondary hover:shadow-lg transition-shadow group"
                 >
-                  <div class='flex justify-center items-center'>
+                  <div class="flex justify-center items-center">
                     <Image
                       src={relatedProduct.image}
                       alt={relatedProduct.title}
-                      height='240'
-                      width='180'
-                      class='h-[240px] md:h-[240px] w-auto object-cover object-center group-hover:scale-105 transition-transform'
+                      height="240"
+                      width="180"
+                      class="h-[240px] md:h-[240px] w-auto object-cover object-center group-hover:scale-105 transition-transform"
                     />
                   </div>
-                  <p class='text-[14px] md:text-[16px] mt-[16px] md:mt-[24px] text-wrap text-center group-hover:text-gradient transition-colors'>
+                  <p class="text-[14px] md:text-[16px] mt-[16px] md:mt-[24px] text-wrap text-center group-hover:text-gradient transition-colors">
                     {relatedProduct.title}
                   </p>
                 </a>

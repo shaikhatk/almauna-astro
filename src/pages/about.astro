@@ -42,21 +42,21 @@ const aboutData = [
 <Layout metadata={metadata}>
   <main>
     <section
-      style='background-image:linear-gradient(180deg, #75317A 0%, rgba(130, 46, 124, 0.784801) 52.96%, rgba(179, 36, 130, 0) 100%), url(/src/assets/images/aboutus-hero.png);  background-size: cover; background-position: center; height: 740px;'
+      style="background-image:linear-gradient(180deg, #75317A 0%, rgba(130, 46, 124, 0.784801) 52.96%, rgba(179, 36, 130, 0) 100%), url(/src/assets/images/aboutus-hero.png);  background-size: cover; background-position: center; height: 740px;"
     >
-      <div class='flex flex-col items-center pt-[96px] px-6'>
-        <h1 class='text-[32px] font-bold text-white text-center'>
-          Al Mauna Trading:<br class='md:hidden' /> dedicated to excellence
+      <div class="flex flex-col items-center pt-[96px] px-6">
+        <h1 class="text-[32px] font-bold text-white text-center">
+          Al Mauna Trading:<br class="md:hidden" /> dedicated to excellence
         </h1>
-        <p class='text-[20px] pt-2 text-[#F6E9F2] text-center'>
-          We are a regional leader committed to delivering diverse, high-quality<br class='md:block hidden' /> products with
+        <p class="text-[20px] pt-2 text-[#F6E9F2] text-center">
+          We are a regional leader committed to delivering diverse, high-quality<br class="md:block hidden" /> products with
           unwavering professionalism and care since 2016.
         </p>
       </div>
     </section>
-    <section class='py-[96px]'>
-      <div class='max-w-5xl mx-auto px-6 lg:px-0'>
-        <p class='text-[20px]'>
+    <section class="py-[96px]">
+      <div class="max-w-5xl mx-auto px-6 lg:px-0">
+        <p class="text-[20px]">
           Established in 2016, Al Mauna Trading rapidly set out to become a leading food import and distribution company
           in Qatar. Driven by a passionate and committed team, our core mission is to empower the region's food supply
           chain by sourcing the best quality products from around the world at truly affordable prices. We proudly
@@ -75,29 +75,29 @@ const aboutData = [
       </div>
     </section>
 
-    <section class='pt-[96px] pb-[170px] bg-gradient-secondary'>
-      <div class='max-w-5xl mx-auto px-6 lg:px-0'>
-        <h2 class='text-[32px] text-gradient font-bold text-center'>Meet our Executive Director</h2>
-        <div class='mt-[48px] flex md:flex-row flex-col gap-[48px]'>
-          <div class='flex justify-center items-center md:hidden'>
+    <section class="pt-[96px] pb-[170px] bg-gradient-secondary">
+      <div class="max-w-5xl mx-auto px-6 lg:px-0">
+        <h2 class="text-[32px] text-gradient font-bold text-center">Meet our Executive Director</h2>
+        <div class="mt-[48px] flex md:flex-row flex-col gap-[48px]">
+          <div class="flex justify-center items-center md:hidden">
             <Image
-              src='/src/assets/images/dr-faleh.jpg'
+              src="/src/assets/images/dr-faleh.jpg"
               height={180}
               width={180}
-              class='h-[180px] w-[180px] object-cover object-top'
-              alt='Dr. Faleh Mohamed Hussein Ali'
+              class="h-[180px] w-[180px] object-cover object-top"
+              alt="Dr. Faleh Mohamed Hussein Ali"
             />
           </div>
           <Image
-            src='/src/assets/images/dr-faleh.jpg'
+            src="/src/assets/images/dr-faleh.jpg"
             height={180}
             width={180}
-            class='h-[180px] w-[180px] object-cover object-top md:block hidden'
-            alt='Dr. Faleh Mohamed Hussein Ali'
+            class="h-[180px] w-[180px] object-cover object-top md:block hidden"
+            alt="Dr. Faleh Mohamed Hussein Ali"
           />
           <div>
-            <h3 class='text-[24px] font-bold'>Dr. Faleh Mohamed Hussein Ali</h3>
-            <p class='text-[20px] mt-[9px] mb-[32px]'>
+            <h3 class="text-[24px] font-bold">Dr. Faleh Mohamed Hussein Ali</h3>
+            <p class="text-[20px] mt-[9px] mb-[32px]">
               Dr. Faleh worked as the assistant for Policy to the Minister of Health for 8 years, at the Supreme Council
               of Health (SCH), Qatar's highest health authority. He guided national planning for health facilities,
               services and workforce. He is also was responsible for policies on health financing, quality, patient
@@ -105,7 +105,7 @@ const aboutData = [
               the projects in the National Health Strategy 2011-2016, and personally lead the implementation of 13 of
               the 40 projects.
             </p>
-            <a href='/director' class='bg-white py-[16px] px-[32px] rounded-[32px] text-[#712F76] font-bold text-[16px]'
+            <a href="/director" class="bg-white py-[16px] px-[32px] rounded-[32px] text-[#712F76] font-bold text-[16px]"
               >Read more</a
             >
           </div>
@@ -120,48 +120,48 @@ const aboutData = [
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
-      class='py-[96px] md:[background-image:url(/src/assets/images/about-bg.svg)] [background-image:none]'
+      class="py-[96px] md:[background-image:url(/src/assets/images/about-bg.svg)] [background-image:none]"
     >
-      <div class='max-w-5xl mx-auto px-6'>
+      <div class="max-w-5xl mx-auto px-6">
         {/* Heading */}
-        <div class='text-center'>
-          <h2 class='font-bold text-gradient text-[32px]'>From Doha to Dubai: our strategic evolution</h2>
-          <p class='text-[20px] pt-2'>
+        <div class="text-center">
+          <h2 class="font-bold text-gradient text-[32px]">From Doha to Dubai: our strategic evolution</h2>
+          <p class="text-[20px] pt-2">
             Al Mauna Trading is defined by foundational development and strategic expansions.
           </p>
         </div>
 
-        <div class='relative pl-24'>
+        <div class="relative pl-24">
           {
             timelineData.map((item, index) => (
-              <div key={index} class='relative '>
+              <div key={index} class="relative ">
                 {/* Year Badge */}
-                <div class='absolute -left-24 top-0 bg-gradient-primary text-white text-[24px] font-bold px-[12px] py-[2px] rounded-[32px] flex justify-center items-center'>
+                <div class="absolute -left-24 top-0 bg-gradient-primary text-white text-[24px] font-bold px-[12px] py-[2px] rounded-[32px] flex justify-center items-center">
                   {item.year}
                 </div>
 
                 {/* Dotted line only between items */}
                 {index !== timelineData.length - 1 && (
-                  <div class='absolute md:left-[-55px] md:top-[42px] left-[-60px] top-[44px] md:h-[280px] h-[700px] border-l-4 border-dashed border-[#C26AA4] ' />
+                  <div class="absolute md:left-[-55px] md:top-[42px] left-[-60px] top-[44px] md:h-[280px] h-[700px] border-l-4 border-dashed border-[#C26AA4] " />
                 )}
 
                 {/* Content + Image */}
-                <div class='grid md:grid-cols-2 gap-8 md:pl-10 pl-3 mt-[64px]'>
+                <div class="grid md:grid-cols-2 gap-8 md:pl-10 pl-3 mt-[64px]">
                   <div>
-                    <h3 class='text-[24px] font-bold text-gradient'>{item.title}</h3>
-                    <p class='text-[20px] mt-2 mb-[32px]'>{item.description}</p>
+                    <h3 class="text-[24px] font-bold text-gradient">{item.title}</h3>
+                    <p class="text-[20px] mt-2 mb-[32px]">{item.description}</p>
 
                     {item.button && (
                       <a
-                        href='/dubai-branch'
-                        class='bg-white text-[#712F76] shadow-secondary text-[16px] px-6 py-3 font-bold rounded-[32px]'
+                        href="/dubai-branch"
+                        class="bg-white text-[#712F76] shadow-secondary text-[16px] px-6 py-3 font-bold rounded-[32px]"
                       >
                         {item.button.text}
                       </a>
                     )}
                   </div>
 
-                  <img src={item.image} class='w-[360px] h-[240px] ' alt='timeline-image' />
+                  <img src={item.image} class="w-[360px] h-[240px] " alt="timeline-image" />
                 </div>
               </div>
             ))
@@ -171,7 +171,7 @@ const aboutData = [
     </section>
 
     <section
-      class='py-[96px]'
+      class="py-[96px]"
       style={{
         backgroundImage: 'url(/src/assets/images/violet-bg.svg)',
         backgroundRepeat: 'no-repeat',
@@ -179,31 +179,31 @@ const aboutData = [
         backgroundPosition: 'center',
       }}
     >
-      <div class='max-w-5xl mx-auto px-6'>
-        <div class='flex flex-col items-center'>
-          <h1 class='text-[32px] font-bold text-gradient-secondary text-center'>
+      <div class="max-w-5xl mx-auto px-6">
+        <div class="flex flex-col items-center">
+          <h1 class="text-[32px] font-bold text-gradient-secondary text-center">
             Driven by purpose, inspired by vision
           </h1>
-          <p class='text-[20px] text-[#F6E9F2] text-center pt-2'>Quality in every step, ambition in every move.</p>
+          <p class="text-[20px] text-[#F6E9F2] text-center pt-2">Quality in every step, ambition in every move.</p>
         </div>
 
-        <div class='grid md:grid-cols-2 grid-cols-1 gap-[96px] mt-[64px]'>
+        <div class="grid md:grid-cols-2 grid-cols-1 gap-[96px] mt-[64px]">
           {
             aboutData.map((item, index) => (
               <div key={index}>
-                <div class='flex items-center justify-center'>
+                <div class="flex items-center justify-center">
                   <Image
                     src={item.img}
                     height={148}
                     width={148}
-                    class='w-[148px] h-[148px] object-center object-cover'
+                    class="w-[148px] h-[148px] object-center object-cover"
                     alt={item.title}
                   />
                 </div>
 
-                <h1 class='text-[32px] font-bold text-gradient-secondary text-center'>{item.title}</h1>
+                <h1 class="text-[32px] font-bold text-gradient-secondary text-center">{item.title}</h1>
 
-                <p class='text-[20px] text-[#F6E9F2] text-center mt-[16px]'>{item.desc}</p>
+                <p class="text-[20px] text-[#F6E9F2] text-center mt-[16px]">{item.desc}</p>
               </div>
             ))
           }
@@ -211,16 +211,16 @@ const aboutData = [
       </div>
     </section>
 
-    <section class='pt-[96px] pb-[170px]'>
-      <div class='max-w-5xl mx-auto px-6'>
-        <h1 class='text-[32px] font-bold text-gradient text-center'>Get your quote today</h1>
-        <p class='text-[20px] text-center mt-[8px]'>
+    <section class="pt-[96px] pb-[170px]">
+      <div class="max-w-5xl mx-auto px-6">
+        <h1 class="text-[32px] font-bold text-gradient text-center">Get your quote today</h1>
+        <p class="text-[20px] text-center mt-[8px]">
           From retail to wholesale, we’ll design a plan that matches your scale, timing, and goals.
         </p>
-        <div class='flex justify-center items-center mt-[48px]'>
+        <div class="flex justify-center items-center mt-[48px]">
           <a
-            href='/get-a-quote'
-            class='bg-gradient-primary py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px]'
+            href="/get-a-quote"
+            class="bg-gradient-primary py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px]"
             >Get a Quote</a
           >
         </div>

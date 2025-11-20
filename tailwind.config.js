@@ -1,4 +1,3 @@
-
 import defaultTheme from 'tailwindcss/defaultTheme';
 import plugin from 'tailwindcss/plugin';
 import typographyPlugin from '@tailwindcss/typography';
@@ -80,7 +79,6 @@ export default {
           position: 'relative',
           background: 'linear-gradient(white, white) padding-box',
           border: '1px solid transparent',
-          backgroundClip: 'padding-box',
           backgroundImage:
             'linear-gradient(white, white), linear-gradient(89.4deg, rgba(235, 123, 197, 0.7) 0.12%, rgba(215, 109, 222, 0.7) 99.99%)',
           backgroundOrigin: 'border-box',
@@ -90,7 +88,6 @@ export default {
           position: 'relative',
           background: 'linear-gradient(white, white) padding-box',
           border: '1px solid transparent',
-          backgroundClip: 'padding-box',
           backgroundImage:
             'linear-gradient(white, white), linear-gradient(89.4deg, rgba(179, 36, 130, 0.7) 0.12%, rgba(163, 39, 128, 0.7) 26.52%, rgba(117, 49, 122, 0.7) 99.99%)',
           backgroundOrigin: 'border-box',

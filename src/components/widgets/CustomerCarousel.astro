@@ -29,10 +29,6 @@ const bottomRowLogosData = [
   { src: '/src/assets/images/customers/teatime-10.jpg', alt: 'Tea Time' },
 ];
 
-// Duplicate the arrays to create seamless loop effect
-const topRowLogos = [...topRowLogosData, ...topRowLogosData];
-const bottomRowLogos = [...bottomRowLogosData, ...bottomRowLogosData];
-
 const testimonials = [
   {
     quote:
@@ -59,50 +55,77 @@ const testimonials = [
       transform: translateX(0);
     }
     100% {
-      transform: translateX(calc(-50% - 16px));
+      transform: translateX(-50%);
     }
   }
 
   @keyframes scrollLeft {
     0% {
-      transform: translateX(calc(-50% - 16px));
+      transform: translateX(-50%);
     }
     100% {
       transform: translateX(0);
     }
   }
 
+  .carousel-wrapper {
+    overflow: hidden;
+  }
+
+  .carousel-row {
+    display: flex;
+    gap: 64px;
+    width: max-content;
+  }
+
   .carousel-row-top {
-    animation: scrollRight 10s linear infinite;
+    animation: scrollRight 30s linear infinite;
   }
 
   .carousel-row-bottom {
-    animation: scrollLeft 10s linear infinite;
+    animation: scrollLeft 30s linear infinite;
   }
 
-  .carousel-row-top:hover,
-  .carousel-row-bottom:hover {
+  .carousel-row:hover {
     animation-play-state: paused;
+  }
+
+  .carousel-item {
+    flex-shrink: 0;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 8px;
   }
 </style>
 
-<section class='pt-[96px] pb-[170px]'>
+<section class="pt-[96px] pb-[170px]">
   <div>
     <!-- Header -->
-    <div class='text-center mb-[80px] max-w-6xl mx-auto'>
-      <h1 class='text-[32px] font-bold text-gradient'>{title}</h1>
-      <p class='text-[20px] pt-[8px]'>{subtitle}</p>
+    <div class="text-center mb-[80px] max-w-6xl mx-auto">
+      <h1 class="text-[32px] font-bold text-gradient">{title}</h1>
+      <p class="text-[20px] pt-[8px]">{subtitle}</p>
     </div>
 
     <!-- Carousel Container -->
-    <div class='mb-[96px] overflow-hidden'>
+    <div class="mb-[96px]">
       <!-- Top Row - Scrolling Right -->
-      <div class='mb-[32px]'>
-        <div class='flex gap-[64px] carousel-row-top'>
+      <div class="mb-[32px] carousel-wrapper">
+        <div class="carousel-row carousel-row-top">
           {
-            topRowLogos.map((logo) => (
-              <div class='flex-shrink-0 w-[200px] h-[200px] flex items-center justify-center bg-white'>
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
+            topRowLogosData.map((logo) => (
+              <div class="carousel-item">
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class="object-contain" />
+              </div>
+            ))
+          }
+          {
+            topRowLogosData.map((logo) => (
+              <div class="carousel-item">
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class="object-contain" />
               </div>
             ))
           }
@@ -110,12 +133,19 @@ const testimonials = [
       </div>
 
       <!-- Bottom Row - Scrolling Left -->
-      <div>
-        <div class='flex gap-[64px] carousel-row-bottom'>
+      <div class="carousel-wrapper">
+        <div class="carousel-row carousel-row-bottom">
           {
-            bottomRowLogos.map((logo) => (
-              <div class='flex-shrink-0 w-[200px] h-[200px] flex items-center justify-center bg-white'>
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
+            bottomRowLogosData.map((logo) => (
+              <div class="carousel-item">
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class="object-contain" />
+              </div>
+            ))
+          }
+          {
+            bottomRowLogosData.map((logo) => (
+              <div class="carousel-item">
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class="object-contain" />
               </div>
             ))
           }
@@ -124,36 +154,36 @@ const testimonials = [
     </div>
 
     <!-- Testimonials Section -->
-    <div class='max-w-6xl mx-auto px-6'>
-      <div class='flex md:flex-row flex-col md:justify-between gap-[32px] md:gap-[96px]'>
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex md:flex-row flex-col md:justify-between gap-[32px] md:gap-[96px]">
         {
           testimonials.map((testimonial) => (
-            <div class='bg-gradient-to-br from-[#F6E9F2] to-[#F0E0F0] rounded-[16px] p-[32px]'>
-              <div class='flex justify-between items-start gap-[36px]'>
+            <div class="bg-gradient-to-br from-[#F6E9F2] to-[#F0E0F0] rounded-[16px] p-[32px]">
+              <div class="flex justify-between items-start gap-[36px]">
                 <div>
                   <Image
-                    src='/src/assets/images/quotation.svg'
-                    alt='quotation-mark'
+                    src="/src/assets/images/quotation.svg"
+                    alt="quotation-mark"
                     width={56}
                     height={56}
-                    class='w-[250px] h-[55px] '
+                    class="w-[250px] h-[55px]"
                   />
                 </div>
 
-                <div class='flex flex-col'>
-                  <p class='text-[20px] mb-[24px]'>{testimonial.quote}</p>
-                  <div class='flex justify-start items-center gap-[16px]'>
+                <div class="flex flex-col">
+                  <p class="text-[20px] mb-[24px]">{testimonial.quote}</p>
+                  <div class="flex justify-start items-center gap-[16px]">
                     <Image
                       src={testimonial.image}
                       alt={testimonial.author}
                       width={56}
                       height={56}
-                      class='w-[96px] h-[96px] rounded-[64px] object-center object-cover'
+                      class="w-[96px] h-[96px] rounded-[64px] object-center object-cover"
                     />
                     <div>
-                      <p class='font-bold text-[20px] '>{testimonial.author}</p>
-                      <p class='text-[20px] '>{testimonial.position}</p>
-                      <p class='text-[20px]'>{testimonial.company}</p>
+                      <p class="font-bold text-[20px]">{testimonial.author}</p>
+                      <p class="text-[20px]">{testimonial.position}</p>
+                      <p class="text-[20px]">{testimonial.company}</p>
                     </div>
                   </div>
                 </div>

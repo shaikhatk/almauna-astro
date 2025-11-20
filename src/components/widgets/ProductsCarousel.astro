@@ -16,7 +16,7 @@ const featuredProducts = products
   }));
 ---
 
-<div class='max-w-5xl mx-auto px-6' data-products-carousel>
+<div class="max-w-5xl mx-auto px-6" data-products-carousel>
   <Carousel
     slides={featuredProducts}
     autoPlayDelay={3000}
@@ -25,38 +25,38 @@ const featuredProducts = products
     showSwipe={true}
     data-carousel-instance
   >
-    <Fragment slot='slides'>
+    <Fragment slot="slides">
       {
         featuredProducts.map((product, index) => (
           <div
-            class='carousel-slide w-full flex items-center md:flex-row flex-col gap-[64px] p-0 md:p-12 md:h-[450px] h-[953px]'
+            class="carousel-slide w-full flex items-center md:flex-row flex-col gap-[64px] p-0 md:p-12 md:h-[450px] h-[953px]"
             data-slide-index={index}
           >
-            <div class='flex-shrink-0'>
+            <div class="flex-shrink-0">
               <img
                 src={product.image}
-                class='w-[299px] h-[400px] object-cover select-none'
+                class="w-[299px] h-[400px] object-cover select-none"
                 alt={product.title}
-                loading='lazy'
-                draggable='false'
+                loading="lazy"
+                draggable="false"
               />
             </div>
 
-            <div class='flex-1'>
-              <h2 class='text-[24px] font-bold text-gradient-tertiary'>{product.title}</h2>
-              <p class='text-[18px] mt-[16px]'>{product.subtitle}</p>
-              <p class='text-[20px] pt-[24px] '>{product.description}</p>
+            <div class="flex-1">
+              <h2 class="text-[24px] font-bold text-gradient-tertiary">{product.title}</h2>
+              <p class="text-[18px] mt-[16px]">{product.subtitle}</p>
+              <p class="text-[20px] pt-[24px] ">{product.description}</p>
 
-              <div class='flex md:flex-row flex-col items-center gap-[24px] md:gap-4 mt-[32px]'>
+              <div class="flex md:flex-row flex-col items-center gap-[24px] md:gap-4 mt-[32px]">
                 <a
-                  href='/get-a-quote'
-                  class='bg-gradient-primary w-fit py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px] hover:shadow-lg transition-shadow'
+                  href="/get-a-quote"
+                  class="bg-gradient-primary w-fit py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px] hover:shadow-lg transition-shadow"
                 >
                   Get a Quote
                 </a>
                 <a
                   href={`/brand/${product.brandId}/${product.productId}`}
-                  class='py-[16px] px-[32px] w-fit border-2 border-[#75317A] rounded-[32px] text-[16px] text-[#75317A] font-bold hover:bg-[#75317A] hover:text-white transition-colors'
+                  class="py-[16px] px-[32px] w-fit border-2 border-[#75317A] rounded-[32px] text-[16px] text-[#75317A] font-bold hover:bg-[#75317A] hover:text-white transition-colors"
                 >
                   {product.viewBtn}
                 </a>
@@ -68,15 +68,15 @@ const featuredProducts = products
     </Fragment>
   </Carousel>
 
-  <div class='flex justify-center gap-3' data-dots-container>
+  <div class="flex justify-center gap-3" data-dots-container>
     {
       featuredProducts.map((_, index) => (
         <button
-          class='carousel-dot h-3 rounded-full border-2 border-gray-400 bg-opacity-[50%] bg-gray-300 w-3'
+          class="carousel-dot h-3 rounded-full border-2 border-gray-400 bg-opacity-[50%] bg-gray-300 w-3"
           data-dot-index={index}
           data-active={index === 0 ? 'true' : 'false'}
           aria-label={`Go to slide ${index + 1}`}
-          type='button'
+          type="button"
         />
       ))
     }
@@ -144,7 +144,6 @@ const featuredProducts = products
       let visibleIndex = -1;
 
       this.slides?.forEach((slide, index) => {
-        const rect = slide.getBoundingClientRect();
         const isVisible =
           slide.offsetParent !== null &&
           (slide.style.display === 'flex' || slide.style.display === '' || getComputedStyle(slide).display === 'flex');

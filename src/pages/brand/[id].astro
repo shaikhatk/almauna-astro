@@ -1,4 +1,3 @@
-
 ---
 import { products } from '~/data/productsData';
 import { brands } from '~/data/brandsData';
@@ -60,9 +59,7 @@ if (!product) {
                   width="150"
                   class="h-[50px] w-[150px] object-cover mb-[16px]"
                 />
-                <p class="text-[14px] md:text-[16px] text-[#1E1E1E] text-opacity-[70%]">
-                  {brand.name}
-                </p>
+                <p class="text-[14px] md:text-[16px] text-[#1E1E1E] text-opacity-[70%]">{brand.name}</p>
               </div>
             )
           }
@@ -85,9 +82,7 @@ if (!product) {
           {
             brand && (
               <div class="mb-[32px] md:mb-[48px] p-[16px] md:p-[24px] bg-gradient-secondary rounded-[8px]">
-                <h3 class="text-[18px] md:text-[20px] font-bold text-gradient mb-[12px]">
-                  About {brand.brandTitle}
-                </h3>
+                <h3 class="text-[18px] md:text-[20px] font-bold text-gradient mb-[12px]">About {brand.brandTitle}</h3>
                 <div
                   class="text-[14px] md:text-[16px] text-[#1E1E1E] text-opacity-[80%]"
                   set:html={brand.brandDescription}
