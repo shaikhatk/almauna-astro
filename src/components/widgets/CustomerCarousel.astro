@@ -102,30 +102,30 @@ const testimonials = [
   }
 </style>
 
-<section class="pt-[96px] pb-[170px]">
+<section class='pt-[64px] pb-[120px]'>
   <div>
     <!-- Header -->
-    <div class="text-center mb-[80px] max-w-6xl mx-auto">
-      <h1 class="text-[32px] font-bold text-gradient">{title}</h1>
-      <p class="text-[20px] pt-[8px]">{subtitle}</p>
+    <div class='text-center mb-[64px] max-w-6xl mx-auto'>
+      <h1 class='text-[32px] font-bold text-gradient'>{title}</h1>
+      <p class='text-[20px] pt-[8px]'>{subtitle}</p>
     </div>
 
     <!-- Carousel Container -->
-    <div class="mb-[96px]">
+    <div class='mb-[64px]'>
       <!-- Top Row - Scrolling Right -->
-      <div class="mb-[32px] carousel-wrapper">
-        <div class="carousel-row carousel-row-top">
+      <div class='mb-[32px] carousel-wrapper'>
+        <div class='carousel-row carousel-row-top'>
           {
             topRowLogosData.map((logo) => (
-              <div class="carousel-item">
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class="object-contain" />
+              <div class='carousel-item'>
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
               </div>
             ))
           }
           {
             topRowLogosData.map((logo) => (
-              <div class="carousel-item">
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class="object-contain" />
+              <div class='carousel-item'>
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
               </div>
             ))
           }
@@ -133,19 +133,19 @@ const testimonials = [
       </div>
 
       <!-- Bottom Row - Scrolling Left -->
-      <div class="carousel-wrapper">
-        <div class="carousel-row carousel-row-bottom">
+      <div class='carousel-wrapper'>
+        <div class='carousel-row carousel-row-bottom'>
           {
             bottomRowLogosData.map((logo) => (
-              <div class="carousel-item">
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class="object-contain" />
+              <div class='carousel-item'>
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
               </div>
             ))
           }
           {
             bottomRowLogosData.map((logo) => (
-              <div class="carousel-item">
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class="object-contain" />
+              <div class='carousel-item'>
+                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
               </div>
             ))
           }
@@ -154,36 +154,36 @@ const testimonials = [
     </div>
 
     <!-- Testimonials Section -->
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="flex md:flex-row flex-col md:justify-between gap-[32px] md:gap-[96px]">
+    <div class='max-w-6xl mx-auto px-6'>
+      <div class='flex md:flex-row flex-col md:justify-between gap-[32px] md:gap-[96px]'>
         {
           testimonials.map((testimonial) => (
-            <div class="bg-gradient-to-br from-[#F6E9F2] to-[#F0E0F0] rounded-[16px] p-[32px]">
-              <div class="flex justify-between items-start gap-[36px]">
+            <div class='bg-gradient-to-br from-[#F6E9F2] to-[#F0E0F0] rounded-[16px] p-[32px]'>
+              <div class='flex justify-between items-start gap-[36px]'>
                 <div>
                   <Image
-                    src="/src/assets/images/quotation.svg"
-                    alt="quotation-mark"
+                    src='/src/assets/images/quotation.svg'
+                    alt='quotation-mark'
                     width={56}
                     height={56}
-                    class="w-[250px] h-[55px]"
+                    class='w-[250px] h-[55px]'
                   />
                 </div>
 
-                <div class="flex flex-col">
-                  <p class="text-[20px] mb-[24px]">{testimonial.quote}</p>
-                  <div class="flex justify-start items-center gap-[16px]">
+                <div class='flex flex-col'>
+                  <p class='text-[20px] mb-[24px]'>{testimonial.quote}</p>
+                  <div class='flex justify-start items-center gap-[16px]'>
                     <Image
                       src={testimonial.image}
                       alt={testimonial.author}
                       width={56}
                       height={56}
-                      class="w-[96px] h-[96px] rounded-[64px] object-center object-cover"
+                      class='w-[96px] h-[96px] rounded-[64px] object-center object-cover'
                     />
                     <div>
-                      <p class="font-bold text-[20px]">{testimonial.author}</p>
-                      <p class="text-[20px]">{testimonial.position}</p>
-                      <p class="text-[20px]">{testimonial.company}</p>
+                      <p class='font-bold text-[20px]'>{testimonial.author}</p>
+                      <p class='text-[20px]'>{testimonial.position}</p>
+                      <p class='text-[20px]'>{testimonial.company}</p>
                     </div>
                   </div>
                 </div>

@@ -270,7 +270,7 @@ export const products = [
 
   // Tradekey Products
   {
-    id: 'tradekey-corn-oil-1.8l',
+    id: 'tradekey-corn-oil-1-8l',
     title: 'Tradekey Corn Oil-1.8L',
     image: '/src/assets/images/tradekey/tradekey.jpeg',
     description:
@@ -346,7 +346,7 @@ export const products = [
 
   // April Products
   {
-    id: 'april-mayonnaise-3.7',
+    id: 'april-mayonnaise-3-7l',
     title: 'April Mayonnaise 3.7L',
     image: '/src/assets/images/april-mayo/april.jpeg',
     description: 'Premium mayonnaise crafted with quality ingredients, 3.78L',

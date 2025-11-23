@@ -3,60 +3,64 @@ import { Image } from 'astro:assets';
 ---
 
 <header
-  class="sticky top-0 z-40 flex-none w-full transition-all duration-100 ease-in-out bg-white dark:bg-slate-900 shadow-sm"
+  class='sticky top-0 z-40 flex-none w-full transition-all duration-100 ease-in-out bg-white dark:bg-slate-900 shadow-sm'
 >
-  <div class="container mx-auto px-4 max-w-5xl">
-    <div class="flex items-center justify-between py-4">
+  <div class='container mx-auto px-4 max-w-5xl'>
+    <div class='flex items-center justify-between py-4'>
       <!-- Left Navigation (Desktop) -->
-      <ul class="hidden lg:flex text-[14px] font-bold gap-[48px]">
-        <li><a href="/" class="hover:font-bold hover:text-gradient transition">Home</a></li>
-        <li><a href="/about" class="hover:font-bold hover:text-gradient transition">About Us</a></li>
+      <ul class='hidden lg:flex text-[14px] font-bold gap-[48px]'>
+        <li><a href='/' class='hover:font-bold hover:text-gradient transition'>Home</a></li>
+        <li><a href='/about' class='hover:font-bold hover:text-gradient transition'>About Us</a></li>
         <li>
-          <a href="/brands?brand=maharani" class="hover:font-bold hover:text-gradient transition">Brands and Products</a
+          <a href='/brands?brand=maharani' class='hover:font-bold hover:text-gradient transition'>Brands and Products</a
           >
         </li>
       </ul>
 
       <!-- Logo -->
-      <div class="flex-shrink-0">
-        <Image src="/src/assets/images/logo.png" alt="Logo" width="100" height="100" class="w-[208px] h-[44.6px]" />
+      <div class='flex-shrink-0'>
+        <a href='/'>
+          <Image src='/src/assets/images/logo.png' alt='Logo' width='100' height='100' class='w-[208px] h-[44.6px]' />
+        </a>
       </div>
 
       <!-- Right Navigation (Desktop) -->
-      <ul class="hidden lg:flex text-[14px] font-bold gap-[48px]">
+      <ul class='hidden lg:flex text-[14px] font-bold gap-[48px]'>
         <li>
-          <a href="https://store.almauna.com/" class="hover:font-bold hover:text-gradient transition">Online Store</a>
+          <a href='https://store.almauna.com/' target='_blank' class='hover:font-bold hover:text-gradient transition'
+            >Online Store</a
+          >
         </li>
-        <li><a href="/dubai-branch" class="hover:font-bold hover:text-gradient transition">Dubai Branch</a></li>
-        <li><a href="/contact" class="hover:font-bold hover:text-gradient transition">Contact Us</a></li>
+        <li><a href='/dubai-branch' class='hover:font-bold hover:text-gradient transition'>Dubai Branch</a></li>
+        <li><a href='/contact' class='hover:font-bold hover:text-gradient transition'>Contact Us</a></li>
       </ul>
 
       <!-- Hamburger Menu Button (Mobile) -->
       <button
-        id="menu-toggle"
-        class="lg:hidden flex flex-col gap-1.5 p-2"
-        aria-label="Toggle menu"
-        aria-expanded="false"
+        id='menu-toggle'
+        class='lg:hidden flex flex-col gap-1.5 p-2'
+        aria-label='Toggle menu'
+        aria-expanded='false'
       >
-        <span class="w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block"></span>
-        <span class="w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block"></span>
-        <span class="w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block"></span>
+        <span class='w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block'></span>
+        <span class='w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block'></span>
+        <span class='w-6 h-0.5 bg-gray-800 dark:bg-white transition-all duration-300 block'></span>
       </button>
     </div>
 
     <!-- Mobile Menu -->
-    <nav id="mobile-menu" class="hidden lg:hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-      <ul class="flex flex-col text-[14px] font-bold gap-4 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
-        <li><a href="/" class="block hover:text-gradient transition">Home</a></li>
-        <li><a href="/about" class="block hover:text-gradient transition">About Us</a></li>
-        <li><a href="/brands?brand=maharani" class="block hover:text-gradient transition">Brands and Products</a></li>
+    <nav id='mobile-menu' class='hidden lg:hidden max-h-0 overflow-hidden transition-all duration-300 ease-in-out'>
+      <ul class='flex flex-col text-[14px] font-bold gap-4 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4'>
+        <li><a href='/' class='block hover:text-gradient transition'>Home</a></li>
+        <li><a href='/about' class='block hover:text-gradient transition'>About Us</a></li>
+        <li><a href='/brands?brand=maharani' class='block hover:text-gradient transition'>Brands and Products</a></li>
         <li>
-          <a href="https://store.almauna.com/" target="_blank" class="block hover:text-gradient transition"
+          <a href='https://store.almauna.com/' target='_blank' class='block hover:text-gradient transition'
             >Online Store</a
           >
         </li>
-        <li><a href="/dubai-branch" class="block hover:text-gradient transition">Dubai Branch</a></li>
-        <li><a href="/contact" class="block hover:text-gradient transition">Contact Us</a></li>
+        <li><a href='/dubai-branch' class='block hover:text-gradient transition'>Dubai Branch</a></li>
+        <li><a href='/contact' class='block hover:text-gradient transition'>Contact Us</a></li>
       </ul>
     </nav>
   </div>

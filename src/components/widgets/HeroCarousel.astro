@@ -1,4 +1,7 @@
 ---
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 const slides = [
   {
     id: 1,
@@ -12,7 +15,7 @@ const slides = [
     id: 2,
     img: '/src/assets/images/Photography/hero-home-2.jpg',
     overlay: 'linear-gradient(90.07deg, #75317A 0.06%, rgba(130,46,124,0.78) 52.95%, rgba(179,36,130,0) 99.93%)',
-    align: 'left',
+    align: 'center',
     title: 'Our legacy: trusted logistics, premium brands',
     subtitle:
       "From day one, we've specialized in robust import, distribution, and wholesale, ensuring steady supply for every scale of business in Qatar.",
@@ -21,71 +24,93 @@ const slides = [
     id: 3,
     img: '/src/assets/images/Photography/hero-home-3.jpg',
     overlay: 'linear-gradient(90.07deg, #75317A 0.06%, rgba(130,46,124,0.78) 52.95%, rgba(179,36,130,0) 99.93%)',
-    align: 'left',
+    align: 'center',
     title: 'New heights in supply: ISO certified quality',
     subtitle:
       'Our new ISO 22000–certified Dubai branch expands your reach with efficient, scalable supply solutions across the wider UAE region.',
   },
 ];
-// Create infinite loop: original slides + clone of first slide at end
-const infiniteSlides = [...slides, slides[0]];
-const infiniteSlideCount = infiniteSlides.length;
 ---
 
 <style>
-  /* Minimal helper styles using Tailwind utilities via @apply */
-  .dot {
-    @apply h-2 w-2 rounded-full bg-white/50 transition-all duration-300 cursor-pointer;
+  .hero-swiper {
+    width: 100%;
+    height: 728px;
   }
-  .dot.active {
-    @apply w-6 bg-white;
+
+  @media (min-width: 768px) {
+    .hero-swiper {
+      height: 720px;
+    }
   }
-  /* Prevent text selection while dragging */
-  .no-select {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+
+  :global(.hero-swiper .swiper-slide) {
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(.hero-swiper .swiper-pagination-bullet) {
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    width: 12px;
+    height: 12px;
+  }
+
+  :global(.hero-swiper .swiper-pagination-bullet-active) {
+    background-color: white;
+    width: 24px;
+    border-radius: 6px;
+  }
+
+  :global(.hero-swiper .swiper-button-next),
+  :global(.hero-swiper .swiper-button-prev) {
+    display: none;
+  }
+
+  .slide-overlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  .slide-content {
+    position: relative;
+    z-index: 10;
+    color: white;
+    padding: 1.5rem;
   }
 </style>
 
-<div id='heroCarouselRoot' class='relative w-full h-[728px] md:h-[720px] overflow-hidden no-select'>
-  <!-- track -->
-  <div id='carouselTrack' class='flex h-full' style={`width: ${infiniteSlideCount * 100}%`} aria-hidden='false'>
+<div id='heroCarouselRoot' class='hero-swiper swiper'>
+  <div class='swiper-wrapper'>
     {
-      infiniteSlides.map((s) => (
-        <div
-          role='group'
-          aria-roledescription='slide'
-          class='w-full h-full flex-shrink-0 relative'
-          style={`background-image: url('${s.img}'); background-size: cover; background-position: center;`}
-        >
-          {/* overlay */}
-          <div class='absolute inset-0' style={`background: ${s.overlay};`} />
-
-          {/* content container: center for mobile and first slide, left for desktop others */}
+      slides.map((slide) => (
+        <div class='swiper-slide' style={`background-image: url('${slide.img}')`}>
+          <div class='slide-overlay' style={`background: ${slide.overlay}`} />
           <div
-            class={`relative z-10 h-full flex flex-col gap-6 text-white px-6 lg:px-24 ${
-              s.align === 'center'
+            class={`slide-content h-full flex flex-col gap-6 lg:px-24 ${
+              slide.align === 'center'
                 ? 'items-center md:justify-center justify-start mt-[64px] md:mt-0 text-center'
-                : 'md:items-start md:text-left items-center md:justify-center justify-start mt-[64px] md:mt-0 text-center'
+                : 'md:items-start md:justify-center items-center justify-start mt-[64px] md:mt-0 md:text-left text-center'
             }`}
           >
-            <div class={`${s.align === 'left' ? 'md:max-w-[640px] max-w-[640px]' : 'max-w-[960px]'}`}>
+            <div class={`${slide.align === 'left' ? 'md:max-w-[640px] max-w-[640px]' : 'max-w-[960px]'}`}>
               <h2
                 class={`font-bold ${
-                  s.align === 'center'
+                  slide.align === 'center'
                     ? 'text-[32px] md:text-6xl lg:text-[64px]'
                     : 'text-[32px] md:text-5xl lg:text-[64px]'
                 }`}
               >
-                {s.title}
+                {slide.title}
               </h2>
 
-              <p class='md:mt-[42px] mt-[32px] text-[20px] md:text-[24px]'>{s.subtitle}</p>
+              <p class='md:mt-[42px] mt-[32px] text-[20px] md:text-[24px]'>{slide.subtitle}</p>
 
               <div
-                class={`mt-[164px] md:mt-[96px] md:mb-0 flex md:flex-row flex-col gap-[18px] md:gap-[32px] ${s.align === 'center' ? 'justify-center items-center' : 'md:justify-start items-center justify-center'}`}
+                class={`mt-[164px] md:mt-[96px] md:mb-0 flex md:flex-row flex-col gap-[18px] md:gap-[32px] ${slide.align === 'center' ? 'justify-center items-center' : 'md:justify-start justify-center items-center'}`}
               >
                 <a
                   href='/brands'
@@ -110,191 +135,42 @@ const infiniteSlideCount = infiniteSlides.length;
     }
   </div>
 
-  <!-- Dots -->
-  <div class='absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-30'>
-    {slides.map((_, i) => <button class='dot' aria-label={`Go to slide ${i + 1}`} data-index={i} />)}
-  </div>
+  <div class='swiper-pagination mb-6'></div>
 </div>
 
 <script>
+  import Swiper from 'swiper';
+  import { Autoplay, Pagination } from 'swiper/modules';
+
   function initializeHeroCarousel() {
-    // Defensive initializer: only run when the DOM nodes exist
     const root = document.getElementById('heroCarouselRoot');
-    const track = document.getElementById('carouselTrack');
-    if (!(root instanceof HTMLElement) || !(track instanceof HTMLElement)) return;
+    if (!(root instanceof HTMLElement)) return;
 
-    const rootEl = root;
-    const trackEl = track;
-    const dots = Array.from(rootEl.querySelectorAll('.dot')).filter((d) => d instanceof HTMLElement);
-    const total = dots.length; // Original slide count (3)
-    const infiniteTotal = total + 1; // With cloned slide (4)
-
-    let index = 0; // Current position in infinite track
-    let autoTimer: number | NodeJS.Timeout | null = null;
-    let resizeTimeoutVar: number | NodeJS.Timeout | null = null;
-    const INTERVAL = 5000;
-    let isDragging = false;
-    let startX = 0;
-    let currentTranslate = 0;
-    let prevTranslate = 0;
-    function setSizes() {
-      const rootWidth = rootEl.clientWidth || window.innerWidth;
-      trackEl.style.width = `${rootWidth * infiniteTotal}px`;
-      Array.from(trackEl.children).forEach((child) => {
-        if (child && child instanceof HTMLElement) child.style.width = `${rootWidth}px`;
-      });
-      setTranslate(-index * rootWidth, false);
-    }
-
-    function setTranslate(x, animate = true) {
-      trackEl.style.transition = animate ? 'transform 700ms ease-in-out' : 'none';
-      trackEl.style.transform = `translateX(${x}px)`;
-      currentTranslate = x;
-      prevTranslate = x;
-      updateDots();
-    }
-
-    function updateDots() {
-      const displayIndex = total > 0 ? index % total : 0;
-      dots.forEach((d, i) => d.classList.toggle('active', i === displayIndex));
-    }
-
-    function goTo(i, animate = true) {
-      index = i;
-      const rootWidth = rootEl.clientWidth || window.innerWidth;
-      setTranslate(-index * rootWidth, animate);
-    }
-
-    function handleInfiniteLoop() {
-      // When we reach the cloned slide at the end, jump back to start without animation
-      if (index === infiniteTotal - 1) {
-        setTimeout(() => {
-          goTo(0, false);
-        }, 700); // Match animation duration
-      }
-    }
-
-    function nextSlide() {
-      goTo(index + 1);
-      handleInfiniteLoop();
-    }
-
-    function prevSlide() {
-      // If at start, jump to cloned slide at end
-      if (index === 0) {
-        goTo(infiniteTotal - 1, false);
-        setTimeout(() => {
-          goTo(infiniteTotal - 2);
-        }, 50);
-      } else {
-        goTo(index - 1);
-      }
-    }
-
-    function startAuto() {
-      stopAuto();
-      autoTimer = window.setInterval(nextSlide, INTERVAL);
-    }
-
-    function stopAuto() {
-      if (autoTimer !== null) {
-        clearInterval(autoTimer);
-        autoTimer = null;
-      }
-    }
-
-    // Dot click handlers
-    dots.forEach((dot) => {
-      // dot is narrowed to HTMLElement above
-      const dotEl = /** @type {HTMLElement & { dataset: DOMStringMap }} */ (dot);
-      dotEl.addEventListener('click', () => {
-        stopAuto();
-        const targetIndex = Number(dotEl.dataset.index);
-        if (!Number.isNaN(targetIndex)) goTo(targetIndex);
-        startAuto();
-      });
-    });
-
-    function pointerDown(clientX) {
-      isDragging = true;
-      startX = clientX;
-      prevTranslate = currentTranslate;
-      trackEl.style.transition = 'none';
-      stopAuto();
-    }
-
-    function pointerMove(clientX) {
-      if (!isDragging) return;
-      const dx = clientX - startX;
-      setTranslate(prevTranslate + dx, false);
-    }
-
-    function pointerUp(clientX) {
-      if (!isDragging) return;
-      isDragging = false;
-
-      const dx = clientX - startX;
-      const threshold = (rootEl.clientWidth || window.innerWidth) * 0.12;
-
-      if (dx > threshold) prevSlide();
-      else if (dx < -threshold) nextSlide();
-      else goTo(index);
-
-      startAuto();
-    }
-
-    // Mouse events
-    trackEl.addEventListener('mousedown', (e) => {
-      e.preventDefault();
-      pointerDown(e.clientX);
-      function onMouseMove(ev) {
-        pointerMove(ev.clientX);
-      }
-      function onMouseUp(ev) {
-        pointerUp(ev.clientX);
-        window.removeEventListener('mousemove', onMouseMove);
-      }
-      window.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('mouseup', onMouseUp, { once: true });
-    });
-
-    // Touch events
-    trackEl.addEventListener(
-      'touchstart',
-      (e) => {
-        if (e.touches && e.touches[0]) pointerDown(e.touches[0].clientX);
+    new Swiper(root, {
+      modules: [Autoplay, Pagination],
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
       },
-      { passive: true }
-    );
-    trackEl.addEventListener(
-      'touchmove',
-      (e) => {
-        if (e.touches && e.touches[0]) pointerMove(e.touches[0].clientX);
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        dynamicBullets: false,
       },
-      { passive: true }
-    );
-    trackEl.addEventListener('touchend', (e) => {
-      if (e.changedTouches && e.changedTouches[0]) pointerUp(e.changedTouches[0].clientX);
+      loop: true,
+      touchRatio: 1,
+      touchAngle: 45,
+      keyboard: {
+        enabled: true,
+      },
     });
-
-    window.addEventListener('resize', () => {
-      if (resizeTimeoutVar) clearTimeout(resizeTimeoutVar);
-      resizeTimeoutVar = setTimeout(setSizes, 120);
-    });
-
-    // Initialize sizes, dots and autoplay
-    setSizes();
-    updateDots();
-    startAuto();
   }
 
-  // Initialize on page load (call the initializer safely)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeHeroCarousel);
   } else {
     initializeHeroCarousel();
   }
 
-  // Re-initialize on Astro page transitions (if present)
   document.addEventListener('astro:page-load', initializeHeroCarousel);
 </script>

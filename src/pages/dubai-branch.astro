@@ -4,7 +4,19 @@ import Image from 'astro/components/Image.astro';
 import LocationMap from '~/components/widgets/LocationMap.astro';
 
 const metadata = {
-  title: 'dubai-branch',
+  title: 'Dubai Branch',
+  description:
+    'Al Mauna Trading Dubai branch — ISO 22000 certified food distribution hub serving the GCC retail, hospitality and wellness markets.',
+  image: '/src/assets/images/dubai-branch.png',
+};
+
+const baseUrl = process.env.SITE_URL ?? 'https://example.com';
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  url: `${baseUrl}/dubai-branch`,
+  name: metadata.title,
+  description: metadata.description,
 };
 
 const dubaiData = [
@@ -71,11 +83,18 @@ const countriesData = [
 
 <Layout metadata={metadata}>
   <main>
-    <section>
-      <div class="grid grid-cols-1 md:grid-cols-2">
-        <div class="bg-gradient-primary py-[96px] px-6 md:pl-[44px] md:pr-[74px]">
-          <h1 class="text-[32px] font-bold text-white">Dubai Branch:<br /> our gateway to the GCC</h1>
-          <p class="text-[20px] pt-[32px] text-white">
+    <script type='application/ld+json' set:html={JSON.stringify(structuredData)} />
+    <section class='md:block hidden'>
+      <div class='grid grid-cols-1 md:grid-cols-2'>
+        <div class='bg-gradient-primary py-[96px] px-6 md:pl-[44px] md:pr-[74px]'>
+          <h1
+            class='text-[32px] font-bold text-white intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+          >
+            Dubai Branch:<br /> our gateway to the GCC
+          </h1>
+          <p
+            class='text-[20px] pt-[32px] text-white intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+          >
             In 2025, Al Mauna Trading proudly opened its Dubai branch — a key step in bringing our trusted expertise
             from Qatar to the heart of the UAE.
             <br /><br />
@@ -86,31 +105,63 @@ const countriesData = [
           </p>
         </div>
         <Image
-          src="/src/assets/images/dubai-branch.png"
-          alt="Dubai Branch"
+          src='/src/assets/images/dubai-branch.png'
+          alt='Dubai Branch'
           height={588}
           width={388}
-          class="md:h-[588px] h-[334px] w-full object-cover objetc-center"
+          class='md:h-[588px] h-[334px] w-full object-cover objetc-center'
         />
       </div>
     </section>
-    <section class="md:py-[96px] pt-[96px] pb-[45px] bg-gradient-secondary">
-      <div class="max-w-5xl mx-auto px-6">
-        <div class="text-center mb-[64px]">
-          <h2 class="font-bold text-gradient text-[32px]">Al Mauna Dubai: more than just a branch</h2>
-          <p class="text-[20px] pt-2">It is a natural extension of a legacy built on trust and performance.</p>
+    <section
+      class='md:hidden'
+      style='background-image:linear-gradient(180deg, #75317A 0%, rgba(130, 46, 124, 0.784801) 52.96%, rgba(179, 36, 130, 0) 100%), url(/src/assets/images/dubai-branch.png);  background-size: cover; background-position: top;'
+    >
+      <div class='py-[64px] mx-auto px-6'>
+        <h1
+          class='text-[32px] font-bold text-white intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+        >
+          Dubai Branch:<br /> our gateway to the GCC
+        </h1>
+        <p
+          class='text-[20px] pt-[32px] text-white intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+        >
+          In 2025, Al Mauna Trading proudly opened its Dubai branch — a key step in bringing our trusted expertise from
+          Qatar to the heart of the UAE.
+          <br /><br />
+          From our base in Business Bay, we serve the country’s dynamic retail, hospitality, and wellness markets with the
+          same dedication to quality, innovation, and service that defines our brand. Our Dubai branch is also ISO 22000
+          certified, reflecting our commitment to the highest standards of food safety management — ensuring every product
+          we handle is stored, distributed, and delivered with care and compliance at every stage.
+        </p>
+      </div>
+    </section>
+
+    <section class='py-[64px] bg-gradient-secondary'>
+      <div class='max-w-5xl mx-auto px-6'>
+        <div class='text-center mb-[64px]'>
+          <h2
+            class='font-bold text-gradient text-[32px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+          >
+            Al Mauna Dubai: more than just a branch
+          </h2>
+          <p
+            class='text-[20px] pt-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+          >
+            It is a natural extension of a legacy built on trust and performance.
+          </p>
         </div>
-        <p class="text-[20px]">
+        <p class='text-[20px]'>
           Since our beginnings in Qatar, we’ve grown into a trusted partner for sourcing and distributing premium food
           and wellness products.<br /><br />Being in Business Bay allows us to stay connected with retailers, suppliers,
           and logistics partners across the Emirates — ensuring fast, reliable, and tailored solutions.
         </p>
-        <br />
-        <div class="flex flex-col md:flex-row md:justify-between">
-          <div class="text-[20px]">
+
+        <div class='flex flex-col md:flex-row md:justify-between'>
+          <div class='text-[20px]'>
             We specialize in:
-            <br /><br />
-            <ul class="md:pl-[50px] pl-[20px] list-disc">
+            <br />
+            <ul class='md:pl-[50px] pl-[20px] list-disc'>
               <li>Importing globally recognized food and wellness brands</li>
               <li>Wholesale distribution to retail, hospitality, and healthcare sectors</li>
               <li>Regional warehousing and inventory management</li>
@@ -120,31 +171,37 @@ const countriesData = [
             <br />
             Our mission is simple: deliver value, from source to shelf.
           </div>
-          <div class="flex justify-center pt-[24px] md:pt-0">
+          <div class='flex justify-center pt-[24px] md:pt-0'>
             <Image
-              src="/src/assets/images/iso.svg"
-              title="iso-image"
-              alt="iso-image"
+              src='/src/assets/images/iso.svg'
+              title='iso-image'
+              alt='iso-image'
               height={250}
               width={350}
-              class="md:h-[316px] md:w-[316px] h-[289px] w-[289px] object-cover object-center"
+              class='md:h-[316px] md:w-[316px] h-[289px] w-[289px] object-cover object-center'
             />
           </div>
         </div>
       </div>
     </section>
-    <section class="py-[96px]">
-      <div class="max-w-5xl mx-auto px-6">
-        <div class="text-center mb-[64px]">
-          <h2 class="font-bold text-gradient text-[32px]">What we do in Dubai</h2>
-          <p class="text-[20px] pt-2">
-            Our Dubai hub operates as a full-service supply and distribution center,<br class="md:block hidden" />
+    <section class='py-[64px]'>
+      <div class='max-w-5xl mx-auto px-6'>
+        <div class='text-center mb-[64px]'>
+          <h2
+            class='font-bold text-gradient text-[32px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+          >
+            What we do in Dubai
+          </h2>
+          <p
+            class='text-[20px] pt-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+          >
+            Our Dubai hub operates as a full-service supply and distribution center,<br class='md:block hidden' />
             designed to meet the fast-paced demands of the UAE market.
           </p>
         </div>
-        <p class="text-[20px]">Our core capabilities in Dubai include:</p>
+        <p class='text-[20px]'>Our core capabilities in Dubai include:</p>
         <br />
-        <ul class="md:pl-[50px] pl-[20px] list-disc text-[20px]">
+        <ul class='md:pl-[50px] pl-[20px] list-disc text-[20px]'>
           <li><strong>Import & Clearance: </strong> Swift, compliant handling of global shipments into the UAE.</li>
           <li>
             <strong>Warehousing & Stock Management: </strong> Safe storage, smart organization, and real-time inventory control.
@@ -166,7 +223,7 @@ const countriesData = [
           </li>
         </ul>
         <br />
-        <p class="text-[20px]">
+        <p class='text-[20px]'>
           From supermarkets and specialty shops to hotels and wellness chains, we ensure premium products reach shelves
           fresh and on time.
         </p>
@@ -174,7 +231,7 @@ const countriesData = [
     </section>
 
     <section
-      class="py-[96px]"
+      class='py-[64px]'
       style={{
         backgroundImage: 'url(/src/assets/images/violet-bg.svg)',
         backgroundRepeat: 'no-repeat',
@@ -182,34 +239,35 @@ const countriesData = [
         backgroundPosition: 'center',
       }}
     >
-      <div class="max-w-6xl mx-auto px-6">
-        <div class="flex flex-col items-center">
-          <h1 class="text-[32px] font-bold text-gradient-secondary text-center">
+      <div class='max-w-6xl mx-auto px-6'>
+        <div class='flex flex-col items-center'>
+          <h1 class='text-[32px] font-bold text-gradient-secondary text-center'>
             Driven by purpose, inspired by vision
           </h1>
-          <p class="text-[20px] pt-2 text-[#F6E9F2] text-center">Quality in every step, ambition in every move.</p>
+          <p class='text-[20px] pt-2 text-[#F6E9F2] text-center'>Quality in every step, ambition in every move.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-[48px] md:gap-[28px] mt-[64px]">
+        <div class='grid grid-cols-1 md:grid-cols-5 gap-[48px] md:gap-[28px] mt-[64px]'>
           {
             dubaiData.map((item, index) => (
-              <div key={index}>
-                <div class="flex relative items-center justify-center">
-                  <div class="bg-gradient-tertiary rotate-[45deg] h-[80px] w-[80px] rounded-[8px]" />
+              <div class='intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                <div class='flex relative items-center justify-center'>
+                  <div class='bg-gradient-tertiary rotate-[45deg] h-[80px] w-[80px] rounded-[8px]' />
                   <Image
                     src={item.img}
                     height={111}
                     width={96}
-                    class="w-[110px] h-[111px] absolute object-center object-cover"
+                    class='w-[110px] h-[111px] absolute object-center object-cover'
                     alt={item.title}
                   />
                 </div>
-
-                <h1 class="text-[16px] font-bold text-gradient-secondary text-center pt-[20px] md:pt-[46px]">
+                <h1 class='text-[16px] font-bold text-gradient-secondary text-center pt-[20px] md:pt-[46px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
                   {item.title}
                 </h1>
 
-                <p class="text-[14px] text-[#F6E9F2] text-center pt-1">{item.desc}</p>
+                <p class='text-[14px] text-[#F6E9F2] text-center pt-1 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                  {item.desc}
+                </p>
               </div>
             ))
           }
@@ -217,39 +275,39 @@ const countriesData = [
       </div>
     </section>
 
-    <section class="py-[96px] bg-gradient-secondary">
-      <div class="max-w-6xl mx-auto px-6">
-        <div class="md:mb-[64px]">
-          <h2 class="font-bold text-gradient text-[32px] text-center">Regional export from UAE</h2>
-          <p class="text-[20px] pt-2 text-center">
+    <section class='py-[64px] bg-gradient-secondary'>
+      <div class='max-w-6xl mx-auto px-6'>
+        <div class='md:mb-[48px]'>
+          <h2 class='font-bold text-gradient text-[32px] text-center'>Regional export from UAE</h2>
+          <p class='text-[20px] pt-2 text-center'>
             Beyond the Emirates, our Dubai hub also serves as a gateway to key African markets. We deliver quality food
             products with efficiency and flexibility on Kenya, Nigeria, Ghana, Tanzania, Uganda and Ethiopia.
           </p>
-          <p class="text-[20px] mt-[64px]">Key export destinations:</p>
+          <p class='text-[20px] mt-[48px]'>Key export destinations:</p>
         </div>
-        <div class="md:grid hidden md:grid-cols-3 md:gap-[16px]">
+        <div class='md:grid hidden md:grid-cols-3 md:gap-[16px]'>
           {
             countriesData.map((item, index) => (
-              <div key={index} class="md:bg-white md:rounded-[8px] md:p-[24px] md:flex items-center justify-around ">
+              <div class='md:bg-white md:rounded-[8px] md:p-[24px] md:flex items-center justify-around '>
                 <Image
                   src={item.img}
                   alt={item.title}
                   width={64}
                   height={40}
-                  class="w-[64px] h-[64px] object-cover object-center md:block hidden"
+                  class='w-[64px] h-[64px] object-cover object-center md:block hidden'
                 />
 
                 <div>
-                  <p class="text-[20px] font-bold">{item.title}</p>
-                  <p class="text-[20px]">{item.desc}</p>
+                  <p class='text-[20px] font-bold'>{item.title}</p>
+                  <p class='text-[20px]'>{item.desc}</p>
                 </div>
               </div>
             ))
           }
         </div>
 
-        <div class="md:hidden">
-          <ul class="md:pl-[50px] pl-[20px] list-disc text-[20px]">
+        <div class='md:hidden'>
+          <ul class='md:pl-[50px] pl-[20px] list-disc text-[20px]'>
             <li><strong>Kenya</strong> – Nairobi, Mombasa</li>
             <li><strong>Nigeria</strong> – Abuja, Lagos</li>
             <li><strong>Ghana</strong> – Accra, Tema</li>
@@ -259,29 +317,29 @@ const countriesData = [
           </ul>
         </div>
 
-        <p class="text-[20px] mt-[48px] md:mt-[64px]">Why African clients choose us:</p>
-        <br class="md:block hidden" />
-        <ul class="pl-[50px] list-disc text-[20px]">
+        <p class='text-[20px] mt-[48px] md:mt-[48px]'>Why African clients choose us:</p>
+        <br class='md:block hidden' />
+        <ul class='pl-[50px] list-disc text-[20px]'>
           <li>Consolidated shipments from Jebel Ali</li>
           <li>Competitive bulk pricing</li>
           <li>Flexible labeling and packaging</li>
           <li>Proven expertise in regional port clearances</li>
         </ul>
         <br />
-        <p class="text-[20px]">
+        <p class='text-[20px]'>
           At Al Mauna Trading – Dubai, we’re here to connect global quality with local needs — today, and for the
           future.
         </p>
       </div>
     </section>
 
-    <section class="py-[96px] px-6">
-      <div class="max-w-6xl mx-auto border rounded-[8px]">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-[48px]">
+    <section class='py-[64px] px-6'>
+      <div class='max-w-6xl mx-auto border rounded-[8px]'>
+        <div class='grid grid-cols-1 lg:grid-cols-3 gap-y-[48px] md:gap-[48px]'>
           <!-- Map Section -->
-          <div class="col-span-1">
+          <div class='col-span-1'>
             <LocationMap
-              mapId="map-container-dubai"
+              mapId='map-container-dubai'
               officeLocation={{
                 name: 'Office',
                 address: 'Office No: 2105-0184, The Binary by Omniyat, Business Bay, Dubai, United Arab Emirates',
@@ -300,64 +358,64 @@ const countriesData = [
           </div>
 
           <!-- Contact Information Section -->
-          <div class="md:flex flex-row justify-between items-start col-span-2 px-6 md:pl-[40px] py-[48px]">
+          <div class='md:flex flex-row justify-between items-start col-span-2 px-6 md:pl-[40px] md:py-[48px] pb-[48px]'>
             <div>
-              <h2 class="text-[24px] text-gradient font-bold md:mb-[16px] mb-[32px]">UAE Office</h2>
+              <h2 class='text-[24px] text-gradient font-bold md:mb-[16px] mb-[32px]'>UAE Office</h2>
               <!-- Office -->
               <div>
-                <h3 class="text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]">ADDRESS</h3>
-                <p class="text-[20px] text-[#B32482] underline mb-[16px]">
-                  Office No: 2105-0184, The Binary by Omniyat,<br class="md:block hidden" /> Business Bay, Dubai, United
+                <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>ADDRESS</h3>
+                <p class='text-[20px] text-[#B32482] underline mb-[16px]'>
+                  Office No: 2105-0184, The Binary by Omniyat,<br class='md:block hidden' /> Business Bay, Dubai, United
                   Arab Emirates
                 </p>
               </div>
-              <div class="mt-[16px] md:hidden">
+              <div class='mt-[16px] md:hidden'>
                 <a
-                  href="https://maps.google.com/?q=The+Binary+by+Omniyat,+Business+Bay,+Dubai,+UAE"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold"
+                  href='https://maps.google.com/?q=The+Binary+by+Omniyat,+Business+Bay,+Dubai,+UAE'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold'
                 >
                   Get Directions
                 </a>
               </div>
 
               <!-- Warehouse -->
-              <div class="md:mt-[16px] mt-[32px]">
-                <h3 class="text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]">WAREHOUSE</h3>
-                <p class="text-[20px]">Ocean Fair International, Dubai</p>
+              <div class='md:mt-[16px] mt-[32px]'>
+                <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>WAREHOUSE</h3>
+                <p class='text-[20px]'>Ocean Fair International, Dubai</p>
               </div>
 
               <!-- Phone -->
-              <div class="md:mt-[16px] mt-[32px]">
-                <h3 class="text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]">PHONE</h3>
+              <div class='md:mt-[16px] mt-[32px]'>
+                <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>PHONE</h3>
                 <div>
-                  <a href="tel:+971504789777" class="text-[20px] text-[#B32482] underline"> +971504789777 </a>
-                  <a href="tel:+971425880070" class="text-[20px] text-[#B32482] underline"> +971425880070 </a>
+                  <a href='tel:+971504789777' class='text-[20px] text-[#B32482] underline'> +971504789777 </a>
+                  <a href='tel:+971425880070' class='text-[20px] text-[#B32482] underline'> +971425880070 </a>
                 </div>
               </div>
 
               <!-- Email -->
-              <div class="md:mt-[16px] mt-[32px]">
-                <h3 class="text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]">E-MAIL</h3>
-                <a href="mailto:sales.uae@almauna.com" class="text-[20px] text-[#B32482] underline">
+              <div class='md:mt-[16px] mt-[32px]'>
+                <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>E-MAIL</h3>
+                <a href='mailto:sales.uae@almauna.com' class='text-[20px] text-[#B32482] underline'>
                   sales.uae@almauna.com
                 </a>
               </div>
 
               <!-- Opening Hours -->
-              <div class="md:mt-[16px] mt-[32px]">
-                <h3 class="text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]">OPENING HOURS</h3>
-                <p class="text-[20px]">Mon – Fri: 8:00 AM – 5:00 PM</p>
+              <div class='md:mt-[16px] mt-[32px]'>
+                <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>OPENING HOURS</h3>
+                <p class='text-[20px]'>Mon – Fri: 8:00 AM – 5:00 PM</p>
               </div>
             </div>
 
-            <div class="md:mt-[60px] md:block hidden md:mr-[70px]">
+            <div class='md:mt-[60px] md:block hidden md:mr-[70px]'>
               <a
-                href="https://maps.google.com/?q=The+Binary+by+Omniyat,+Business+Bay,+Dubai,+UAE"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold"
+                href='https://maps.google.com/?q=The+Binary+by+Omniyat,+Business+Bay,+Dubai,+UAE'
+                target='_blank'
+                rel='noopener noreferrer'
+                class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold'
               >
                 Get Directions
               </a>
@@ -367,16 +425,16 @@ const countriesData = [
       </div>
     </section>
 
-    <section class="pt-[96px] pb-[170px] bg-gradient-secondary">
-      <div class="max-w-5xl mx-auto px-6">
-        <h1 class="text-[32px] font-bold text-gradient text-center">Your products, delivered with care</h1>
-        <p class="text-[20px] text-center mt-[8px]">
+    <section class='pt-[64px] pb-[120px] bg-gradient-secondary'>
+      <div class='max-w-5xl mx-auto px-6'>
+        <h1 class='text-[32px] font-bold text-gradient text-center'>Your products, delivered with care</h1>
+        <p class='text-[20px] text-center mt-[8px]'>
           Get a competitive quote and discover how Al Mauna can streamline your sourcing and distribution.
         </p>
-        <div class="flex justify-center items-center mt-[48px]">
+        <div class='flex justify-center items-center mt-[48px]'>
           <a
-            href="/get-a-quote"
-            class="bg-gradient-primary py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px]"
+            href='/get-a-quote'
+            class='bg-gradient-primary py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px]'
             >Get a Quote</a
           >
         </div>

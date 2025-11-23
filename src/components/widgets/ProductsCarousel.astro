@@ -1,5 +1,6 @@
 ---
-import Carousel from './Carousel.astro';
+import 'swiper/css';
+import 'swiper/css/pagination';
 import { products } from '~/data/productsData';
 
 const featuredProducts = products
@@ -16,228 +17,121 @@ const featuredProducts = products
   }));
 ---
 
-<div class="max-w-5xl mx-auto px-6" data-products-carousel>
-  <Carousel
-    slides={featuredProducts}
-    autoPlayDelay={3000}
-    showControls={false}
-    showDots={false}
-    showSwipe={true}
-    data-carousel-instance
-  >
-    <Fragment slot="slides">
+<div class='max-w-5xl mx-auto md:px-0 px-6' id='productsCarouselRoot'>
+  <div class='swiper'>
+    <div class='swiper-wrapper'>
       {
         featuredProducts.map((product, index) => (
-          <div
-            class="carousel-slide w-full flex items-center md:flex-row flex-col gap-[64px] p-0 md:p-12 md:h-[450px] h-[953px]"
-            data-slide-index={index}
-          >
-            <div class="flex-shrink-0">
-              <img
-                src={product.image}
-                class="w-[299px] h-[400px] object-cover select-none"
-                alt={product.title}
-                loading="lazy"
-                draggable="false"
-              />
-            </div>
+          <div class='swiper-slide w-full md:h-[450px] h-[953px]' data-slide-index={index}>
+            <div class='flex items-center md:flex-row flex-col gap-[28px] md:gap-[64px]'>
+              <div class='flex-shrink-0'>
+                <img
+                  src={product.image}
+                  class='w-[299px] h-[400px] object-cover select-none'
+                  alt={product.title}
+                  loading='lazy'
+                  draggable='false'
+                />
+              </div>
 
-            <div class="flex-1">
-              <h2 class="text-[24px] font-bold text-gradient-tertiary">{product.title}</h2>
-              <p class="text-[18px] mt-[16px]">{product.subtitle}</p>
-              <p class="text-[20px] pt-[24px] ">{product.description}</p>
+              <div class='flex-1'>
+                <h2 class='text-[24px] font-bold text-gradient-tertiary'>{product.title}</h2>
+                <p class='text-[18px] mt-[16px]'>{product.subtitle}</p>
+                <p class='text-[20px] pt-[24px] line-clamp-3'>{product.description}</p>
 
-              <div class="flex md:flex-row flex-col items-center gap-[24px] md:gap-4 mt-[32px]">
-                <a
-                  href="/get-a-quote"
-                  class="bg-gradient-primary w-fit py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px] hover:shadow-lg transition-shadow"
-                >
-                  Get a Quote
-                </a>
-                <a
-                  href={`/brand/${product.brandId}/${product.productId}`}
-                  class="py-[16px] px-[32px] w-fit border-2 border-[#75317A] rounded-[32px] text-[16px] text-[#75317A] font-bold hover:bg-[#75317A] hover:text-white transition-colors"
-                >
-                  {product.viewBtn}
-                </a>
+                <div class='flex md:flex-row flex-col items-center gap-[24px] md:gap-4 mt-[32px]'>
+                  <a
+                    href='/get-a-quote'
+                    class='bg-gradient-primary w-fit py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px] hover:shadow-lg transition-shadow'
+                  >
+                    Get a Quote
+                  </a>
+                  <a
+                    href={`/brand/${product.brandId}/${product.productId}`}
+                    class='py-[16px] px-[32px] w-fit border-2 border-[#75317A] rounded-[32px] text-[16px] text-[#75317A] font-bold hover:bg-[#75317A] hover:text-white transition-colors'
+                  >
+                    {product.viewBtn}
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         ))
       }
-    </Fragment>
-  </Carousel>
-
-  <div class="flex justify-center gap-3" data-dots-container>
-    {
-      featuredProducts.map((_, index) => (
-        <button
-          class="carousel-dot h-3 rounded-full border-2 border-gray-400 bg-opacity-[50%] bg-gray-300 w-3"
-          data-dot-index={index}
-          data-active={index === 0 ? 'true' : 'false'}
-          aria-label={`Go to slide ${index + 1}`}
-          type="button"
-        />
-      ))
-    }
+    </div>
+    <div class='siwper-wrapper mt-[80px] md:mt-0'>
+      <div class='swiper-pagination'></div>
+    </div>
   </div>
 </div>
 
-<script>
-  class ProductsCarouselController {
-    private currentSlide: number = 0;
-    private totalSlides: number = 0;
-    private autoPlayInterval: ReturnType<typeof setInterval> | null = null;
-    private pollInterval: ReturnType<typeof setInterval> | null = null;
-    private container: HTMLElement | null = null;
-    private slides: NodeListOf<HTMLElement> | null = null;
-    private dots: NodeListOf<HTMLElement> | null = null;
-    private lastVisibleIndex: number = -1;
-
-    constructor() {
-      this.init();
-    }
-
-    private init(): void {
-      this.container = document.querySelector('[data-products-carousel]');
-      if (!this.container) return;
-
-      this.slides = this.container.querySelectorAll('.carousel-slide');
-      this.dots = this.container.querySelectorAll('.carousel-dot');
-      this.totalSlides = this.slides?.length || 0;
-
-      if (this.totalSlides === 0) return;
-
-      this.setupDotListeners();
-      this.setupHoverListeners();
-      this.startPolling();
-    }
-
-    private setupDotListeners(): void {
-      this.dots?.forEach((dot, index) => {
-        dot.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.goToSlide(index);
-        });
-      });
-    }
-
-    private setupHoverListeners(): void {
-      this.container?.addEventListener('mouseenter', () => this.stopAutoPlay());
-      this.container?.addEventListener('mouseleave', () => this.startAutoPlay());
-    }
-
-    private startPolling(): void {
-      this.pollInterval = setInterval(() => {
-        this.checkVisibleSlide();
-      }, 100);
-    }
-
-    private stopPolling(): void {
-      if (this.pollInterval) {
-        clearInterval(this.pollInterval);
-        this.pollInterval = null;
-      }
-    }
-
-    private checkVisibleSlide(): void {
-      let visibleIndex = -1;
-
-      this.slides?.forEach((slide, index) => {
-        const isVisible =
-          slide.offsetParent !== null &&
-          (slide.style.display === 'flex' || slide.style.display === '' || getComputedStyle(slide).display === 'flex');
-
-        if (isVisible) {
-          visibleIndex = index;
-        }
-      });
-
-      if (visibleIndex !== -1 && visibleIndex !== this.lastVisibleIndex) {
-        this.lastVisibleIndex = visibleIndex;
-        this.currentSlide = visibleIndex;
-        this.updateDots(visibleIndex);
-      }
-    }
-
-    private updateDots(activeIndex: number): void {
-      this.dots?.forEach((dot, index) => {
-        const isActive = index === activeIndex;
-        dot.setAttribute('data-active', isActive ? 'true' : 'false');
-      });
-    }
-
-    private goToSlide(index: number): void {
-      this.currentSlide = index;
-      this.lastVisibleIndex = index;
-      this.updateDots(index);
-
-      // Hide all slides and show the selected one
-      this.slides?.forEach((slide, i) => {
-        slide.style.display = i === index ? 'flex' : 'none';
-      });
-
-      this.resetAutoPlay();
-    }
-
-    private nextSlide(): void {
-      const nextIndex = (this.currentSlide + 1) % this.totalSlides;
-      this.goToSlide(nextIndex);
-    }
-
-    private startAutoPlay(): void {
-      this.stopAutoPlay();
-      this.autoPlayInterval = setInterval(() => this.nextSlide(), 8000);
-    }
-
-    private stopAutoPlay(): void {
-      if (this.autoPlayInterval) {
-        clearInterval(this.autoPlayInterval);
-        this.autoPlayInterval = null;
-      }
-    }
-
-    private resetAutoPlay(): void {
-      this.stopAutoPlay();
-      this.startAutoPlay();
-    }
-
-    public destroy(): void {
-      this.stopAutoPlay();
-      this.stopPolling();
-    }
-  }
-
-  let controller: ProductsCarouselController | null = null;
-
-  function initCarousel() {
-    if (controller) {
-      controller.destroy();
-    }
-    controller = new ProductsCarouselController();
-  }
-
-  // Initialize carousel when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCarousel);
-  } else {
-    initCarousel();
-  }
-
-  // Reinitialize on Astro navigation
-  document.addEventListener('astro:after-swap', initCarousel);
-</script>
-
 <style>
-  :global(.carousel-slide) {
-    display: none;
+  :global(.products-carousel .swiper-pagination-bullet) {
+    background-color: #808080;
+    opacity: 0.5;
+    width: 12px;
+    height: 12px;
   }
 
-  :global(.carousel-dot[data-active='true']) {
-    @apply w-12 bg-[#808080BF] bg-opacity-[75%] transition-all duration-300;
-  }
-
-  :global(.carousel-dot[data-active='false']) {
-    @apply w-3  bg-[#808080BF] bg-opacity-[50%] transition-all duration-300;
+  :global(.products-carousel .swiper-pagination-bullet-active) {
+    background-color: #808080;
+    opacity: 0.75;
+    width: 48px;
+    border-radius: 6px;
   }
 </style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Autoplay, Pagination } from 'swiper/modules';
+
+  function initializeProductsCarousel() {
+    const root = document.getElementById('productsCarouselRoot');
+    if (!(root instanceof HTMLElement)) return;
+
+    root.classList.add('products-carousel');
+
+    const swiperElement = root.querySelector('.swiper');
+    if (!(swiperElement instanceof HTMLElement)) return;
+
+    new Swiper(swiperElement, {
+      modules: [Autoplay, Pagination],
+      autoplay: {
+        delay: 8000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: swiperElement.querySelector('.swiper-pagination') as HTMLElement,
+        clickable: true,
+        dynamicBullets: false,
+      },
+      loop: true,
+      observer: true,
+      observeParents: true,
+      touchRatio: 1,
+      touchAngle: 45,
+      keyboard: {
+        enabled: true,
+      },
+      on: {
+        slideChange() {
+          try {
+            if (this.pagination && typeof this.pagination.update === 'function') {
+              this.pagination.update();
+            }
+          } catch {
+            // swallow errors silently — pagination update is best-effort
+          }
+        },
+      },
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeProductsCarousel);
+  } else {
+    initializeProductsCarousel();
+  }
+
+  document.addEventListener('astro:page-load', initializeProductsCarousel);
+</script>

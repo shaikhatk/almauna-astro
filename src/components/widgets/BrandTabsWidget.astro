@@ -10,400 +10,402 @@ const { selectedBrandId = brands[0]?.id } = Astro.props;
 const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
 ---
 
-<div class="brand-tabs-widget" data-default-brand={selectedBrandId}>
-  <!-- BRAND TABS HEADER -->
-  <section class="bg-gradient-secondary pt-[32px]">
-    <div
-      class="tabs-scroll-container flex justify-start md:justify-center items-center max-w-5xl mx-auto px-4 overflow-x-auto md:overflow-x-visible scrollbar-hide"
-    >
-      {
-        brands.map((brand) => {
-          const isActive = brand.id === selectedBrandId;
-          return (
-            <button
-              class={`brand-tab-button py-[16px] px-[24px] border border-black border-opacity-[20%] rounded-t-[8px] transition-all duration-300 cursor-pointer flex-shrink-0
-              ${isActive ? 'bg-gradient-primary text-white' : 'bg-white text-[#1E1E1E] '}
-              `}
-              data-brand-id={brand.id}
-              data-brand-logo={brand.brandLogoImage}
-              data-brand-title={brand.brandTitle}
-              data-brand-description={brand.brandDescription}
-              data-collection-title={brand.collectionTitle}
-              data-catalog={brand.catalog}
-              data-products={JSON.stringify(brand.products)}
-              aria-selected={isActive}
-              role="tab"
-            >
-              <h2
-                class={`text-[14px] md:text-[16px] font-semibold whitespace-nowrap ${isActive ? 'text-white' : 'text-[#1E1E1E]'}`}
+<div class='brand-tabs-widget' data-default-brand={selectedBrandId}>
+  <!-- BRAND TABS + DETAILS WRAPPER -->
+  <div class='brand-tabs-area relative'>
+    <!-- Sticky tabs on mobile, static on md+ -->
+    <div class='sticky top-[77px] md:static z-50 bg-[#f3eaf2] pt-[40px] md:pt-10'>
+      <div
+        class='tabs-scroll-container flex justify-start md:justify-center items-center max-w-5xl mx-auto px-4 overflow-x-auto md:overflow-x-visible scrollbar-hide'
+      >
+        {
+          brands.map((brand) => {
+            const isActive = brand.id === selectedBrandId;
+            return (
+              <button
+                class={`brand-tab-button py-[16px] px-[24px] border border-black border-opacity-[20%] rounded-t-[8px] transition-all duration-300 cursor-pointer flex-shrink-0
+                ${isActive ? 'bg-gradient-primary text-white' : 'bg-white text-[#1E1E1E] '}
+                `}
+                data-brand-id={brand.id}
+                data-brand-logo={brand.brandLogoImage}
+                data-brand-title={brand.brandTitle}
+                data-brand-description={brand.brandDescription}
+                data-collection-title={brand.collectionTitle}
+                data-catalog={brand.catalog}
+                data-products={JSON.stringify(brand.products)}
+                aria-selected={isActive}
+                role='tab'
               >
-                {brand.name}
-              </h2>
-              <p
-                class={`text-[12px] md:text-[14px] pt-[4px] whitespace-nowrap ${isActive ? 'text-white text-opacity-[70%]' : 'text-[#1E1E1E] text-opacity-[50%]'}`}
-              >
-                {brand.description}
-              </p>
-            </button>
-          );
-        })
-      }
-    </div>
-  </section>
-
-  <!-- BRAND DETAILS -->
-  <section class="pt-[64px]">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex justify-center items-center">
-        <Image
-          id="widget-brand-logo"
-          src={selectedBrand.brandLogoImage}
-          alt={selectedBrand.brandTitle}
-          height="66"
-          width="200"
-          class="h-auto w-[206px] object-cover"
-        />
-      </div>
-
-      <div class="text-[16px] md:text-[20px] text-center mt-[24px] md:mt-[32px] mb-[96px]">
-        <span id="widget-brand-description">
-          <p>{selectedBrand.brandDescription}</p>
-        </span>
-      </div>
-    </div>
-
-    <!-- COLLECTION SECTION -->
-    <section class="py-[48px] md:py-[96px] bg-gradient-secondary">
-      <div class="max-w-7xl mx-auto px-4">
-        <h2 id="widget-collection-title" class="text-[24px] md:text-[32px] text-gradient font-bold text-center">
-          {selectedBrand.collectionTitle}
-        </h2>
-
-        <div
-          id="widget-products-container"
-          class="flex flex-col items-center md:grid md:grid-cols-4 gap-[24px] md:gap-[24px] mt-[48px]"
-        >
-          {
-            selectedBrand.products.map((product) => {
-              const productId = product.id
-                .toLowerCase()
-                .replace(/\s+/g, '-')
-                .replace(/[^\w-]/g, '');
-              return (
-                <a
-                  href={`/brand/${selectedBrand.id}/${productId}`}
-                  class="bg-white rounded-[8px] p-[24px] md:p-[24px] shadow-secondary h-[350px] w-[290px] hover:shadow-lg transition-shadow group"
+                <h2
+                  class={`text-[14px] md:text-[16px] font-semibold whitespace-nowrap ${isActive ? 'text-white' : 'text-[#1E1E1E]'}`}
                 >
-                  <div class="flex justify-center items-center">
-                    <Image
-                      src={product.image}
-                      alt={product.title}
-                      height="240"
-                      width="180"
-                      class="w-[180px] h-[240px] object-cover object-center group-hover:scale-105 transition-transform"
-                    />
-                  </div>
-                  <p class="text-[14px] md:text-[16px] mt-[16px] md:mt-[24px] text-wrap text-center group-hover:text-gradient transition-colors">
-                    {product.title}
-                  </p>
-                </a>
-              );
-            })
-          }
-        </div>
-
-        <div
-          class="flex md:flex-row flex-col justify-center items-center gap-[10px] mt-[32px] md:mt-[48px] flex-wrap px-4"
-        >
-          <a
-            id="widget-catalog-link"
-            href={selectedBrand.catalog}
-            target="_blank"
-            class="bg-white py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-secondary rounded-[32px] text-[#712F76] font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow whitespace-nowrap"
-          >
-            Download <span id="widget-catalog-brand-name">{selectedBrand.brandTitle}</span> Catalog
-          </a>
-
-          <a
-            href="https://store.almauna.com/"
-            target="_blank"
-            class="bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow whitespace-nowrap"
-          >
-            Shop Online
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHOLESALE / DISTRIBUTION -->
-    <section class="pt-[48px] md:pt-[96px] pb-[96px] md:pb-[170px]">
-      <div class="max-w-5xl mx-auto px-4">
-        <h1 class="text-[24px] md:text-[32px] font-bold text-gradient text-center">
-          Looking for wholesale or distribution?
-        </h1>
-        <p class="text-[16px] md:text-[20px] text-center mt-[8px]">
-          Partner with us to bring <span id="widget-wholesale-brand-name">{selectedBrand.brandTitle}</span> to your shelves.
-        </p>
-        <div class="flex justify-center items-center mt-[32px] md:mt-[48px]">
-          <a
-            href="/get-a-quote"
-            class="bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow"
-          >
-            Get a Quote
-          </a>
-        </div>
-      </div>
-    </section>
-  </section>
-
-  <script>
-    class BrandTabsWidget {
-      private widget: HTMLElement;
-      private tabButtons: NodeListOf<HTMLButtonElement>;
-      private defaultBrandId: string;
-      private tabsContainer: HTMLElement | null;
-
-      constructor(element: HTMLElement) {
-        this.widget = element;
-        this.tabButtons = element.querySelectorAll('.brand-tab-button');
-        this.defaultBrandId = element.getAttribute('data-default-brand') || '';
-        this.tabsContainer = element.querySelector('.tabs-scroll-container');
-
-        this.init();
-      }
-
-      private init(): void {
-        this.tabButtons.forEach((button) => {
-          button.addEventListener('click', (e) => this.handleTabClick(e));
-        });
-
-        // Handle browser back/forward buttons
-        window.addEventListener('popstate', () => {
-          const url = new URL(window.location.href);
-          const brandId = url.searchParams.get('brand');
-          if (brandId) {
-            this.setActiveBrand(brandId);
-            this.scrollActiveTabIntoView();
-          }
-        });
-
-        // Check for brand parameter in URL on page load
-        const url = new URL(window.location.href);
-        const brandIdFromUrl = url.searchParams.get('brand');
-
-        if (brandIdFromUrl) {
-          // Set active brand from URL parameter
-          this.setActiveBrand(brandIdFromUrl);
-          // Scroll into view after a small delay to ensure DOM is ready
-          setTimeout(() => this.scrollActiveTabIntoView(), 100);
-        } else {
-          // Scroll default active tab into view
-          this.scrollActiveTabIntoView();
-        }
-      }
-
-      private handleTabClick(e: Event): void {
-        const clickedButton = e.currentTarget as HTMLButtonElement;
-        const brandId = clickedButton.getAttribute('data-brand-id');
-
-        if (!brandId) return;
-
-        // Update URL
-        const url = new URL(window.location.href);
-        url.searchParams.set('brand', brandId);
-        window.history.pushState({}, '', url);
-
-        // Update active brand
-        this.setActiveBrand(brandId);
-
-        // Scroll active tab into view
-        this.scrollActiveTabIntoView();
-
-        // Dispatch custom event
-        this.widget.dispatchEvent(
-          new CustomEvent('brand-changed', {
-            detail: { brandId },
-            bubbles: true,
+                  {brand.name}
+                </h2>
+                <p
+                  class={`text-[12px] md:text-[14px] pt-[4px] whitespace-nowrap ${isActive ? 'text-white text-opacity-[70%]' : 'text-[#1E1E1E] text-opacity-[50%]'}`}
+                >
+                  {brand.description}
+                </p>
+              </button>
+            );
           })
-        );
-      }
-
-      private scrollActiveTabIntoView(): void {
-        const activeButton = this.widget.querySelector('[aria-selected="true"]') as HTMLButtonElement;
-
-        if (activeButton && this.tabsContainer) {
-          // Use requestAnimationFrame to ensure DOM is ready
-          requestAnimationFrame(() => {
-            activeButton.scrollIntoView({
-              behavior: 'smooth',
-              block: 'nearest',
-              inline: 'center',
-            });
-          });
         }
-      }
+      </div>
+    </div>
 
-      private setActiveBrand(brandId: string): void {
-        console.log('Setting active brand to:', brandId); // ADD THIS LINE
+    <!-- BRAND DETAILS -->
+    <section class='pt-[64px]'>
+      <div class='max-w-6xl mx-auto px-4'>
+        <div class='flex justify-center items-center'>
+          <Image
+            id='widget-brand-logo'
+            src={selectedBrand.brandLogoImage}
+            alt={selectedBrand.brandTitle}
+            height='66'
+            width='200'
+            class='h-auto w-[206px] object-cover'
+          />
+        </div>
 
-        this.tabButtons.forEach((button) => {
-          const isActive = button.getAttribute('data-brand-id') === brandId;
-          const heading = button.querySelector('h2');
-          const description = button.querySelector('p');
+        <div class='text-[16px] md:text-[20px] text-center mt-[24px] md:mt-[32px] mb-[64px]'>
+          <span id='widget-brand-description'>
+            <p>{selectedBrand.brandDescription}</p>
+          </span>
+        </div>
+      </div>
 
-          if (isActive) {
-            button.setAttribute('aria-selected', 'true');
-            button.classList.remove('bg-white', 'text-[#1E1E1E]');
-            button.classList.add('bg-gradient-primary', 'text-white');
+      <!-- COLLECTION SECTION -->
+      <section class='py-[48px] md:py-[64px] bg-gradient-secondary'>
+        <div class='max-w-7xl mx-auto px-4'>
+          <h2 id='widget-collection-title' class='text-[24px] md:text-[32px] text-gradient font-bold text-center'>
+            {selectedBrand.collectionTitle}
+          </h2>
 
-            if (heading) {
-              heading.classList.remove('text-[#1E1E1E]');
-              heading.classList.add('text-white');
-            }
-
-            if (description) {
-              description.classList.remove('text-[#1E1E1E]', 'text-opacity-[50%]');
-              description.classList.add('text-white', 'text-opacity-[70%]');
-            }
-
-            // Update content
-            this.updateBrandContent(button);
-          } else {
-            button.setAttribute('aria-selected', 'false');
-            button.classList.remove('bg-gradient-primary', 'text-white');
-            button.classList.add('bg-white', 'text-[#1E1E1E]');
-
-            if (heading) {
-              heading.classList.remove('text-white');
-              heading.classList.add('text-[#1E1E1E]');
-            }
-
-            if (description) {
-              description.classList.remove('text-white', 'text-opacity-[70%]');
-              description.classList.add('text-[#1E1E1E]', 'text-opacity-[50%]');
-            }
-          }
-        });
-      }
-
-      private updateBrandContent(activeButton: HTMLButtonElement): void {
-        const brandLogo = document.getElementById('widget-brand-logo') as HTMLImageElement;
-        const brandTitle = document.getElementById('widget-brand-title');
-        const brandDescription = document.getElementById('widget-brand-description');
-        const collectionTitle = document.getElementById('widget-collection-title');
-        const catalogBrandName = document.getElementById('widget-catalog-brand-name');
-        const wholesaleBrandName = document.getElementById('widget-wholesale-brand-name');
-        const catalogLink = document.getElementById('widget-catalog-link') as HTMLAnchorElement;
-        const productsContainer = document.getElementById('widget-products-container');
-
-        const logo = activeButton.getAttribute('data-brand-logo');
-        const title = activeButton.getAttribute('data-brand-title');
-        const description = activeButton.getAttribute('data-brand-description');
-        const collection = activeButton.getAttribute('data-collection-title');
-        const catalog = activeButton.getAttribute('data-catalog');
-        const productsJson = activeButton.getAttribute('data-products');
-
-        console.log('Updating brand content:', {
-          title,
-          collection,
-          catalog,
-          productsCount: productsJson ? JSON.parse(productsJson).length : 0,
-        });
-
-        // Update brand details
-        if (brandLogo && logo) {
-          brandLogo.src = logo;
-          brandLogo.alt = title || 'Brand Logo';
-        }
-
-        if (brandTitle) brandTitle.textContent = title || '';
-
-        if (collectionTitle) collectionTitle.textContent = collection || '';
-        if (catalogBrandName) catalogBrandName.textContent = title || '';
-        if (wholesaleBrandName) wholesaleBrandName.textContent = title || '';
-
-        // Update catalog link
-        if (catalogLink && catalog) {
-          catalogLink.href = catalog;
-          console.log('Updated catalog link to:', catalog);
-        }
-
-        // Update brand description
-        if (brandDescription && description) {
-          try {
-            const descriptionArray = JSON.parse(description);
-            brandDescription.innerHTML = descriptionArray.map((para: string) => `<p>${para}</p>`).join('');
-          } catch {
-            brandDescription.innerHTML = `<p>${description}</p>`;
-          }
-        }
-
-        // Update products with fade animation
-        if (productsContainer && productsJson) {
-          try {
-            interface Product {
-              id: string;
-              title: string;
-              image: string;
-              brand: {
-                id: string;
-              };
-            }
-
-            const products: Product[] = JSON.parse(productsJson);
-            console.log('Products on tab change:', products);
-
-            // Fade out
-            productsContainer.style.opacity = '0';
-            productsContainer.style.transition = 'opacity 0.3s ease-in-out';
-
-            productsContainer.innerHTML = products
-              .map((product: Product) => {
+          <div
+            id='widget-products-container'
+            class='flex flex-col items-center sm:grid-cols-3 md:grid md:grid-cols-4 gap-[24px] md:gap-[24px] mt-[48px]'
+          >
+            {
+              selectedBrand.products.map((product) => {
                 const productId = product.id
                   .toLowerCase()
                   .replace(/\s+/g, '-')
                   .replace(/[^\w-]/g, '');
-                return `
+                return (
+                  <a
+                    href={`/brand/${selectedBrand.id}/${productId}`}
+                    class='bg-white rounded-[8px] p-[24px] md:p-[24px] shadow-secondary h-[350px] w-[290px] hover:shadow-lg transition-shadow group'
+                  >
+                    <div class='flex justify-center items-center gap-[16px]'>
+                      <Image
+                        src={product.image}
+                        alt={product.title}
+                        height='240'
+                        width='180'
+                        class='w-[180px] h-[240px] object-cover object-center group-hover:scale-105 transition-transform'
+                      />
+                    </div>
+                    <p class='text-[14px] md:text-[16px] mt-[16px] md:mt-[24px] text-wrap text-center group-hover:text-gradient transition-colors'>
+                      {product.title}
+                    </p>
+                  </a>
+                );
+              })
+            }
+          </div>
+
+          <div
+            class='flex md:flex-row flex-col justify-center items-center gap-[10px] mt-[32px] md:mt-[48px] flex-wrap px-4'
+          >
+            <a
+              id='widget-catalog-link'
+              href={selectedBrand.catalog}
+              target='_blank'
+              class='bg-white py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-secondary rounded-[32px] text-[#712F76] font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow whitespace-nowrap'
+            >
+              Download <span id='widget-catalog-brand-name'>{selectedBrand.brandTitle}</span> Catalog
+            </a>
+
+            <a
+              href='https://store.almauna.com/'
+              target='_blank'
+              class='bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow whitespace-nowrap'
+            >
+              Shop Online
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHOLESALE / DISTRIBUTION -->
+      <section class='pt-[64px] pb-[120px]'>
+        <div class='max-w-5xl mx-auto px-4'>
+          <h1 class='text-[24px] md:text-[32px] font-bold text-gradient text-center'>
+            Looking for wholesale or distribution?
+          </h1>
+          <p class='text-[16px] md:text-[20px] text-center mt-[8px]'>
+            Partner with us to bring <span id='widget-wholesale-brand-name'>{selectedBrand.brandTitle}</span> to your shelves.
+          </p>
+          <div class='flex justify-center items-center mt-[32px] md:mt-[48px]'>
+            <a
+              href='/get-a-quote'
+              class='bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow'
+            >
+              Get a Quote
+            </a>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <script>
+      class BrandTabsWidget {
+        private widget: HTMLElement;
+        private tabButtons: NodeListOf<HTMLButtonElement>;
+        private defaultBrandId: string;
+        private tabsContainer: HTMLElement | null;
+
+        constructor(element: HTMLElement) {
+          this.widget = element;
+          this.tabButtons = element.querySelectorAll('.brand-tab-button');
+          this.defaultBrandId = element.getAttribute('data-default-brand') || '';
+          this.tabsContainer = element.querySelector('.tabs-scroll-container');
+
+          this.init();
+        }
+
+        private init(): void {
+          this.tabButtons.forEach((button) => {
+            button.addEventListener('click', (e) => this.handleTabClick(e));
+          });
+
+          // Handle browser back/forward buttons
+          window.addEventListener('popstate', () => {
+            const url = new URL(window.location.href);
+            const brandId = url.searchParams.get('brand');
+            if (brandId) {
+              this.setActiveBrand(brandId);
+              this.scrollActiveTabIntoView();
+            }
+          });
+
+          // Check for brand parameter in URL on page load
+          const url = new URL(window.location.href);
+          const brandIdFromUrl = url.searchParams.get('brand');
+
+          if (brandIdFromUrl) {
+            // Set active brand from URL parameter
+            this.setActiveBrand(brandIdFromUrl);
+            // Scroll into view after a small delay to ensure DOM is ready
+            setTimeout(() => this.scrollActiveTabIntoView(), 100);
+          } else {
+            // Scroll default active tab into view
+            this.scrollActiveTabIntoView();
+          }
+        }
+
+        private handleTabClick(e: Event): void {
+          const clickedButton = e.currentTarget as HTMLButtonElement;
+          const brandId = clickedButton.getAttribute('data-brand-id');
+
+          if (!brandId) return;
+
+          // Update URL
+          const url = new URL(window.location.href);
+          url.searchParams.set('brand', brandId);
+          window.history.pushState({}, '', url);
+
+          // Update active brand
+          this.setActiveBrand(brandId);
+
+          // Scroll active tab into view
+          this.scrollActiveTabIntoView();
+
+          // Dispatch custom event
+          this.widget.dispatchEvent(
+            new CustomEvent('brand-changed', {
+              detail: { brandId },
+              bubbles: true,
+            })
+          );
+        }
+
+        private scrollActiveTabIntoView(): void {
+          const activeButton = this.widget.querySelector('[aria-selected="true"]') as HTMLButtonElement;
+
+          if (activeButton && this.tabsContainer) {
+            // Use requestAnimationFrame to ensure DOM is ready
+            requestAnimationFrame(() => {
+              activeButton.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center',
+              });
+            });
+          }
+        }
+
+        private setActiveBrand(brandId: string): void {
+          console.log('Setting active brand to:', brandId); // ADD THIS LINE
+
+          this.tabButtons.forEach((button) => {
+            const isActive = button.getAttribute('data-brand-id') === brandId;
+            const heading = button.querySelector('h2');
+            const description = button.querySelector('p');
+
+            if (isActive) {
+              button.setAttribute('aria-selected', 'true');
+              button.classList.remove('bg-white', 'text-[#1E1E1E]');
+              button.classList.add('bg-gradient-primary', 'text-white');
+
+              if (heading) {
+                heading.classList.remove('text-[#1E1E1E]');
+                heading.classList.add('text-white');
+              }
+
+              if (description) {
+                description.classList.remove('text-[#1E1E1E]', 'text-opacity-[50%]');
+                description.classList.add('text-white', 'text-opacity-[70%]');
+              }
+
+              // Update content
+              this.updateBrandContent(button);
+            } else {
+              button.setAttribute('aria-selected', 'false');
+              button.classList.remove('bg-gradient-primary', 'text-white');
+              button.classList.add('bg-white', 'text-[#1E1E1E]');
+
+              if (heading) {
+                heading.classList.remove('text-white');
+                heading.classList.add('text-[#1E1E1E]');
+              }
+
+              if (description) {
+                description.classList.remove('text-white', 'text-opacity-[70%]');
+                description.classList.add('text-[#1E1E1E]', 'text-opacity-[50%]');
+              }
+            }
+          });
+        }
+
+        private updateBrandContent(activeButton: HTMLButtonElement): void {
+          const brandLogo = document.getElementById('widget-brand-logo') as HTMLImageElement;
+          const brandTitle = document.getElementById('widget-brand-title');
+          const brandDescription = document.getElementById('widget-brand-description');
+          const collectionTitle = document.getElementById('widget-collection-title');
+          const catalogBrandName = document.getElementById('widget-catalog-brand-name');
+          const wholesaleBrandName = document.getElementById('widget-wholesale-brand-name');
+          const catalogLink = document.getElementById('widget-catalog-link') as HTMLAnchorElement;
+          const productsContainer = document.getElementById('widget-products-container');
+
+          const logo = activeButton.getAttribute('data-brand-logo');
+          const title = activeButton.getAttribute('data-brand-title');
+          const description = activeButton.getAttribute('data-brand-description');
+          const collection = activeButton.getAttribute('data-collection-title');
+          const catalog = activeButton.getAttribute('data-catalog');
+          const productsJson = activeButton.getAttribute('data-products');
+
+          console.log('Updating brand content:', {
+            title,
+            collection,
+            catalog,
+            productsCount: productsJson ? JSON.parse(productsJson).length : 0,
+          });
+
+          // Update brand details
+          if (brandLogo && logo) {
+            brandLogo.src = logo;
+            brandLogo.alt = title || 'Brand Logo';
+          }
+
+          if (brandTitle) brandTitle.textContent = title || '';
+
+          if (collectionTitle) collectionTitle.textContent = collection || '';
+          if (catalogBrandName) catalogBrandName.textContent = title || '';
+          if (wholesaleBrandName) wholesaleBrandName.textContent = title || '';
+
+          // Update catalog link
+          if (catalogLink && catalog) {
+            catalogLink.href = catalog;
+            console.log('Updated catalog link to:', catalog);
+          }
+
+          // Update brand description
+          if (brandDescription && description) {
+            try {
+              const descriptionArray = JSON.parse(description);
+              brandDescription.innerHTML = descriptionArray.map((para: string) => `<p>${para}</p>`).join('');
+            } catch {
+              brandDescription.innerHTML = `<p>${description}</p>`;
+            }
+          }
+
+          // Update products with fade animation
+          if (productsContainer && productsJson) {
+            try {
+              interface Product {
+                id: string;
+                title: string;
+                image: string;
+                brand: {
+                  id: string;
+                };
+              }
+
+              const products: Product[] = JSON.parse(productsJson);
+              console.log('Products on tab change:', products);
+
+              // Fade out
+              productsContainer.style.opacity = '0';
+              productsContainer.style.transition = 'opacity 0.3s ease-in-out';
+
+              productsContainer.innerHTML = products
+                .map((product: Product) => {
+                  const productId = product.id
+                    .toLowerCase()
+                    .replace(/\s+/g, '-')
+                    .replace(/[^\w-]/g, '');
+                  return `
               <a href="/brand/${product.brand.id}/${productId}" class="bg-white rounded-[8px] p-[24px] md:p-[24px] shadow-secondary h-[350px] w-[290px] hover:shadow-lg transition-shadow group cursor-pointer">
                 <div class="flex justify-center items-center">
                   <img
                     src="${product.image}"
                     alt="${product.title}"
                     class="w-[180px] h-[240px] object-cover object-center group-hover:scale-105 transition-transform"
-                    loading="lazy"
                   />
                 </div>
                 <p class="text-[14px] md:text-[16px] mt-[16px] md:mt-[24px] text-wrap text-center group-hover:text-gradient transition-colors">${product.title}</p>
               </a>
             `;
-              })
-              .join('');
+                })
+                .join('');
 
-            // Fade in
-            productsContainer.style.opacity = '1';
-          } catch {
-            console.error('Error parsing products');
+              // Fade in
+              productsContainer.style.opacity = '1';
+            } catch {
+              console.error('Error parsing products');
+            }
           }
         }
       }
-    }
 
-    // Initialize the widget when the DOM is loaded
-    function initializeBrandWidget() {
-      const widget = document.querySelector('.brand-tabs-widget') as HTMLElement;
-      if (widget) {
-        new BrandTabsWidget(widget);
+      // Initialize the widget when the DOM is loaded
+      function initializeBrandWidget() {
+        const widget = document.querySelector('.brand-tabs-widget') as HTMLElement;
+        if (widget) {
+          new BrandTabsWidget(widget);
+        }
       }
-    }
 
-    // Initialize on initial page load
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initializeBrandWidget);
-    } else {
-      initializeBrandWidget();
-    }
+      // Initialize on initial page load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeBrandWidget);
+      } else {
+        initializeBrandWidget();
+      }
 
-    // Re-initialize on Astro page transitions
-    document.addEventListener('astro:page-load', initializeBrandWidget);
-  </script>
+      // Re-initialize on Astro page transitions
+      document.addEventListener('astro:page-load', initializeBrandWidget);
+    </script>
+  </div>
 </div>

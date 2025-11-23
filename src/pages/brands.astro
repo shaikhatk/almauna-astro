@@ -5,10 +5,28 @@ import { brands } from '~/data/brandsData';
 
 // Default selected brand = first brand
 const selectedBrand = Astro.url.searchParams.get('brand') || brands[0].id;
+
+const metadata = {
+  title: 'Brands',
+  description: 'Browse our curated collection of premium brands sourced and distributed by Al Mauna Trading.',
+  image: '/src/assets/images/home/home-1.png',
+};
+
+const baseUrl = process.env.SITE_URL ?? 'https://example.com';
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  url: `${baseUrl}/brands`,
+  name: metadata.title,
+  description: metadata.description,
+};
 ---
 
-<Layout metadata={{ title: 'Brands' }}>
+<Layout metadata={metadata}>
   <main>
-    <BrandTabsWidget selectedBrandId={selectedBrand} />
+    <script type='application/ld+json' set:html={JSON.stringify(structuredData)} />
+    <div class='intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+      <BrandTabsWidget selectedBrandId={selectedBrand} />
+    </div>
   </main>
 </Layout>

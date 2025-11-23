@@ -1,24 +1,26 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: Almauna
+  site: 'https://almauna.com'
   base: '/'
   trailingSlash: false
 
-  googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
+  googleSiteVerificationId: xxxx-xxxxxxxx_xxxx
 
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: Almauna
+    template: '%s — Almauna'
+  description: >
+    At Al Mauna Trading, we go beyond distribution.
+    We are passionate about enriching the culinary experiences in Qatar and the UAE. Since 2016, our commitment to quality, value, and service has been empowered by our strategic hubs, including our dynamic Dubai Branch for efficient distribution.
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: Alamuna
     images:
-      - url: '~/assets/images/default.png'
+      - url: '~/assets/images/logo.png'
         width: 1200
         height: 628
     type: website

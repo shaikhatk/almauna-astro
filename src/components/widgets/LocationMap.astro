@@ -26,8 +26,8 @@ const {
 } = Astro.props;
 ---
 
-<div id={mapId} class="w-[380px] h-[300px] md:h-[490px] rounded-lg overflow-hidden shadow-lg">
-  <div id={`${mapId}-inner`} class="w-full h-full"></div>
+<div id={mapId} class='lg:w-[380px] w-full h-[300px] md:h-[490px] rounded-lg overflow-hidden shadow-lg'>
+  <div id={`${mapId}-inner`} class='w-full h-full'></div>
 </div>
 
 <script define:vars={{ apiKey, mapId, officeLocation, warehouseLocation }}>

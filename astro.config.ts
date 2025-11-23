@@ -24,6 +24,9 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 export default defineConfig({
   output: 'static',
 
+  // Required by sitemap to generate absolute URLs. Set SITE_URL in CI or replace the default.
+  site: process.env.SITE_URL ?? 'https://example.com',
+
   integrations: [
     tailwind({
       applyBaseStyles: false,
