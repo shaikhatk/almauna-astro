@@ -170,7 +170,7 @@ const aboutData = [
           </p>
         </div>
 
-        <div class='relative pl-24'>
+        <div class='relative md:block hidden pl-24'>
           {
             timelineData.map((item, index) => (
               <div class='relative intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
@@ -207,6 +207,43 @@ const aboutData = [
                   <img
                     src={item.image}
                     class='w-[360px] h-[240px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+                    alt='timeline-image'
+                  />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class='md:hidden'>
+          {
+            timelineData.map((item, index) => (
+              <div class=' motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                {/* Year Badge */}
+                <div class='bg-gradient-primary text-white text-[18px] w-fit font-bold px-[12px] py-[2px] rounded-[32px] flex justify-center items-center gap-y-[48px] mt-[48px]'>
+                  {item.year}
+                </div>
+                {/* Content + Image */}
+                <div class='grid md:grid-cols-2 gap-8 mt-[28px]'>
+                  <div>
+                    <h3 class='text-[24px] font-bold text-gradient intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                      {item.title}
+                    </h3>
+                    <p class='text-[20px] mt-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                      {item.description}
+                    </p>
+                  </div>
+                  {item.button && (
+                    <a
+                      href='/dubai-branch'
+                      class='bg-white text-[#712F76] mt-[28px] w-fit shadow-secondary text-[16px] px-6 py-3 font-bold rounded-[32px]'
+                    >
+                      {item.button.text}
+                    </a>
+                  )}
+                  <img
+                    src={item.image}
+                    class='w-full md:w-[360px] h-[240px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
                     alt='timeline-image'
                   />
                 </div>
