@@ -1,3 +1,4 @@
+
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Image from 'astro/components/Image.astro';
@@ -249,7 +250,7 @@ const countriesData = [
 
         <div class='grid grid-cols-1 md:grid-cols-5 gap-[48px] md:gap-[28px] mt-[64px]'>
           {
-            dubaiData.map((item, index) => (
+            dubaiData.map((item) => (
               <div class='intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
                 <div class='flex relative items-center justify-center'>
                   <div class='bg-gradient-tertiary rotate-[45deg] h-[80px] w-[80px] rounded-[8px]' />
@@ -287,8 +288,8 @@ const countriesData = [
         </div>
         <div class='md:grid hidden md:grid-cols-3 md:gap-[16px]'>
           {
-            countriesData.map((item, index) => (
-              <div class='md:bg-white md:rounded-[8px] md:p-[24px] md:flex items-center justify-around '>
+            countriesData.map((item) => (
+            <div class='md:bg-white md:rounded-[8px] md:p-[24px] md:flex items-center justify-around '>
                 <Image
                   src={item.img}
                   alt={item.title}
