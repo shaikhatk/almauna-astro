@@ -12,19 +12,20 @@ const featuredProducts = products
     title: product.title,
     subtitle: product.subtitle,
     description: product.description,
+    origin: product.orgin,
     brandId: product.brand.id,
     viewBtn: `View More From ${product.brand.id.charAt(0).toUpperCase() + product.brand.id.slice(1)}`,
   }));
 ---
 
-<div class='max-w-5xl mx-auto md:px-0 px-6' id='productsCarouselRoot'>
+<div class='max-w-5xl mx-auto md:px-0' id='productsCarouselRoot'>
   <div class='swiper'>
     <div class='swiper-wrapper'>
       {
         featuredProducts.map((product, index) => (
           <div class='swiper-slide w-full md:h-[450px] h-[953px]' data-slide-index={index}>
             <div class='flex items-center md:flex-row flex-col gap-[28px] md:gap-[64px]'>
-              <div class='flex-shrink-0'>
+              <div class='flex-shrink-0 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
                 <img
                   src={product.image}
                   class='w-[299px] h-[400px] object-cover select-none'
@@ -35,13 +36,28 @@ const featuredProducts = products
               </div>
 
               <div class='flex-1'>
-                <h2 class='text-[24px] font-bold text-gradient-tertiary'>{product.title}</h2>
-                <p class='text-[18px] mt-[16px]'>{product.subtitle}</p>
-                <p class='text-[20px] pt-[24px] line-clamp-3'>{product.description}</p>
+                <h2 class='text-[24px] font-bold text-gradient-tertiary intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                  {product.title}
+                </h2>
+                <div class='flex gap-[24px]'>
+                  <p class='text-[18px] mt-[16px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                    {product.brandId}
+                  </p>
+                  <p class='text-[18px] mt-[16px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                    {product.origin}
+                  </p>
+                </div>
+                <p class='text-[18px] mt-[16px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                  {product.subtitle}
+                </p>
+                <p class='text-[20px] pt-[24px] line-clamp-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                  {product.description}
+                </p>
 
-                <div class='flex md:flex-row flex-col items-center gap-[24px] md:gap-4 mt-[32px]'>
+                <div class='flex md:flex-row flex-col items-center gap-[24px] md:gap-4 mt-[32px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
                   <a
-                    href='/get-a-quote'
+                    href='https://wa.me/97433560938'
+                    target='_blank'
                     class='bg-gradient-primary w-fit py-[16px] px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[16px] hover:shadow-lg transition-shadow'
                   >
                     Get a Quote
@@ -94,6 +110,12 @@ const featuredProducts = products
     const swiperElement = root.querySelector('.swiper');
     if (!(swiperElement instanceof HTMLElement)) return;
 
+    // Destroy existing instance if it exists to prevent duplicates on View Transitions
+    // Using (true, false) to preserve any inline styles
+    if ((swiperElement as any).swiper) {
+      (swiperElement as any).swiper.destroy(true, false);
+    }
+
     new Swiper(swiperElement, {
       modules: [Autoplay, Pagination],
       autoplay: {
@@ -125,12 +147,6 @@ const featuredProducts = products
         },
       },
     });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeProductsCarousel);
-  } else {
-    initializeProductsCarousel();
   }
 
   document.addEventListener('astro:page-load', initializeProductsCarousel);

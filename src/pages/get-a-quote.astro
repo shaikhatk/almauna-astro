@@ -11,7 +11,8 @@ const baseUrl = process.env.SITE_URL ?? 'https://example.com';
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  url: `${baseUrl}/get-a-quote`,
+  url: `${baseUrl}href='https://wa.me/97433560938'
+target='_blank'`,
   name: metadata.title,
   description: metadata.description,
 };
@@ -20,7 +21,7 @@ const structuredData = {
 <Layout metadata={metadata}>
   <main>
     <script type='application/ld+json' set:html={JSON.stringify(structuredData)} />
-    <section class='bg-gradient-secondary pt-[64px] pb-[120px]'>
+    <section class='bg-gradient-secondary pt-[58px] pb-[120px]'>
       <div class='max-w-5xl mx-auto px-6'>
         <h2
           class='text-center text-[32px] text-gradient font-bold intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
@@ -56,7 +57,7 @@ const structuredData = {
 
           <input
             type='text'
-            placeholder='Phone number / WhatsApp'
+            placeholder='Phone number'
             class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
           />
 
@@ -66,17 +67,9 @@ const structuredData = {
             class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
           />
 
-          <select
-            class='w-full px-2 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] text-black text-opacity-50'
-          >
-            <option>Monthly Requirement</option>
-            <option>Weekly Requirement</option>
-            <option>Daily Requirement</option>
-          </select>
-
           <input
             type='text'
-            placeholder='Delivery Location'
+            placeholder='Products'
             class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
           />
 
@@ -89,7 +82,7 @@ const structuredData = {
           <div class='flex justify-center pt-[32px]'>
             <button
               type='submit'
-              class='px-8 py-3 rounded-[32px] focus:outline-none text-white font-bold text-[16px] bg-gradient-primary shadow-md hover:opacity-90'
+              class='px-8 py-3 rounded-[32px] focus:outline-none text-white font-bold text-[16px] bg-gradient-primary shadow-md hover:opacity-90 hover:scale-105 transition-transform duration-200 ease-in-out'
             >
               Send Message
             </button>

@@ -14,16 +14,16 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
   <!-- BRAND TABS + DETAILS WRAPPER -->
   <div class='brand-tabs-area relative'>
     <!-- Sticky tabs on mobile, static on md+ -->
-    <div class='sticky top-[77px] md:static z-50 bg-[#f3eaf2] pt-[40px] md:pt-10'>
+    <div class='sticky top-[76px] md:static z-50 bg-[#f3eaf2] pt-[40px] md:pt-10'>
       <div
-        class='tabs-scroll-container flex justify-start md:justify-center items-center max-w-5xl mx-auto px-4 overflow-x-auto md:overflow-x-visible scrollbar-hide'
+        class='tabs-scroll-container flex justify-start md:justify-center items-center max-w-6xl mx-auto px-4 overflow-x-auto md:overflow-x-visible scrollbar-hide'
       >
         {
           brands.map((brand) => {
             const isActive = brand.id === selectedBrandId;
             return (
               <button
-                class={`brand-tab-button py-[16px] px-[24px] border border-black border-opacity-[20%] rounded-t-[8px] transition-all duration-300 cursor-pointer flex-shrink-0
+                class={`brand-tab-button py-[16px] px-[38px] border border-black border-opacity-[20%] rounded-t-[8px] transition-all duration-300 cursor-pointer flex-shrink-0
                 ${isActive ? 'bg-gradient-primary text-white' : 'bg-white text-[#1E1E1E] '}
                 `}
                 data-brand-id={brand.id}
@@ -32,6 +32,7 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
                 data-brand-description={brand.brandDescription}
                 data-collection-title={brand.collectionTitle}
                 data-catalog={brand.catalog}
+                data-store-link={brand.storeLink}
                 data-products={JSON.stringify(brand.products)}
                 aria-selected={isActive}
                 role='tab'
@@ -54,7 +55,7 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
     </div>
 
     <!-- BRAND DETAILS -->
-    <section class='pt-[64px]'>
+    <section class='pt-[58px]'>
       <div class='max-w-6xl mx-auto px-4'>
         <div class='flex justify-center items-center'>
           <Image
@@ -75,7 +76,7 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
       </div>
 
       <!-- COLLECTION SECTION -->
-      <section class='py-[48px] md:py-[64px] bg-gradient-secondary'>
+      <section class='py-[48px] md:py-[58px] bg-gradient-secondary'>
         <div class='max-w-7xl mx-auto px-4'>
           <h2 id='widget-collection-title' class='text-[24px] md:text-[32px] text-gradient font-bold text-center'>
             {selectedBrand.collectionTitle}
@@ -83,7 +84,7 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
 
           <div
             id='widget-products-container'
-            class='flex flex-col items-center sm:grid-cols-3 md:grid md:grid-cols-4 gap-[24px] md:gap-[24px] mt-[48px]'
+            class='flex flex-col items-center justify-center md:flex-wrap md:flex-row gap-[24px] md:gap-[24px] mt-[48px]'
           >
             {
               selectedBrand.products.map((product) => {
@@ -121,15 +122,16 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
               id='widget-catalog-link'
               href={selectedBrand.catalog}
               target='_blank'
-              class='bg-white py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-secondary rounded-[32px] text-[#712F76] font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow whitespace-nowrap'
+              class='bg-white py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-secondary rounded-[32px] text-[#712F76] font-bold text-[14px] md:text-[16px] hover:shadow-lg whitespace-nowrap hover:scale-105 transition-transform duration-200 ease-in-out'
             >
               Download <span id='widget-catalog-brand-name'>{selectedBrand.brandTitle}</span> Catalog
             </a>
 
             <a
-              href='https://store.almauna.com/'
+              href={selectedBrand.storeLink}
+              id='widget-store-link'
               target='_blank'
-              class='bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow whitespace-nowrap'
+              class='bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg whitespace-nowrap hover:scale-105 transition-transform duration-200 ease-in-out'
             >
               Shop Online
             </a>
@@ -138,7 +140,7 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
       </section>
 
       <!-- WHOLESALE / DISTRIBUTION -->
-      <section class='pt-[64px] pb-[120px]'>
+      <section class='pt-[58px] pb-[120px]'>
         <div class='max-w-5xl mx-auto px-4'>
           <h1 class='text-[24px] md:text-[32px] font-bold text-gradient text-center'>
             Looking for wholesale or distribution?
@@ -148,8 +150,9 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
           </p>
           <div class='flex justify-center items-center mt-[32px] md:mt-[48px]'>
             <a
-              href='/get-a-quote'
-              class='bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg transition-shadow'
+              href='https://wa.me/97433560938'
+              target='_blank'
+              class='bg-gradient-primary py-[12px] md:py-[16px] px-[20px] md:px-[32px] shadow-primary rounded-[32px] text-white font-bold text-[14px] md:text-[16px] hover:shadow-lg hover:scale-105 transition-transform duration-200 ease-in-out'
             >
               Get a Quote
             </a>
@@ -296,6 +299,7 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
           const catalogBrandName = document.getElementById('widget-catalog-brand-name');
           const wholesaleBrandName = document.getElementById('widget-wholesale-brand-name');
           const catalogLink = document.getElementById('widget-catalog-link') as HTMLAnchorElement;
+          const storeLink = document.getElementById('widget-store-link') as HTMLAnchorElement;
           const productsContainer = document.getElementById('widget-products-container');
 
           const logo = activeButton.getAttribute('data-brand-logo');
@@ -303,12 +307,14 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
           const description = activeButton.getAttribute('data-brand-description');
           const collection = activeButton.getAttribute('data-collection-title');
           const catalog = activeButton.getAttribute('data-catalog');
+          const store = activeButton.getAttribute('data-store-link');
           const productsJson = activeButton.getAttribute('data-products');
 
           console.log('Updating brand content:', {
             title,
             collection,
             catalog,
+            store,
             productsCount: productsJson ? JSON.parse(productsJson).length : 0,
           });
 
@@ -328,6 +334,12 @@ const selectedBrand = brands.find((b) => b.id === selectedBrandId) || brands[0];
           if (catalogLink && catalog) {
             catalogLink.href = catalog;
             console.log('Updated catalog link to:', catalog);
+          }
+
+          // Add this: Update store link
+          if (storeLink && store) {
+            storeLink.href = store;
+            console.log('Updated store link to:', store);
           }
 
           // Update brand description

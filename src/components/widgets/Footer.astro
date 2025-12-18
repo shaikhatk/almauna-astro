@@ -7,7 +7,7 @@ const footerSections = [
       { label: 'About Us', href: '/about' },
       { label: 'Dubai Branch', href: '/dubai-branch' },
       { label: 'Contact Us', href: '/contact' },
-      { label: 'Careers', href: '/' },
+      { label: 'Shop Now', href: 'https://store.almauna.com/', target: '_blank' },
     ],
   },
   {
@@ -16,25 +16,24 @@ const footerSections = [
       { label: 'Import and Distribution', href: '/divisions#import' },
       { label: 'Wholesale Solutions', href: '/divisions#wholesale' },
       { label: 'Retail Distributions', href: '/divisions#retail' },
-      { label: 'Online Store', href: 'https://store.almauna.com/', target: '_blank', class: 'md:block hidden' },
+      { label: 'Direct-To-Consumer (D2C)', href: '/divisions#d2c' },
     ],
   },
   {
     title: 'OUR BRANDS',
     links: [
-      { label: 'Maharani', href: '/brands?brand=maharani' },
-      { label: 'Honig Ozbal', href: '/brands?brand=honig-ozbal' },
-      { label: 'Vitabella', href: '/brands?brand=nicoli-vitabella' },
-      { label: 'Tradekey', href: '/brands?brand=tradekey' },
-      { label: 'April', href: '/brands?brand=april' },
-      { label: 'Shraddha', href: '/brands?brand=shraddha' },
-      { label: 'Al mauna', href: '/brands?brand=al-mauna' },
+      { label: 'Maharani', href: '/brands?brand=Maharani' },
+      { label: 'Honig Ozbal', href: '/brands?brand=Honig-ozbal' },
+      { label: 'Vitabella', href: '/brands?brand=Nicoli-vitabella' },
+      { label: 'Tradekey', href: '/brands?brand=Tradekey' },
+      { label: 'April', href: '/brands?brand=April' },
+      { label: 'Shraddha', href: '/brands?brand=Shraddha' },
     ],
   },
   {
-    title: 'QATAR OFFICE',
+    title: 'HEAD OFFICE',
     details: {
-      address: 'C Ring Road, Doha',
+      address: 'C Ring Road, Doha, Qatar',
       phones: ['+974 4441 6966', '+974 3356 0938'],
       email: 'sales@almauna.com',
     },
@@ -42,7 +41,7 @@ const footerSections = [
   {
     title: 'UAE OFFICE',
     details: {
-      address: 'Business Bay, Dubai',
+      address: 'Business Bay, Dubai, UAE',
       phones: ['+971 5047 89777', '+971 4258 8070'],
       email: 'sales.uae@almauna.com',
     },
@@ -59,8 +58,15 @@ const footerSections = [
       backgroundPosition: 'center',
       borderRadius: '8px',
     }}
-    class='z-10 mt-[-200px] mb-[58px] max-w-6xl mx-auto relative p-[32px] md:py-[49.5px] md:px-[48px] grid grid-cols-1 md:grid-cols-2'
+    class='footer-newsletter z-10 mt-[-200px] mb-[58px] max-w-6xl mx-auto relative p-[32px] md:py-[49.5px] md:px-[48px] grid grid-cols-1 md:grid-cols-2'
   >
+    <style>
+      @media (min-width: 768px) {
+        .footer-newsletter {
+          background-image: url(/src/assets/images/footer-violet.svg) !important;
+        }
+      }
+    </style>
     <div>
       <h2 class='text-[24px] font-bold text-white'>Subscribe to our newsletter</h2>
       <p class='text-[16px] text-white pt-2'>Stay informed with our latest news and exclusive offers</p>
@@ -172,12 +178,12 @@ const footerSections = [
         </div>
       ))
     }
-    <div class='md:hidden block mt-[-70px]'>
+    <!-- <div class='md:hidden block mt-[-70px]'>
       <h3 class='font-bold text-[#FFFFFF] text-[16px] text-opacity-[50%] mb-4'>SHOP</h3>
       <p class='text-[16px] text-[#FFFFFF] hover:underline block'>Online Store</p>
-    </div>
+    </div> -->
   </div>
 
   <!-- Copyright -->
-  <div class='mt-[25px] text-center text-[12px] text-[#C695BE]'>Copyright © 2025 Al Mauna. All rights reserved.</div>
+  <div class='mt-[25px] text-center text-[12px] text-[#C695BE]'>Copyright © 2026 Al Mauna. All rights reserved.</div>
 </footer>

@@ -11,6 +11,7 @@ export default {
         'gradient-secondary': 'linear-gradient(89.17deg, rgba(179, 36, 130, 0.1) 0%, rgba(117, 49, 122, 0.1) 100%);',
         'gradient-tertiary':
           ' linear-gradient(224.08deg, rgba(215, 109, 222, 0.2) 21.62%, rgba(235, 123, 197, 0.2) 74.5%);',
+        'gradient-white': 'white',
       },
       colors: {
         primary: 'var(--aw-color-primary)',
@@ -20,9 +21,9 @@ export default {
         muted: 'var(--aw-color-text-muted)',
       },
       fontFamily: {
-        sans: ['"Rubik Variable"', ...defaultTheme.fontFamily.sans],
+        sans: ['Rubik', 'sans-serif', ...defaultTheme.fontFamily.sans],
         serif: ['var(--aw-font-serif, ui-serif)', ...defaultTheme.fontFamily.serif],
-        heading: ['"Rubik Variable"', ...defaultTheme.fontFamily.sans],
+        heading: ['Rubik', 'sans-serif', ...defaultTheme.fontFamily.sans],
       },
 
       animation: {

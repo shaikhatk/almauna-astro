@@ -1,0 +1,167 @@
+---
+const timelineData = [
+  {
+    year: '2016',
+    title: 'Our Core Operations in Qatar',
+    description: `Operating from our inception in 2016, Al Mauna Qatar stands as our foundational hub, specializing in comprehensive import, distribution, and wholesale services. Backed by a dedicated local team, optimized logistics, and robust partnerships, we consistently deliver timely and efficient supply solutions across diverse sectors throughout Qatar.`,
+    image: '/src/assets/images/timeline-1.png',
+    align: 'left',
+  },
+  {
+    year: '2025',
+    title: 'Expanding Our Horizon: Dubai Operations',
+    description: `In 2025, Al Mauna significantly expanded its regional footprint with the establishment of our dynamic Dubai branch in the United Arab Emirates. This strategic move enhances our reach, allowing us to more effectively serve and empower clients across the entire UAE. With a prime office in Business Bay and a strategically located warehouse, we are fully poised to scale our operations and extend unparalleled service across the wider GCC region.`,
+    image: '/src/assets/images/timeline-2.png',
+    align: 'right',
+    button: {
+      text: 'Meet the Dubai Branch',
+      link: '/dubai-branch',
+    },
+  },
+];
+---
+
+<section class='py-[58px]'>
+  <div class='max-w-6xl mx-auto xl:px-0 px-6'>
+    {/* Heading */}
+    <div class='text-center mb-16'>
+      <h2
+        class='font-bold text-gradient text-[32px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+      >
+        From Doha to Dubai: our strategic evolution
+      </h2>
+      <p
+        class='text-[20px] pt-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+      >
+        Al Mauna Trading is defined by foundational development and strategic expansions.
+      </p>
+    </div>
+
+    {/* Desktop Vertical Timeline - Split Content/Image */}
+    <div class='hidden lg:block relative mt-[58px]'>
+      {/* Central Vertical Line */}
+      <div
+        class='absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-[#C26AA4] to-transparent -translate-x-1/2 h-full'
+      >
+      </div>
+
+      <div class='relative flex flex-col gap-[58px]'>
+        {
+          timelineData.map((item, index) => {
+            const isEven = index % 2 === 0; // 0 (2016) -> Text Left, Image Right
+
+            return (
+              <div class='relative flex items-center w-full'>
+                {/* Year Badge - Centered */}
+                <div class='absolute left-1/2 -translate-x-1/2 z-20 '>
+                  <div class='bg-gradient-primary text-white font-bold py-[4px] px-[16px] rounded-full shadow-lg border-4 border-white text-[16px] tracking-wider'>
+                    {item.year}
+                  </div>
+                </div>
+
+                {/* Left Side */}
+                <div class='w-1/2 pr-20 flex justify-end intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                  {isEven ? (
+                    /* Text Content (Right Aligned) */
+                    <div class='text-right max-w-xl'>
+                      <h3 class='text-[26px] font-bold text-gradient mb-4'>{item.title}</h3>
+                      <p class=' text-[20px]'>{item.description}</p>
+                      {item.button && (
+                        <a
+                          href={item.button.link}
+                          class='inline-block bg-white text-[#712F76] border border-[#712F76]/20 shadow-sm py-2 px-6 rounded-full font-bold hover:bg-[#712F76] hover:text-white transition-colors text-sm'
+                        >
+                          {item.button.text}
+                        </a>
+                      )}
+                    </div>
+                  ) : (
+                    /* Image (Right Aligned in Left Col) */
+                    <div class='relative group intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                      <div class='absolute top-1/2 -right-20 w-20 h-1 -translate-y-1/2' /> {/* Connector */}
+                      <div class='overflow-hidden rounded-2xl shadow-secondary border-4 border-white xl:w-[450px] lg:w-[250px] md:w-[250px] sm:w-[150px] w-[150px] h-[300px] bg-white'>
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          class='w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right Side */}
+                <div class='w-1/2 pl-20 flex justify-start intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                  {!isEven ? (
+                    /* Text Content (Left Aligned) */
+                    <div class='text-left max-w-xl'>
+                      <h3 class='text-[26px] font-bold text-gradient mb-4'>{item.title}</h3>
+                      <p class='text-[20px] mb-6'>{item.description}</p>
+                      {item.button && (
+                        <a
+                          href={item.button.link}
+                          class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold hover:scale-105 transition-transform duration-200 ease-in-out'
+                        >
+                          {item.button.text}
+                        </a>
+                      )}
+                    </div>
+                  ) : (
+                    /* Image (Left Aligned in Right Col) */
+                    <div class='relative group intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                      <div class='absolute top-1/2 -left-20 w-20 h-1 -translate-y-1/2' /> {/* Connector */}
+                      <div class='overflow-hidden rounded-2xl shadow-secondary border-4 border-white xl:w-[450px] lg:w-[250px] md:w-[250px] sm:w-[150px] w-[150px] h-[300px] bg-white'>
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          class='w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    {/* Mobile Vertical Timeline */}
+    <div class='lg:hidden space-y-12 relative md:max-w-fit'>
+      {/* Vertical Line */}
+      <div class='absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-[#C26AA4] to-transparent'>
+      </div>
+
+      {
+        timelineData.map((item) => (
+          <div class='relative pl-12 motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+            {/* Year Badge */}
+            <div class='absolute left:lg-0 -translate-x-1/2 top-0 bg-gradient-primary text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md border-2 border-white z-10 left-4'>
+              {item.year}
+            </div>
+
+            {/* Content */}
+            <div class='bg-white rounded-xl shadow-md p-5 border border-gray-100'>
+              <div class='overflow-hidden rounded-lg mb-4 h-40'>
+                <img src={item.image} class='w-full h-full object-cover' alt={item.title} />
+              </div>
+
+              <h3 class='text-xl font-bold text-gradient mb-2'>{item.title}</h3>
+              <p class=' text-sm mb-4'>{item.description}</p>
+
+              {item.button && (
+                <a
+                  href={item.button.link}
+                  class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold hover:scale-105 transition-transform duration-200 ease-in-out'
+                >
+                  {item.button.text}
+                </a>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

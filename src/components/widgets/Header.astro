@@ -9,10 +9,11 @@ import { Image } from 'astro:assets';
     <div class='flex items-center justify-between py-4'>
       <!-- Left Navigation (Desktop) -->
       <ul class='hidden lg:flex text-[14px] font-bold gap-[48px]'>
-        <li><a href='/' class='hover:font-bold hover:text-gradient transition'>Home</a></li>
-        <li><a href='/about' class='hover:font-bold hover:text-gradient transition'>About Us</a></li>
+        <li><a href='/' class='hover:font-bold hover:text-[#B32482] transition'>Home</a></li>
+        <li><a href='/about' class='hover:font-bold hover:text-[#B32482] transition'>About Us</a></li>
         <li>
-          <a href='/brands?brand=maharani' class='hover:font-bold hover:text-gradient transition'>Brands and Products</a
+          <a href='/brands?brand=Maharani' class='hover:font-bold hover:text-[#B32482] transition'
+            >Brands and Products</a
           >
         </li>
       </ul>
@@ -27,12 +28,12 @@ import { Image } from 'astro:assets';
       <!-- Right Navigation (Desktop) -->
       <ul class='hidden lg:flex text-[14px] font-bold gap-[48px]'>
         <li>
-          <a href='https://store.almauna.com/' target='_blank' class='hover:font-bold hover:text-gradient transition'
+          <a href='https://store.almauna.com/' target='_blank' class='hover:font-bold hover:text-[#B32482] transition'
             >Online Store</a
           >
         </li>
-        <li><a href='/dubai-branch' class='hover:font-bold hover:text-gradient transition'>Dubai Branch</a></li>
-        <li><a href='/contact' class='hover:font-bold hover:text-gradient transition'>Contact Us</a></li>
+        <li><a href='/dubai-branch' class='hover:font-bold hover:text-[#B32482] transition'>Dubai Branch</a></li>
+        <li><a href='/contact' class='hover:font-bold hover:text-[#B32482] transition'>Contact Us</a></li>
       </ul>
 
       <!-- Hamburger Menu Button (Mobile) -->
@@ -53,7 +54,7 @@ import { Image } from 'astro:assets';
       <ul class='flex flex-col text-[14px] font-bold gap-4 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4'>
         <li><a href='/' class='block transition'>Home</a></li>
         <li><a href='/about' class='block transition'>About Us</a></li>
-        <li><a href='/brands?brand=maharani' class='block transition'>Brands and Products</a></li>
+        <li><a href='/brands?brand=Maharani' class='block transition'>Brands and Products</a></li>
         <li>
           <a href='https://store.almauna.com/' target='_blank' class='block transition'>Online Store</a>
         </li>
@@ -65,6 +66,59 @@ import { Image } from 'astro:assets';
 </header>
 
 <script>
+  let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
+  let lastScrollY = 0;
+
+  function closeMenu() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuToggle = document.getElementById('menu-toggle');
+    const hamburgerLines = menuToggle?.querySelectorAll('span');
+
+    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+      // Close menu
+      mobileMenu.style.maxHeight = '0';
+      setTimeout(() => {
+        mobileMenu?.classList.add('hidden');
+      }, 300);
+      menuToggle?.setAttribute('aria-expanded', 'false');
+
+      // Animate X back to hamburger
+      hamburgerLines?.[0].classList.remove('rotate-45', 'translate-y-2');
+      hamburgerLines?.[1].classList.remove('opacity-0');
+      hamburgerLines?.[2].classList.remove('-rotate-45', '-translate-y-2');
+    }
+  }
+
+  function isBrandsPage(): boolean {
+    // Check if current page is the brands page
+    return window.location.pathname === '/brands' || window.location.pathname.startsWith('/brands?');
+  }
+
+  function handleScroll() {
+    // Only auto-close on scroll if we're on the brands page
+    if (!isBrandsPage()) {
+      return;
+    }
+
+    const currentScrollY = window.scrollY;
+
+    // Check if user has scrolled more than 10px from last position
+    if (Math.abs(currentScrollY - lastScrollY) > 10) {
+      closeMenu();
+      lastScrollY = currentScrollY;
+    }
+
+    // Clear existing timeout
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+
+    // Set new timeout to update lastScrollY after scrolling stops
+    scrollTimeout = setTimeout(() => {
+      lastScrollY = currentScrollY;
+    }, 150);
+  }
+
   function initializeHeader() {
     const menuToggle = document.getElementById('menu-toggle');
 
@@ -76,6 +130,12 @@ import { Image } from 'astro:assets';
     const updatedMobileMenu = document.getElementById('mobile-menu');
     const updatedHamburgerLines = updatedMenuToggle?.querySelectorAll('span');
     const updatedMenuLinks = updatedMobileMenu?.querySelectorAll('a');
+
+    // Remove existing scroll listener
+    window.removeEventListener('scroll', handleScroll);
+
+    // Add scroll listener (will only work on brands page due to check inside handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     updatedMenuToggle?.addEventListener('click', () => {
       const isOpen = updatedMobileMenu?.classList.contains('hidden');
@@ -90,40 +150,22 @@ import { Image } from 'astro:assets';
         }, 0);
         updatedMenuToggle.setAttribute('aria-expanded', 'true');
 
+        // Update lastScrollY when menu opens
+        lastScrollY = window.scrollY;
+
         // Animate hamburger to X
         updatedHamburgerLines?.[0].classList.add('rotate-45', 'translate-y-2');
         updatedHamburgerLines?.[1].classList.add('opacity-0');
         updatedHamburgerLines?.[2].classList.add('-rotate-45', '-translate-y-2');
       } else {
         // Close menu
-        if (updatedMobileMenu) {
-          updatedMobileMenu.style.maxHeight = '0';
-        }
-        setTimeout(() => {
-          updatedMobileMenu?.classList.add('hidden');
-        }, 300);
-        updatedMenuToggle.setAttribute('aria-expanded', 'false');
-
-        // Animate X back to hamburger
-        updatedHamburgerLines?.[0].classList.remove('rotate-45', 'translate-y-2');
-        updatedHamburgerLines?.[1].classList.remove('opacity-0');
-        updatedHamburgerLines?.[2].classList.remove('-rotate-45', '-translate-y-2');
+        closeMenu();
       }
     });
 
     updatedMenuLinks?.forEach((link) => {
       link.addEventListener('click', () => {
-        if (updatedMobileMenu) {
-          updatedMobileMenu.style.maxHeight = '0';
-        }
-        setTimeout(() => {
-          updatedMobileMenu?.classList.add('hidden');
-        }, 300);
-        updatedMenuToggle?.setAttribute('aria-expanded', 'false');
-
-        updatedHamburgerLines?.[0].classList.remove('rotate-45', 'translate-y-2');
-        updatedHamburgerLines?.[1].classList.remove('opacity-0');
-        updatedHamburgerLines?.[2].classList.remove('-rotate-45', '-translate-y-2');
+        closeMenu();
       });
     });
   }
@@ -137,6 +179,14 @@ import { Image } from 'astro:assets';
 
   // Re-initialize on Astro page transitions
   document.addEventListener('astro:page-load', initializeHeader);
+
+  // Cleanup on page unload
+  document.addEventListener('astro:before-preparation', () => {
+    window.removeEventListener('scroll', handleScroll);
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+  });
 </script>
 
 <style>

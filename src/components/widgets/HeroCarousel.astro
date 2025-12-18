@@ -5,29 +5,33 @@ import 'swiper/css/pagination';
 const slides = [
   {
     id: 1,
-    img: '/src/assets/images/Photography/hero-home.svg',
+    img: '/src/assets/images/Photography/slider-main.webp',
+    overlay: 'linear-gradient(90.07deg, #75317A 0.06%, rgba(130,46,124,0.78) 52.95%, rgba(179,36,130,0) 99.93%)',
     align: 'center',
     title: 'Your trusted partner for premium international foods',
     subtitle:
       'We source a diverse selection of high-quality products from leading international brands and deliver it affordably in Qatar and the UAE region since 2016.',
+    call: 'tel:+974 4441 6966',
   },
   {
     id: 2,
-    img: '/src/assets/images/Photography/hero-home-2.jpg',
+    img: '/src/assets/images/Photography/slider-qatar.webp',
     overlay: 'linear-gradient(90.07deg, #75317A 0.06%, rgba(130,46,124,0.78) 52.95%, rgba(179,36,130,0) 99.93%)',
     align: 'center',
     title: 'Our legacy: trusted logistics, premium brands',
     subtitle:
       "From day one, we've specialized in robust import, distribution, and wholesale, ensuring steady supply for every scale of business in Qatar.",
+    call: 'tel:+974 4441 6966',
   },
   {
     id: 3,
-    img: '/src/assets/images/Photography/hero-home-3.jpg',
+    img: '/src/assets/images/Photography/slider-dubai.webp',
     overlay: 'linear-gradient(90.07deg, #75317A 0.06%, rgba(130,46,124,0.78) 52.95%, rgba(179,36,130,0) 99.93%)',
     align: 'center',
     title: 'New heights in supply: ISO certified quality',
     subtitle:
       'Our new ISO 22000–certified Dubai branch expands your reach with efficient, scalable supply solutions across the wider UAE region.',
+    call: 'tel:+971 5047 89777',
   },
 ];
 ---
@@ -40,7 +44,7 @@ const slides = [
 
   @media (min-width: 768px) {
     .hero-swiper {
-      height: 720px;
+      height: 680px;
     }
   }
 
@@ -114,15 +118,15 @@ const slides = [
               >
                 <a
                   href='/brands'
-                  class='px-6 py-3 bg-white text-[#712F76] flex justify-center rounded-[32px] w-[235px] md:w-fit font-bold shadow-lg'
+                  class='px-6 py-3 bg-white text-[#712F76] flex justify-center rounded-[32px] w-[235px] md:w-fit font-bold shadow-lg hover:scale-105 transition-transform duration-200 ease-in-out'
                   aria-label='Explore Our Products'
                 >
                   Explore Our Products
                 </a>
 
                 <a
-                  href='tel:+971 5047 89777'
-                  class='px-5 py-3 border border-white rounded-[32px] w-[118px] bg-white bg-opacity-[50%] font-bold text-white flex justify-center'
+                  href={slide.call}
+                  class='px-5 py-3 outline outline-white rounded-[32px] w-[118px] bg-white bg-opacity-[50%] font-bold text-white flex justify-center hover:scale-105 transition-transform duration-200 ease-in-out'
                   aria-label='Call Us'
                 >
                   Call Us
@@ -146,6 +150,13 @@ const slides = [
     const root = document.getElementById('heroCarouselRoot');
     if (!(root instanceof HTMLElement)) return;
 
+    // Destroy existing instance if it exists to prevent duplicates on View Transitions
+    // Using (true, false) to preserve the 'style' attribute (background image)
+    const swiperRoot = root as unknown as { swiper?: { destroy: (a: boolean, b: boolean) => void } };
+    if (swiperRoot.swiper) {
+      swiperRoot.swiper.destroy(true, false);
+    }
+
     new Swiper(root, {
       modules: [Autoplay, Pagination],
       autoplay: {
@@ -163,13 +174,18 @@ const slides = [
       keyboard: {
         enabled: true,
       },
+      on: {
+        slideChange() {
+          try {
+            if (this.pagination && typeof this.pagination.update === 'function') {
+              this.pagination.update();
+            }
+          } catch {
+            // swallow errors silently
+          }
+        },
+      },
     });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeHeroCarousel);
-  } else {
-    initializeHeroCarousel();
   }
 
   document.addEventListener('astro:page-load', initializeHeroCarousel);

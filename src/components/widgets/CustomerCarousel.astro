@@ -29,24 +29,24 @@ const bottomRowLogosData = [
   { src: '/src/assets/images/customers/teatime-10.jpg', alt: 'Tea Time' },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "The customer focus at Al Mauna is exceptional. Their team goes above and beyond to understand our specific needs, making the entire distribution process incredibly smooth. They're more than a supplier; they're a true partner.",
-    author: 'Mohammed Al-Fardan',
-    position: 'Procurement Manager',
-    company: 'Grand Hypermarket',
-    image: '/src/assets/images/manager.jpg',
-  },
-  {
-    quote:
-      'Al Mauna Trading has been an invaluable partner for our restaurant. Their consistent quality sourcing and reliable delivery of premium ingredients means we never have to compromise on our menu. Truly a seamless experience!',
-    author: 'Chef Ahmed Al-Ghamdi',
-    position: 'Owner',
-    company: 'The Spice Route Restaurant',
-    image: '/src/assets/images/chef.jpg',
-  },
-];
+// const testimonials = [
+//   {
+//     quote:
+//       "The customer focus at Al Mauna is exceptional. Their team goes above and beyond to understand our specific needs, making the entire distribution process incredibly smooth. They're more than a supplier; they're a true partner.",
+//     author: 'Mohammed Al-Fardan',
+//     position: 'Procurement Manager',
+//     company: 'Grand Hypermarket',
+//     image: '/src/assets/images/manager.jpg',
+//   },
+//   {
+//     quote:
+//       'Al Mauna Trading has been an invaluable partner for our restaurant. Their consistent quality sourcing and reliable delivery of premium ingredients means we never have to compromise on our menu. Truly a seamless experience!',
+//     author: 'Chef Ahmed Al-Ghamdi',
+//     position: 'Owner',
+//     company: 'The Spice Route Restaurant',
+//     image: '/src/assets/images/chef.jpg',
+//   },
+// ];
 ---
 
 <style>
@@ -102,16 +102,18 @@ const testimonials = [
   }
 </style>
 
-<section class='pt-[64px] pb-[120px]'>
+<section class='pt-[58px] pb-[120px]'>
   <div>
     <!-- Header -->
-    <div class='text-center mb-[64px] max-w-6xl mx-auto'>
+    <div
+      class='text-center mb-[64px] max-w-6xl mx-auto md:px-0 px-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+    >
       <h1 class='text-[32px] font-bold text-gradient'>{title}</h1>
       <p class='text-[20px] pt-[8px]'>{subtitle}</p>
     </div>
 
     <!-- Carousel Container -->
-    <div class='mb-[64px]'>
+    <div class='mb-[58px]'>
       <!-- Top Row - Scrolling Right -->
       <div class='mb-[32px] carousel-wrapper'>
         <div class='carousel-row carousel-row-top'>
@@ -154,11 +156,11 @@ const testimonials = [
     </div>
 
     <!-- Testimonials Section -->
-    <div class='max-w-6xl mx-auto px-6'>
+    <!-- <div class='max-w-6xl mx-auto px-6'>
       <div class='flex md:flex-row flex-col md:justify-between gap-[32px] md:gap-[96px]'>
         {
           testimonials.map((testimonial) => (
-            <div class='bg-gradient-to-br from-[#F6E9F2] to-[#F0E0F0] rounded-[16px] p-[32px]'>
+            <div class='bg-gradient-to-br from-[#F6E9F2] to-[#F0E0F0] rounded-[16px] p-[32px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
               <div class='flex justify-between items-start gap-[36px]'>
                 <div>
                   <Image
@@ -178,7 +180,7 @@ const testimonials = [
                       alt={testimonial.author}
                       width={56}
                       height={56}
-                      class='w-[96px] h-[96px] rounded-[64px] object-center object-cover'
+                      class='md:w-[96px] md:h-[96px] h-[66px] w-[66px] rounded-[64px] object-center object-cover'
                     />
                     <div>
                       <p class='font-bold text-[20px]'>{testimonial.author}</p>
@@ -192,6 +194,6 @@ const testimonials = [
           ))
         }
       </div>
-    </div>
+    </div> -->
   </div>
 </section>
