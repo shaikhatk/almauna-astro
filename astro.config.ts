@@ -1,5 +1,6 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 import { defineConfig } from 'astro/config';
 
@@ -24,7 +25,6 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 export default defineConfig({
   output: 'static',
 
-  // Required by sitemap to generate absolute URLs. Set SITE_URL in CI or replace the default.
   site: process.env.SITE_URL ?? 'https://example.com',
 
   integrations: [
@@ -72,19 +72,17 @@ export default defineConfig({
     astrowind({
       config: './src/config.yaml',
     }),
-    
+
     {
       name: 'copy-assets-to-dist',
       hooks: {
         'astro:build:done': async ({ dir }) => {
           const srcDir = path.join(process.cwd(), 'src/assets/images');
           const destDir = path.join(dir.pathname, 'src/assets/images');
-          
+
           try {
-            if (fs.existsSync(srcDir)) {
-              fs.cpSync(srcDir, destDir, { recursive: true, force: true });
-              console.log(`✓ Copied src/assets/images to dist folder`);
-            }
+            fs.cpSync(srcDir, destDir, { recursive: true, force: true });
+            console.log(`✓ Copied src/assets/images to dist folder`);
           } catch (error) {
             console.error('Failed to copy assets:', error);
           }
