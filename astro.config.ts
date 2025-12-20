@@ -78,7 +78,7 @@ export default defineConfig({
       hooks: {
         'astro:build:done': async ({ dir }) => {
           const srcDir = path.join(process.cwd(), 'src/assets/images');
-          const destDir = path.join(dir.pathname, 'src/assets/images');
+          const destDir = path.join(fileURLToPath(dir), 'src/assets/images');
 
           try {
             fs.cpSync(srcDir, destDir, { recursive: true, force: true });
