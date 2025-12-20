@@ -137,7 +137,8 @@ export const products = [
     id: 'vitabella-cornflakes-225g',
     title: 'Organic & Gluten free corn flakes',
     image: '/src/assets/images/vitabella/vitabella-1.jpg',
-    description: 'Vitabella Organic & Gluten free corn flakes 225g',
+    description:
+      'Vitabella Corn Flakes are made from high-quality, GMO-free Italian corn, gently cooked to deliver a light, crispy texture and natural taste. Perfect for a wholesome breakfast, enjoy them with milk, yogurt, or fresh fruits for a delicious start to your day.',
     packaging: '225g',
     orgin: 'Italy',
     quality: [
@@ -165,7 +166,8 @@ export const products = [
     id: 'vitabella-choco-25g',
     title: 'Choco & Hazelnut Pillow Organic & GlutenFree',
     image: '/src/assets/images/vitabella/vitabella-2.jpg',
-    description: 'Vitabella Choco & Hazelnut Pillow Organic & GlutenFree 25g',
+    description:
+      'Vitabella Choco & Hazelnut Pillows are gluten-free cereal pillows filled with a rich and creamy chocolate-hazelnut center, made with organic ingredients for a delicious breakfast or snack. Enjoy their light, crispy texture with milk, yogurt, or straight from the pack for a sweet energy boost any time of day.',
     packaging: '25g',
     orgin: 'Italy',
     quality: [
@@ -191,7 +193,8 @@ export const products = [
     id: 'vitabella-choco-crispies-25g',
     title: 'Choco Crispies Organic and Gluten Free',
     image: '/src/assets/images/vitabella/vitabella-3.jpg',
-    description: 'Vitabella Choco Crispies Organic and Gluten Free 25g',
+    description:
+      'Vitabella Choco Crispies are gluten-free, vegan puffed rice cereal coated with rich cocoa for a deliciously crunchy, chocolatey breakfast. Perfect with milk or yogurt, they turn your bowl into a chocolaty treat while keeping it light and wholesome.',
     packaging: '25g',
     orgin: 'Italy',
     quality: [
@@ -217,7 +220,8 @@ export const products = [
     id: 'vitabella-cornflakes-25g',
     title: 'Organic & Gluten free corn flakes',
     image: '/src/assets/images/vitabella/vitabella-4.jpg',
-    description: 'Vitabella Organic & Gluten free corn flakes Signle Serving Bag 25g',
+    description:
+      'Vitabella Corn Flakes are made from high-quality, GMO-free Italian corn, gently cooked to deliver a light, crispy texture and natural taste. Perfect for a wholesome breakfast, enjoy them with milk, yogurt, or fresh fruits for a delicious start to your day.',
     packaging: '25g',
     orgin: 'Italy',
     quality: [

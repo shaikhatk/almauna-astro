@@ -24,11 +24,11 @@ const featuredProducts = products
       {
         featuredProducts.map((product, index) => (
           <div class='swiper-slide w-full md:h-[450px] h-[953px]' data-slide-index={index}>
-            <div class='flex items-center md:flex-row flex-col gap-[28px] md:gap-[64px]'>
+            <div class='flex items-center md:flex-row flex-col gap-[18px] md:gap-[54px]'>
               <div class='flex-shrink-0 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
                 <img
                   src={product.image}
-                  class='w-[299px] h-[400px] object-cover select-none'
+                  class='w-[250px] h-[350px] object-contain select-none'
                   alt={product.title}
                   loading='lazy'
                   draggable='false'
@@ -39,17 +39,17 @@ const featuredProducts = products
                 <h2 class='text-[24px] font-bold text-gradient-tertiary intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
                   {product.title}
                 </h2>
-                <div class='flex gap-[24px]'>
+                {/* <div class='flex gap-[24px]'>
                   <p class='text-[18px] mt-[16px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
                     {product.brandId}
                   </p>
                   <p class='text-[18px] mt-[16px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
                     {product.origin}
                   </p>
-                </div>
-                <p class='text-[18px] mt-[16px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                </div> */}
+                {/* <p class='text-[18px] mt-[16px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
                   {product.subtitle}
-                </p>
+                </p> */}
                 <p class='text-[20px] pt-[24px] line-clamp-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
                   {product.description}
                 </p>
