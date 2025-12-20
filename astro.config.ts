@@ -78,24 +78,11 @@ export default defineConfig({
       hooks: {
         'astro:build:done': async ({ dir }) => {
           const srcDir = path.join(process.cwd(), 'src/assets/images');
-          // Convert URL to proper file path
-          const distDir = fileURLToPath(dir);
-          const destDir = path.join(distDir, '_astro');
+          const destDir = path.join(dir.pathname, 'src/assets/images');
 
           try {
-            // Check if source directory exists
-            if (!fs.existsSync(srcDir)) {
-              console.warn(`⚠ Source directory not found: ${srcDir}`);
-              return;
-            }
-
-            // Create destination if it doesn't exist
-            if (!fs.existsSync(destDir)) {
-              fs.mkdirSync(destDir, { recursive: true });
-            }
-
             fs.cpSync(srcDir, destDir, { recursive: true, force: true });
-            console.log(`✓ Copied src/assets/images to _astro folder`);
+            console.log(`✓ Copied src/assets/images to dist folder`);
           } catch (error) {
             console.error('Failed to copy assets:', error);
           }
