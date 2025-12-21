@@ -49,40 +49,39 @@ const dubaiData = [
 
 const servicesData = [
   {
-    image: '/src/assets/images/Import and clearance 1.jpg',
+    image: '/src/assets/images/Photography/RegionalReach.png',
     title: 'Import & Clearance',
-    description:
-      'Swift, compliant handling of global shipments into the UAE, ensuring smooth customs clearance and regulatory adherence.',
+    description: 'Swift, compliant handling of global shipments into the UAE.',
   },
   {
-    image: '/src/assets/images/Warehousing and stock management 1 .jpg',
+    image: '/src/assets/images/Photography/Warehousing&StockManagement.png',
     title: 'Warehousing & Stock Management',
-    description:
-      'Safe storage, smart organization, and real-time inventory control to maintain product quality and operational efficiency.',
+    description: 'Safe storage, smart organization, and real-time inventory control.',
   },
   {
-    image: '/src/assets/images/Wholsale distribution 1.jpg',
+    image: '/src/assets/images/Photography/WholesaleDistribution.png',
     title: 'Wholesale Distribution',
     description: 'Direct delivery to retailers, pharmacies, organic stores, and HORECA clients across all Emirates.',
   },
   {
-    image: '/src/assets/images/Retail support.jpg',
+    image: '/src/assets/images/Photography/RetailSupport.png',
     title: 'Retail Support',
-    description: 'Merchandising, stock rotation, and strategic product placement to boost visibility and drive sales.',
+    description: 'Merchandising, stock rotation, and product placement to boost visibility and sales.',
   },
+
   {
-    image: '/src/assets/images/E - commerce 1.jpg',
-    title: 'E-commerce Fulfillment',
-    description:
-      'Launching soon, our online store will provide same-day and next-day delivery across Dubai and beyond.',
-  },
-  {
-    image: '/src/assets/images/Client and partner support.jpg',
+    image: '/src/assets/images/Photography/Client&PartnerSupport.png',
     title: 'Client & Partner Support',
-    description:
-      'Multilingual support services for client education, promotional activities, and efficient restock planning.',
+    description: 'Multilingual service for education, promotions, and restock planning.',
   },
 ];
+
+// {
+//     image: '/src/assets/images/Photography/EcommerceFullfillment.png',
+//     title: 'E-commerce Fulfillment',
+//     description:
+//       'Launching soon, our online store will provide same-day and next-day delivery across Dubai and beyond.',
+//   },
 ---
 
 <Layout metadata={metadata}>
@@ -141,7 +140,7 @@ const servicesData = [
       </div>
     </section>
 
-    <section class='py-[58px] bg-gradient-secondary'>
+    <section class='py-[58px]'>
       <div class='max-w-5xl mx-auto px-6'>
         <div class='text-center mb-[64px]'>
           <h2
@@ -204,8 +203,17 @@ const servicesData = [
         </div>
       </div>
     </section>
-    <section class='py-[58px]'>
-      <div class='max-w-6xl mx-auto px-6'>
+    <section
+      class='pt-[58px] pb-[58px] md:pb-[64px]'
+      style={{
+        backgroundImage:
+          'linear-gradient(89.17deg, rgba(179, 36, 130, 0.1) 0%, rgba(117, 49, 122, 0.1) 100%), url(/src/assets/images/Polygons.svg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+    <div class='max-w-6xl mx-auto px-6'>
         <div class='text-center mb-[32px]'>
           <h2
             class='font-bold text-gradient text-[32px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
@@ -219,34 +227,58 @@ const servicesData = [
             designed to meet the fast-paced demands of the UAE market.
           </p>
         </div>
-        <p class='text-[20px] text-center'>Our core capabilities in Dubai include:</p>
 
-        <div class='grid grid-cols-1 md:grid-cols-3 gap-[38px] mt-[58px]'>
+        <div class='grid grid-cols-1 md:grid-cols-5 gap-[48px] md:gap-[32px] mt-[58px]'>
           {
             servicesData.map((item) => (
-              <div>
-                <div class='p-4 rounded-[8px] bg-white shadow-secondary hover:shadow-lg h-full intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
-                  <div class='overflow-hidden rounded-[8px] mb-4'>
-                    <img
-                      src={item.image}
-                      class='h-44 w-full object-cover transition-transform duration-300 hover:scale-110'
-                    />
-                  </div>
-                  <h3 class='text-[18px] font-bold text-gradient mb-2'>{item.title}</h3>
-                  <p class='text-[16px]'>{item.description}</p>
+              <div class='intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade '>
+                <div class='flex relative items-center justify-center hover:scale-110'>
+                  <div class='bg-gradient-tertiary rotate-[45deg] h-[80px] w-[80px] rounded-[8px]' />
+                  <Image
+                    src={item.image}
+                    height={111}
+                    width={96}
+                    class='w-[110px] h-[111px] absolute object-center object-cover'
+                    alt={item.title}
+                  />
                 </div>
+                <h1 class='text-[16px] font-bold text-gradient text-center pt-[32px] md:pt-[32px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                  {item.title}
+                </h1>
+
+                <p class='text-[14px] text-center pt-1 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                  {item.description}
+                </p>
               </div>
             ))
           }
         </div>
 
-        <!-- <p
-          class='text-[20px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-        >
-          From supermarkets and specialty shops to hotels and wellness chains, we ensure premium products reach shelves
-          fresh and on time.
-        </p> -->
+      <div class='mt-[64px] mx-auto px-6 lg:px-0 max-w-sm flex flex-row relative' >
+        <div class='bg-gradient-primary text-white font-bold text-[14px] py-[12px] px-[20px] rounded-[8px] absolute md:left-[-124px] lfet-[-50px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ' >Coming Soon</div>
+        <div class='flex flex-col md:flex-row intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade '>
+                <div class='flex relative items-center md:gap-[32px]  justify-center hover:scale-110'>
+
+                  <div class='bg-gradient-tertiary rotate-[45deg] h-[80px] w-[80px] rounded-[8px]' />
+                  <Image
+                    src='/src/assets/images/Photography/EcommerceFullfillment.png'
+                    height={111}
+                    width={96}
+                    class='md:w-[110px] md:h-[111px] absolute object-center object-cover'
+                    alt='E-commerce fulfillment'
+                  />
+                </div>
+                <div class='md:ml-8 md:mt-0 mt-[32px]'>
+                  <h1 class='text-[16px] font-bold text-gradient text-center pt-[20px] md:pt-0 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'>
+                  E-commerce fulfillment
+                </h1>
+                <p class='text-[14px] text-center pt-1 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade '>
+                  Launching soon, our online<br class='md:block hidden' /> store will offer same-day and <br class='md:block hidden' />next-day delivery across<br class='md:block hidden' /> Dubai and beyond.
+                </p>
+                </div>
+              </div>
       </div>
+    </div>
     </section>
 
     <section
@@ -272,7 +304,7 @@ const servicesData = [
           </p>
         </div>
 
-        <div class='grid grid-cols-1 md:grid-cols-5 gap-[48px] md:gap-[28px] mt-[64px]'>
+        <div class='grid grid-cols-1 md:grid-cols-5 gap-[48px] md:gap-[28px] mt-[58px]'>
           {
             dubaiData.map((item) => (
               <div class='intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade '>

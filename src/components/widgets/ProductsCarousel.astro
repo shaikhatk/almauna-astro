@@ -87,6 +87,7 @@ const featuredProducts = products
     opacity: 0.5;
     width: 12px;
     height: 12px;
+    margin-left: 4px !important;
   }
 
   :global(.products-carousel .swiper-pagination-bullet-active) {
@@ -112,8 +113,9 @@ const featuredProducts = products
 
     // Destroy existing instance if it exists to prevent duplicates on View Transitions
     // Using (true, false) to preserve any inline styles
-    if ((swiperElement as any).swiper) {
-      (swiperElement as any).swiper.destroy(true, false);
+    const swiperInstance = swiperElement as unknown as { swiper?: { destroy: (arg1: boolean, arg2: boolean) => void } };
+    if (swiperInstance.swiper) {
+      swiperInstance.swiper.destroy(true, false);
     }
 
     new Swiper(swiperElement, {
