@@ -345,7 +345,7 @@ export const products = [
     image: '/src/assets/images/shradha/shradha-ghee.png',
     description:
       'Ghee is prepared by melting and simmering unsalted butter until all the water settles at the bottom. Ghee is healthy and used in many traditional Indian dishes, as an ideal for frying.',
-    packaging: '5L x 4',
+    packaging: '15 KG Tin, and 1 Ltr',
     orgin: 'India',
     quality: [
       'Improves Absorption of nutrients',

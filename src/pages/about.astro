@@ -7,7 +7,7 @@ const metadata = {
   title: 'About us',
   description:
     'Learn about Al Mauna Trading — our mission, vision, executive leadership and regional expansion to better serve the GCC market.',
-  image: '/src/assets/images/aboutus-hero.png',
+  image: '/src/assets/images/aboutus-hero.webp',
 };
 
 const baseUrl = process.env.SITE_URL ?? 'https://example.com';
@@ -22,12 +22,12 @@ const structuredData = {
 
 const aboutData = [
   {
-    img: '/src/assets/images/mission.svg',
+    img: '/src/assets/images/mission.webp',
     title: 'Our mission',
     desc: 'To enrich lives by providing top-quality products through a seamless and customer-centric trading experience.',
   },
   {
-    img: '/src/assets/images/vision.svg',
+    img: '/src/assets/images/vision.webp',
     title: 'Our vision',
     desc: 'To become a leading distributor in the GCC, known for our dedication to quality, transparency, and market innovation.',
   },
@@ -38,7 +38,7 @@ const aboutData = [
   <main>
     <script type='application/ld+json' set:html={JSON.stringify(structuredData)} />
     <section
-      style='background-image:linear-gradient(180deg, #75317A 0%, rgba(130, 46, 124, 0.784801) 52.96%, rgba(179, 36, 130, 0) 100%), url(/src/assets/images/aboutus-hero.png);  background-size: cover; background-position: bottom;'
+      style='background-image:linear-gradient(180deg, #75317A 0%, rgba(130, 46, 124, 0.784801) 52.96%, rgba(179, 36, 130, 0) 100%), url(/src/assets/images/aboutus-hero.webp);  background-size: cover; background-position: bottom;'
       class='h-[476px]'
     >
       <div class='flex flex-col items-center pt-[96px] md:pt-[190px] px-6'>

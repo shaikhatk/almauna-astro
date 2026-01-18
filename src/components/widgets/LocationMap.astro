@@ -1,3 +1,4 @@
+
 ---
 interface Props {
   apiKey?: string;
@@ -16,6 +17,9 @@ interface Props {
     mapUrl: string;
     color: string;
   };
+  height?: string;
+  overlay?: boolean;
+  autoOpenInfoWindow?: boolean;
 }
 
 const {
@@ -23,14 +27,17 @@ const {
   mapId = 'map-container',
   officeLocation,
   warehouseLocation,
+  height = '300px',
+  overlay = false,
+  autoOpenInfoWindow = true,
 } = Astro.props;
 ---
 
-<div id={mapId} class='lg:w-[380px] w-full h-[300px] md:h-[510px] rounded-lg overflow-hidden shadow-lg'>
+<div id={mapId} class='lg:w-full w-full rounded-lg overflow-hidden shadow-lg relative' style={{ height }}>
   <div id={`${mapId}-inner`} class='w-full h-full'></div>
 </div>
 
-<script define:vars={{ apiKey, mapId, officeLocation, warehouseLocation }}>
+<script define:vars={{ apiKey, mapId, officeLocation, warehouseLocation, overlay, autoOpenInfoWindow }}>
   // Global flag to prevent multiple API loads
   window.__googleMapsLoaded = window.__googleMapsLoaded || false;
   window.__googleMapsCallbacks = window.__googleMapsCallbacks || [];
@@ -43,6 +50,7 @@ const {
       strokeColor: '#fff',
       strokeWeight: 2,
       scale: 1.2,
+      anchor: new google.maps.Point(0, 28),
     };
 
     const marker = new google.maps.Marker({
@@ -91,10 +99,10 @@ const {
     const mapInstance = new google.maps.Map(mapElement, {
       zoom: 14,
       center: { lat: centerLat, lng: centerLng },
-      mapTypeControl: true,
-      fullscreenControl: true,
-      streetViewControl: true,
-      zoomControl: true,
+      mapTypeControl: !overlay,
+      fullscreenControl: !overlay,
+      streetViewControl: !overlay,
+      zoomControl: !overlay,
       styles: [
         {
           featureType: 'all',
@@ -126,10 +134,12 @@ const {
 
     markersArray.push(officeMarker, warehouseMarker);
 
-    // Auto-open office info window on load
-    setTimeout(() => {
-      officeInfoWindow.open(mapInstance, officeMarker);
-    }, 500);
+    // Auto-open office info window on load if enabled
+    if (autoOpenInfoWindow) {
+      setTimeout(() => {
+        officeInfoWindow.open(mapInstance, officeMarker);
+      }, 500);
+    }
 
     // Fit bounds to show both markers
     const bounds = new google.maps.LatLngBounds();

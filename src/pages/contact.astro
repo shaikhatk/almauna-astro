@@ -1,6 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '~/layouts/PageLayout.astro';
 import LocationMap from '~/components/widgets/LocationMap.astro';
+import whatsappIcon from '~/assets/images/whatsapp-icon.png';
 
 const metadata = {
   title: 'Contact',
@@ -22,267 +24,283 @@ const structuredData = {
 <Layout metadata={metadata}>
   <main>
     <script type='application/ld+json' set:html={JSON.stringify(structuredData)} />
-    <section class='bg-gradient-secondary py-[58px]'>
-      <div class='max-w-5xl mx-auto px-6'>
-        <h2
-          class='text-center text-[32px] text-gradient font-bold intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-        >
-          Contact us
-        </h2>
-        <p
-          class='text-center text-[20px] pt-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-        >
-          We’re here to connect. Reach us anytime through our offices or send us a message.
-        </p>
-
-        <form
-          class='max-w-md mx-auto pt-[40px] space-y-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-        >
-          <input
-            type='text'
-            placeholder='Full name'
-            class='w-full px-4 py-3 focus:outline-none border border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
-          />
-
-          <input
-            type='text'
-            placeholder='Company name'
-            class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
-          />
-
-          <input
-            type='email'
-            placeholder='E-mail'
-            class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
-          />
-
-          <input
-            type='text'
-            placeholder='Phone number'
-            class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
-          />
-          <textarea
-            placeholder='Message'
-            rows='5'
-            class='w-full px-4 py-3 border focus:outline-none border-gradient-secondary rounded-[8px] placeholder:text-black placeholder:opacity-50'
-          ></textarea>
-
-          <div class='flex justify-center pt-[32px]'>
-            <button
-              type='submit'
-              class='px-8 py-3 rounded-[32px] focus:outline-none text-white font-bold text-[16px] bg-gradient-primary shadow-md hover:opacity-90 hover:scale-105 transition-transform duration-200 ease-in-out'
-            >
-              Send Message
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <section class='pt-[58px] pb-[120px]'>
-      <div class='max-w-5xl lg:max-w-6xl mx-auto px-6'>
-        <div>
-          <h2
-            class='text-center text-[32px] text-gradient font-bold intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-          >
-            Al Mauna Offices
-          </h2>
-          <p
-            class='text-center text-[20px] pt-2 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-          >
-            We have multiple branches across the MENA region, ensuring accessibility and convenience for our customers.
-            Visit your nearest branch to connect with our team.
+    <section class='grid grid-cols-1 lg:grid-cols-2 min-h-screen'>
+      <!-- Left Column: Contact Form -->
+      <div
+        class='bg-[#F9F5F8] py-20 px-6 lg:px-10 flex flex-col items-center intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+      >
+        <div class='max-w-md w-full text-center'>
+          <h2 class='text-[32px] text-gradient font-bold'>Contact us</h2>
+          <p class='text-[20px] pt-2 text-black/70'>
+            We're here to connect. Reach us anytime through our offices or send us a message.
           </p>
+
+          <form class='pt-[40px] space-y-4 text-left'>
+            <div class='border-gradient-secondary rounded-[8px]'>
+              <input
+                type='text'
+                placeholder='Full name'
+                class='w-full px-1 py-3 focus:outline-none bg-white rounded-[8px] placeholder:text-black placeholder:opacity-50'
+              />
+            </div>
+
+            <div class='border-gradient-secondary rounded-[8px]'>
+              <input
+                type='text'
+                placeholder='Company name'
+                class='w-full px-1 py-3 focus:outline-none bg-white rounded-[8px] placeholder:text-black placeholder:opacity-50'
+              />
+            </div>
+
+            <div class='border-gradient-secondary rounded-[8px]'>
+              <input
+                type='email'
+                placeholder='E-mail'
+                class='w-full px-1 py-3 focus:outline-none bg-white rounded-[8px] placeholder:text-black placeholder:opacity-50'
+              />
+            </div>
+
+            <div class='border-gradient-secondary rounded-[8px]'>
+              <input
+                type='text'
+                placeholder='Phone number'
+                class='w-full px-1 py-3 focus:outline-none bg-white rounded-[8px] placeholder:text-black placeholder:opacity-50'
+              />
+            </div>
+
+            <div class='border-gradient-secondary rounded-[8px]'>
+              <textarea
+                placeholder='Message'
+                rows='5'
+                class='w-full px-1 py-3 focus:outline-none bg-white rounded-[8px] placeholder:text-black placeholder:opacity-50'
+              ></textarea>
+            </div>
+
+            <div class='flex justify-center pt-[32px]'>
+              <button
+                type='submit'
+                class='px-16 py-3 rounded-[32px] focus:outline-none text-white font-bold text-[16px] bg-gradient-primary shadow-md hover:opacity-90 hover:scale-105 transition-transform duration-200 ease-in-out'
+              >
+                Send Message
+              </button>
+            </div>
+          </form>
         </div>
-        <div class='mt-[64px]'>
-          <div class='flex flex-col gap-[32px]'>
-            <div class='grid grid-cols-1 lg:grid-cols-3 gap-y-[48px] lg:gap-[48px] border rounded-[8px]'>
-              <!-- Map Section -->
-              <div class='col-span-1'>
-                <LocationMap
-                  mapId='map-container-qatar'
-                  officeLocation={{
-                    name: 'Office',
-                    address: 'Office #37, Al Emadi Business Center, C Ring Road, Doha, Qatar',
-                    coords: { lat: 25.2854, lng: 51.531 },
-                    mapUrl: 'https://maps.google.com/?q=Al+Emadi+Business+Center,+C+Ring+Road,+Doha,+Qatar',
-                    color: '#dc2626',
-                  }}
-                  warehouseLocation={{
-                    name: 'Warehouse',
-                    address: 'Milaha Warehouse, Doha - Qatar',
-                    coords: { lat: 25.265, lng: 51.518 },
-                    mapUrl: 'https://maps.google.com/?q=Milaha+Warehouse,+Doha,+Qatar',
-                    color: '#2563eb',
-                  }}
-                />
+      </div>
+
+      <!-- Right Column: Al Mauna Offices -->
+      <div
+        class='bg-white py-20 pb-[6rem] px-6 lg:px-10 flex flex-col items-center intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+      >
+        <div class='max-w-xl w-full text-center'>
+          <h2 class='text-[32px] text-gradient font-bold'>Al Mauna Offices</h2>
+          <p class='text-[20px] pt-2 mb-12 text-black/70'>Visit your nearest branch to connect with our team.</p>
+
+          <div class='flex flex-col gap-16'>
+            <!-- Head Office -->
+            <div class='space-y-6 text-left'>
+              <h3 class='text-gradient font-bold text-[24px]'>Head Office</h3>
+
+              <div class='flex flex-wrap gap-3'>
+                <!-- Whatspp Pill -->
+                <a
+                  href='https://wa.me/97433560938'
+                  class='flex items-center gap-3 px-4 py-2 bg-[#F9F5F8] rounded-xl group hover:scale-105 transition-transform shadow-sm'
+                >
+                  <Image src={whatsappIcon} alt='WhatsApp Icon' class='w-5 h-5' />
+                </a>
+
+                <!-- Mobile Pill -->
+                <a
+                  href='tel:+97433560938'
+                  class='flex items-center gap-3 px-4 py-2 bg-[#F9F5F8] rounded-xl group hover:scale-105 transition-transform shadow-sm min-w-[140px]'
+                >
+                  <i class='fa-solid fa-mobile-screen-button text-gradient text-xl'></i>
+                  <div class='flex flex-col items-start'>
+                    <span class='text-[9px] font-bold text-black/40 uppercase leading-none mb-1'>Mobile</span>
+                    <span class='text-[14px] font-bold text-gradient leading-none'>+974 3356 0938</span>
+                  </div>
+                </a>
+                <!-- Phone Pill -->
+                <a
+                  href='tel:+97444416966'
+                  class='flex items-center gap-3 px-4 py-2 bg-[#F9F5F8] rounded-xl group hover:scale-105 transition-transform shadow-sm min-w-[140px]'
+                >
+                  <i class='fa-solid fa-phone text-gradient text-xl'></i>
+                  <div class='flex flex-col items-start'>
+                    <span class='text-[9px] font-bold text-black/40 uppercase leading-none mb-1'>Phone</span>
+
+                    <span class='text-[14px] font-bold text-gradient leading-none'>+974 4441 6966</span>
+                  </div>
+                </a>
+                <!-- Email Pill -->
+                <a
+                  href='mailto:sales@almauna.com'
+                  class='flex items-center gap-3 px-4 py-2 bg-[#F9F5F8] rounded-xl group hover:scale-105 transition-transform shadow-sm min-w-[140px]'
+                >
+                  <i class='fa-solid fa-envelope text-gradient text-xl'></i>
+                  <div class='flex flex-col items-start'>
+                    <span class='text-[9px] font-bold text-black/40 uppercase leading-none mb-1'>E-mail</span>
+                    <span class='text-[14px] font-bold text-gradient leading-none'>sales@almauna.com</span>
+                  </div>
+                </a>
               </div>
 
-              <!-- Contact Information Section -->
-
+              <!-- Address Card -->
               <div
-                class='md:flex flex-row justify-between items-start col-span-2 px-6 pb-[48px] md:pl-[40px] lg:py-[48px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+                class='bg-white rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-sm border border-black/5'
               >
-                <div>
-                  <h2 class='text-[24px] text-gradient font-bold md:mb-[16px] mb-[32px]'>Head Office</h2>
-                  <!-- Office -->
+                <!-- Map Thumbnail -->
+                <div class='md:w-[40%] min-h-[220px] bg-gray-100'>
+                  <LocationMap
+                    mapId='map-container-qatar'
+                    autoOpenInfoWindow={false}
+                    officeLocation={{
+                      name: 'Office',
+                      address: 'Office #37, Al Emadi Business Center, C Ring Road, Doha, Qatar',
+                      coords: { lat: 25.262604, lng: 51.5366315 },
+                      mapUrl: 'https://maps.google.com/?q=Al+Emadi+Business+Center,+C+Ring+Road,+Doha,+Qatar',
+                      color: '#dc2626',
+                    }}
+                    warehouseLocation={{
+                      name: 'Warehouse',
+                      address: 'Milaha Warehouse, Doha - Qatar',
+                      coords: { lat: 25.160923, lng: 51.467017 },
+                      mapUrl:
+                        'https://www.google.com/maps/search/Milaha+Warehouse,+Doha,+Qatar/@25.1590559,51.4658048,18z/data=!3m1!4b1?entry=ttu',
+                      color: '#2563eb',
+                    }}
+                  />
+                </div>
+                <!-- Details -->
+                <div class='p-6 md:w-[60%] space-y-4'>
                   <div>
-                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>ADDRESS</h3>
-                    <p class='text-[20px] text-[#B32482] underline mb-[16px]'>
-                      Office #37, Al Emadi Business Center,<br class='md:block hidden' /> C Ring Road, Doha, Qatar
+                    <h4 class='text-[11px] font-bold text-black/40 uppercase mb-1'>Address</h4>
+                    <p class='text-[14px] text-gradient underline font-medium leading-tight'>
+                      Office #37, Al Emadi Business Center, C Ring Road, Doha, Qatar
                     </p>
-                  </div>
-                  <div
-                    class='mt-[16px] md:hidden intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-                  >
                     <a
                       href='https://maps.google.com/?q=Al+Emadi+Business+Center,+C+Ring+Road,+Doha,+Qatar'
                       target='_blank'
-                      rel='noopener noreferrer'
-                      class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold'
+                      class='inline-block mt-3 px-6 py-1 border border-[#75317A33] rounded-full text-[12px] font-bold text-gradient hover:bg-[#75317A0D] transition-colors'
                     >
                       Get Directions
                     </a>
                   </div>
-
-                  <!-- Warehouse -->
-                  <div class='md:mt-[16px] mt-[32px]'>
-                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>WAREHOUSE</h3>
-                    <p class='text-[20px]'>Milaha Warehouse, Doha - Qatar</p>
+                  <div>
+                    <h4 class='text-[11px] font-bold text-black/40 uppercase mb-0.5'>Warehouse</h4>
+                    <p class='text-[14px] font-semibold text-black/80'>Milaha Warehouse, Doha - Qatar</p>
                   </div>
-
-                  <!-- Phone -->
-                  <div class='md:mt-[16px] mt-[32px]'>
-                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>PHONE</h3>
-                    <div>
-                      <a href='tel:+97444416966' class='text-[20px] text-[#B32482] underline'> +974 4441 6966 </a>
-                      <br />
-                      <a href='tel:+97433560938' class='text-[20px] text-[#B32482] underline'> +974 3356 0938 </a>
-                    </div>
+                  <div>
+                    <h4 class='text-[11px] font-bold text-black/40 uppercase mb-0.5'>Opening Hours</h4>
+                    <p class='text-[14px] font-semibold text-black/80'>Sat - Thu: 8:00 AM - 5:00 PM</p>
                   </div>
-
-                  <!-- Email -->
-                  <div class='md:mt-[16px] mt-[32px]'>
-                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>E-MAIL</h3>
-                    <a href='mailto:sales@almauna.com' class='text-[20px] text-[#B32482] underline'>
-                      sales@almauna.com
-                    </a>
-                  </div>
-
-                  <!-- Opening Hours -->
-                  <div class='md:mt-[16px] mt-[32px]'>
-                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>OPENING HOURS</h3>
-                    <p class='text-[20px]'>Sat – Thu: 8:00 AM – 5:00 PM</p>
-                  </div>
-                </div>
-
-                <div
-                  class='md:mt-[60px] md:block hidden md:mr-[70px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-                >
-                  <a
-                    href='https://maps.google.com/?q=Al+Emadi+Business+Center,+C+Ring+Road,+Doha,+Qatar'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold hover:scale-105 transition-transform duration-200 ease-in-out'
-                  >
-                    Get Directions
-                  </a>
                 </div>
               </div>
             </div>
 
-            <div class='grid grid-cols-1 lg:grid-cols-3 gap-y-[48px] lg:gap-[48px] border rounded-[8px]'>
-              <!-- Map Section -->
-              <div class='col-span-1'>
-                <LocationMap
-                  mapId='map-container-dubai'
-                  officeLocation={{
-                    name: 'Office',
-                    address:
-                      'Office 3-43, A Diyar - Office 3, Rag Biz HQ Business Centre, Al Wasl, Sheikh Zayed Rd - Dubai, United Arab Emirates.',
-                    coords: { lat: 25.1876803, lng: 55.24863 },
-                    mapUrl: 'https://maps.google.com/?q=RAG+Biz+HQ+%7C+Business+Centre+in+Dubai',
-                    color: '#dc2626',
-                  }}
-                  warehouseLocation={{
-                    name: 'Warehouse',
-                    address: 'Ocean Fair International, Dubai',
-                    coords: { lat: 25.2048, lng: 55.2708 },
-                    mapUrl: 'https://maps.google.com/?q=Ocean+Fair+International,+Dubai,+UAE',
-                    color: '#2563eb',
-                  }}
-                />
+            <!-- UAE Office -->
+            <div class='space-y-6 text-left'>
+              <h3 class='text-gradient font-bold text-[24px]'>UAE Office</h3>
+
+              <div class='flex flex-wrap gap-3'>
+                <!-- Whatspp Pill -->
+                <a
+                  href='https://wa.me/971504789777'
+                  class='flex items-center gap-3 px-4 py-2 bg-[#F9F5F8] rounded-xl group hover:scale-105 transition-transform shadow-sm'
+                >
+                  <Image src={whatsappIcon} alt='WhatsApp Icon' class='w-5 h-5' />
+                </a>
+
+                <!-- Mobile Pill -->
+                <a
+                  href='tel:+971504789777'
+                  class='flex items-center gap-3 px-4 py-2 bg-[#F9F5F8] rounded-xl group hover:scale-105 transition-transform shadow-sm min-w-[140px]'
+                >
+                  <i class='fa-solid fa-mobile-screen-button text-gradient text-xl'></i>
+                  <div class='flex flex-col items-start'>
+                    <span class='text-[9px] font-bold text-black/40 uppercase leading-none mb-1'>Mobile</span>
+                    <span class='text-[14px] font-bold text-gradient leading-none'>+971 5047 89777</span>
+                  </div>
+                </a>
+
+                <!-- Phone Pill -->
+                <a
+                  href='tel:+971 42588070'
+                  class='flex items-center gap-3 px-4 py-2 bg-[#F9F5F8] rounded-xl group hover:scale-105 transition-transform shadow-sm min-w-[140px]'
+                >
+                  <i class='fa-solid fa-phone text-gradient text-xl'></i>
+                  <div class='flex flex-col items-start'>
+                    <span class='text-[9px] font-bold text-black/40 uppercase leading-none mb-1'>Phone</span>
+                    <span class='text-[14px] font-bold text-gradient leading-none'>+971 42588070</span>
+                  </div>
+                </a>
+
+                <!-- Email Pill -->
+                <a
+                  href='mailto:sales.uae@almauna.com'
+                  class='flex items-center gap-3 px-4 py-2 bg-[#F9F5F8] rounded-xl group hover:scale-105 transition-transform shadow-sm min-w-[140px]'
+                >
+                  <i class='fa-solid fa-envelope text-gradient text-xl'></i>
+                  <div class='flex flex-col items-start'>
+                    <span class='text-[9px] font-bold text-black/40 uppercase leading-none mb-1'>E-mail</span>
+                    <span class='text-[14px] font-bold text-gradient leading-none'>sales.uae@almauna.com</span>
+                  </div>
+                </a>
               </div>
 
-              <!-- Contact Information Section -->
+              <!-- Address Card -->
               <div
-                class='md:flex flex-row justify-between items-start col-span-2 px-6 md:pl-[40px] pb-[48px] lg:py-[48px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
+                class='bg-white rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-sm border border-black/5'
               >
-                <div>
-                  <h2 class='text-[24px] text-gradient font-bold md:mb-[16px] mb-[32px]'>UAE Office</h2>
-                  <!-- Office -->
+                <!-- Map Thumbnail -->
+                <div class='md:w-[40%] min-h-[220px] bg-gray-100'>
                   <div>
-                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>ADDRESS</h3>
-                    <p class='text-[20px] text-[#B32482] underline mb-[16px]'>
-                      Office 3-43, A Diyar - Office 3,<br class='md:block hidden' /> Rag Biz HQ Business Centre, Al Wasl,
-                      Sheikh Zayed Rd - <br class='md:block hidden' />Dubai, United Arab Emirates
-                    </p>
+                    <LocationMap
+                      mapId='map-container-dubai'
+                      autoOpenInfoWindow={false}
+                      officeLocation={{
+                        name: 'Office',
+                        address:
+                          'Office 3-43, A Diyar - Office 3, Rag Biz HQ Business Centre, Al Wasl, Sheikh Zayed Rd - Dubai, United Arab Emirates.',
+                        coords: { lat: 25.1876791, lng: 55.2553689 },
+                        mapUrl: 'https://maps.google.com/?q=RAG+Biz+HQ+%7C+Business+Centre+in+Dubai',
+                        color: '#dc2626',
+                      }}
+                      warehouseLocation={{
+                        name: 'Warehouse',
+                        address: 'Ocean Fair International, Dubai',
+                        coords: { lat: 24.9351731, lng: 55.0484003 },
+                        mapUrl: 'https://maps.google.com/?q=Ocean+Fair+International,+Dubai,+UAE',
+                        color: '#2563eb',
+                      }}
+                    />
                   </div>
-                  <div
-                    class='mt-[16px] md:hidden intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-                  >
+                </div>
+                <!-- Details -->
+                <div class='p-6 md:w-[60%] space-y-4'>
+                  <div>
+                    <h4 class='text-[11px] font-bold text-black/40 uppercase mb-1'>Address</h4>
+                    <p class='text-[14px] text-gradient underline font-medium leading-tight'>
+                      Office 3-43, A Diyar - Office 3, Rag Biz HQ Business Centre, Al Wasl, Sheikh Zayed Rd - Dubai,
+                      United Arab Emirates.
+                    </p>
                     <a
                       href='https://maps.google.com/?q=RAG+Biz+HQ+%7C+Business+Centre+in+Dubai'
                       target='_blank'
-                      rel='noopener noreferrer'
-                      class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold'
+                      class='inline-block mt-3 px-6 py-1 border border-[#75317A33] rounded-full text-[12px] font-bold text-gradient hover:bg-[#75317A0D] transition-colors'
                     >
                       Get Directions
                     </a>
                   </div>
-
-                  <!-- Warehouse -->
-                  <div class='md:mt-[16px] mt-[32px]'>
-                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>WAREHOUSE</h3>
-                    <p class='text-[20px]'>Ocean Fair International, Dubai</p>
+                  <div>
+                    <h4 class='text-[11px] font-bold text-black/40 uppercase mb-0.5'>Warehouse</h4>
+                    <p class='text-[14px] font-semibold text-black/80'>Ocean Fair International, Dubai</p>
                   </div>
-
-                  <!-- Phone -->
-                  <div class='md:mt-[16px] mt-[32px]'>
-                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>PHONE</h3>
-                    <div>
-                      <a href='tel:+971504789777' class='text-[20px] text-[#B32482] underline'> +971504789777 </a>
-                      <br />
-                      <a href='tel:+971425880070' class='text-[20px] text-[#B32482] underline'> +971425880070 </a>
-                    </div>
+                  <div>
+                    <h4 class='text-[11px] font-bold text-black/40 uppercase mb-0.5'>Opening Hours</h4>
+                    <p class='text-[14px] font-semibold text-black/80'>Mon - Sat: 8:00 AM - 5:00 PM</p>
                   </div>
-
-                  <!-- Email -->
-                  <div class='md:mt-[16px] mt-[32px]'>
-                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>E-MAIL</h3>
-                    <a href='mailto:sales.uae@almauna.com' class='text-[20px] text-[#B32482] underline'>
-                      sales.uae@almauna.com
-                    </a>
-                  </div>
-
-                  <!-- Opening Hours -->
-                  <div class='md:mt-[16px] mt-[32px]'>
-                    <h3 class='text-[16px] font-bold text-black text-opacity-[50%] mb-[4px]'>OPENING HOURS</h3>
-                    <p class='text-[20px]'>Mon – Fri: 8:00 AM – 5:00 PM</p>
-                  </div>
-                </div>
-
-                <div
-                  class='md:mt-[60px] md:block hidden md:mr-[70px] intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-                >
-                  <a
-                    href='https://maps.google.com/?q=RAG+Biz+HQ+%7C+Business+Centre+in+Dubai'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    class='inline-block px-[16px] py-[8px] shadow-secondary bg-white text-gradient text-[14px] rounded-[32px] font-bold hover:scale-105 transition-transform duration-200 ease-in-out'
-                  >
-                    Get Directions
-                  </a>
                 </div>
               </div>
             </div>
