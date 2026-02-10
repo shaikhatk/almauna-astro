@@ -99,20 +99,20 @@ const footerSections = [
           class='w-[141px] h-[91px] object-cover object-center'
         />
       </a>
-      <div class='flex items-start'>
+      <div class='flex items-start gap-2'>
         <a href='https://www.facebook.com/almauna.qa' target='_blank' aria-label='Facebook'>
-          <img
-            src='/src/assets/images/facebook.svg'
-            alt='Facebook'
-            class='w-[44px] h-[44px] object-cover object-center'
-          />
+          <div
+            class='w-[36px] h-[36px] rounded-full border border-white flex items-center justify-center hover:bg-opacity-20 transition-all duration-200'
+          >
+            <i class='fa-brands fa-facebook-f text-white text-[18px]'></i>
+          </div>
         </a>
         <a href='https://www.instagram.com/almauna_store/' target='_blank' aria-label='Instagram'>
-          <img
-            src='/src/assets/images/insta.svg'
-            alt='Instagram'
-            class='w-[44px] h-[44px] object-cover object-center'
-          />
+          <div
+            class='w-[36px] h-[36px] rounded-full border border-white flex items-center justify-center hover:bg-opacity-20 transition-all duration-200'
+          >
+            <i class='fa-brands fa-instagram text-white text-[18px]'></i>
+          </div>
         </a>
       </div>
     </div>
@@ -127,20 +127,20 @@ const footerSections = [
           class='w-[141px] h-[91px] object-cover object-center'
         /></a
       >
-      <div class='flex mt-[32px] justify-start'>
+      <div class='flex mt-[32px] justify-start gap-2'>
         <a href='https://www.facebook.com/almauna.qa' target='_blank' aria-label='Facebook'>
-          <img
-            src='/src/assets/images/facebook.svg'
-            alt='Facebook'
-            class='w-[44px] h-[44px] object-cover object-center'
-          />
+          <div
+            class='w-[36px] h-[36px] rounded-full border border-white flex items-center justify-center hover:bg-opacity-20 transition-all duration-200'
+          >
+            <i class='fa-brands fa-facebook-f text-white text-[18px]'></i>
+          </div>
         </a>
         <a href='https://www.instagram.com/almauna_store/' target='_blank' aria-label='Instagram'>
-          <img
-            src='/src/assets/images/insta.svg'
-            alt='Instagram'
-            class='w-[44px] h-[44px] object-cover object-center'
-          />
+          <div
+            class='w-[36px] h-[36px] rounded-full border border-white flex items-center justify-center hover:bg-opacity-20 transition-all duration-200'
+          >
+            <i class='fa-brands fa-instagram text-white text-[18px]'></i>
+          </div>
         </a>
       </div>
     </div>
@@ -170,7 +170,9 @@ const footerSections = [
             <div class='text-[16px] space-y-1 text-[#FFFFFF]'>
               <p>{section.details.address}</p>
               {section.details.phones.map((phone) => (
-                <p>{phone}</p>
+                <a href={`tel:${phone.replace(/\s/g, '')}`} class='hover:underline block'>
+                  {phone}
+                </a>
               ))}
               <a href={`mailto:${section.details.email}`} class='hover:underline block'>
                 {section.details.email}

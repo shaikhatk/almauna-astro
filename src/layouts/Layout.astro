@@ -12,6 +12,7 @@ import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
+import Loader from '~/components/common/Loader.astro';
 
 // Comment the line below to disable View Transitions
 import { ClientRouter } from 'astro:transitions';
@@ -52,8 +53,20 @@ const { language, textDirection } = I18N;
   </head>
 
   <body class="antialiased text-page bg-page tracking-tight">
+    <Loader />
     <slot />
 
     <BasicScripts />
+    <script is:inline>
+      window.addEventListener('load', function () {
+        const loader = document.getElementById('page-loader');
+        if (loader) {
+          loader.style.opacity = '0';
+          setTimeout(() => {
+            loader.style.display = 'none';
+          }, 500);
+        }
+      });
+    </script>
   </body>
 </html>

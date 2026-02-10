@@ -1,0 +1,53 @@
+<div id="page-loader">
+  <div class="progress-bar"></div>
+</div>
+
+<style>
+  #page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--aw-color-background, white);
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+  }
+
+  .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(to right, #75317a, #b32482, #75317a);
+    background-size: 200% 100%;
+    animation: progress-animation 1.5s linear infinite;
+  }
+
+  @keyframes progress-animation {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+</style>
+
+<script is:inline>
+  function hideLoader() {
+    const loader = document.getElementById('page-loader');
+    if (loader) {
+      // First, fade out the loader
+      loader.style.opacity = '0';
+      // Then, after the transition, remove it from the DOM
+      setTimeout(() => {
+        loader.remove();
+      }, 500); // Must match the CSS transition duration
+    }
+  }
+
+  // Use astro:page-load event which fires on initial load and after view transitions
+  document.addEventListener('astro:page-load', hideLoader);
+</script>

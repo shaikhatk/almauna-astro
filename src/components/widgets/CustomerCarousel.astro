@@ -100,6 +100,16 @@ const bottomRowLogosData = [
     background-color: white;
     border-radius: 8px;
   }
+
+  @media (max-width: 767px) {
+    .carousel-row {
+      gap: 32px;
+    }
+    .carousel-item {
+      width: 100px;
+      height: 100px;
+    }
+  }
 </style>
 
 <section class='pt-[58px] pb-[120px]'>
@@ -120,14 +130,26 @@ const bottomRowLogosData = [
           {
             topRowLogosData.map((logo) => (
               <div class='carousel-item'>
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={180}
+                  height={100}
+                  class='object-contain h-[80px] w-[120px] lg:h-[140px] lg:w-[180px]'
+                />
               </div>
             ))
           }
           {
             topRowLogosData.map((logo) => (
               <div class='carousel-item'>
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={180}
+                  height={100}
+                  class='object-contain h-[80px] w-[120px] lg:h-[140px] lg:w-[180px]'
+                />
               </div>
             ))
           }
@@ -140,14 +162,26 @@ const bottomRowLogosData = [
           {
             bottomRowLogosData.map((logo) => (
               <div class='carousel-item'>
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={180}
+                  height={100}
+                  class='object-contain h-[80px] w-[120px] lg:h-[140px] lg:w-[180px]'
+                />
               </div>
             ))
           }
           {
             bottomRowLogosData.map((logo) => (
               <div class='carousel-item'>
-                <Image src={logo.src} alt={logo.alt} width={180} height={100} class='object-contain' />
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={180}
+                  height={100}
+                  class='object-contain h-[80px] w-[120px] lg:h-[140px] lg:w-[180px]'
+                />
               </div>
             ))
           }

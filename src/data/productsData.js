@@ -3,7 +3,7 @@ export const products = [
   {
     id: 'maharani-1kg-1',
     title: 'Rice Suitable for Diabetics.',
-    image: '/src/assets/images/maharani/maharani1kg.jpg',
+    image: '/src/assets/images/maharani/maharani1kg.webp',
     description:
       'Premium diabetic-friendly basmati rice, 1kg single pack is a rice is ideal for health-conscious consumers, individuals managing diabetes, and families looking for a low-GI (glycemic index) staple that fits seamlessly into everyday meals. It is carefully processed to retain natural nutrients while reducing starch content, making it a smart alternative to regular white rice.',
     packaging: '1kg',
@@ -29,7 +29,7 @@ export const products = [
   {
     id: 'maharani-5kg-1',
     title: 'Rice Suitable for Diabetics 5kg',
-    image: '/src/assets/images/maharani/maharani5kg.jpg',
+    image: '/src/assets/images/maharani/maharani5kg.webp',
     description:
       'Premium diabetic-friendly basmati rice, 5kg single pack is a rice is ideal for health-conscious consumers, individuals managing diabetes, and families looking for a low-GI (glycemic index) staple that fits seamlessly into everyday meals. It is carefully processed to retain natural nutrients while reducing starch content, making it a smart alternative to regular white rice.',
     packaging: '5kg',
@@ -57,7 +57,7 @@ export const products = [
   {
     id: 'acacia-honey-300g',
     title: 'Natural Acacia Honey',
-    image: '/src/assets/images/honig-ozbal/acacia-honey.jpg',
+    image: '/src/assets/images/honig-ozbal/acacia-honey.webp',
     description:
       'Acacia honey is ideal as an ingredient for your favorite breakfast items, offering contrasting flavors. It              is rich in antioxidants and has anti-inflammatory properties. With its light, sweet, and delicate taste, it serves as a healthy alternative to refined sugar.',
     packaging: '300g',
@@ -84,7 +84,7 @@ export const products = [
   {
     id: 'black-forest-honey-300g',
     title: 'Natural Black Forest Honey',
-    image: '/src/assets/images/honig-ozbal/black-forest-honey.jpg',
+    image: '/src/assets/images/honig-ozbal/black-forest-honey.webp',
     description:
       'Black forest honey has a strong flavor and intense aroma. It Aids in reducing stomach acid in the digestive system and cures stomach ulcers.',
     packaging: '300g',
@@ -109,7 +109,7 @@ export const products = [
   {
     id: 'blossom-honey-300g',
     title: 'Natural Blossom Honey',
-    image: '/src/assets/images/honig-ozbal/blossom-honey.jpg',
+    image: '/src/assets/images/honig-ozbal/blossom-honey.webp',
     description:
       'Blossom Honey has a refreshing sweetness with a hint of citrus flavour to it. It has a strong floral scent and tastes very pleasant. It is good for drizzling on your pancakes, biscuits or juices. It is a wonderful addition to your beverages.',
     packaging: '300g',
@@ -136,7 +136,7 @@ export const products = [
   {
     id: 'vitabella-cornflakes-225g',
     title: 'Organic & Gluten free corn flakes',
-    image: '/src/assets/images/vitabella/vitabella-1.jpg',
+    image: '/src/assets/images/vitabella/vitabella-1.webp',
     description:
       'Vitabella Corn Flakes are made from high-quality, GMO-free Italian corn, gently cooked to deliver a light, crispy texture and natural taste. Perfect for a wholesome breakfast, enjoy them with milk, yogurt, or fresh fruits for a delicious start to your day.',
     packaging: '225g',
@@ -165,7 +165,7 @@ export const products = [
   {
     id: 'vitabella-choco-25g',
     title: 'Choco & Hazelnut Pillow Organic & GlutenFree',
-    image: '/src/assets/images/vitabella/vitabella-2.jpg',
+    image: '/src/assets/images/vitabella/vitabella-2.webp',
     description:
       'Vitabella Choco & Hazelnut Pillows are gluten-free cereal pillows filled with a rich and creamy chocolate-hazelnut center, made with organic ingredients for a delicious breakfast or snack. Enjoy their light, crispy texture with milk, yogurt, or straight from the pack for a sweet energy boost any time of day.',
     packaging: '25g',
@@ -192,7 +192,7 @@ export const products = [
   {
     id: 'vitabella-choco-crispies-25g',
     title: 'Choco Crispies Organic and Gluten Free',
-    image: '/src/assets/images/vitabella/vitabella-3.jpg',
+    image: '/src/assets/images/vitabella/vitabella-3.webp',
     description:
       'Vitabella Choco Crispies are gluten-free, vegan puffed rice cereal coated with rich cocoa for a deliciously crunchy, chocolatey breakfast. Perfect with milk or yogurt, they turn your bowl into a chocolaty treat while keeping it light and wholesome.',
     packaging: '25g',
@@ -219,7 +219,7 @@ export const products = [
   {
     id: 'vitabella-cornflakes-25g',
     title: 'Organic & Gluten free corn flakes',
-    image: '/src/assets/images/vitabella/vitabella-4.jpg',
+    image: '/src/assets/images/vitabella/vitabella-4.webp',
     description:
       'Vitabella Corn Flakes are made from high-quality, GMO-free Italian corn, gently cooked to deliver a light, crispy texture and natural taste. Perfect for a wholesome breakfast, enjoy them with milk, yogurt, or fresh fruits for a delicious start to your day.',
     packaging: '25g',
@@ -246,7 +246,7 @@ export const products = [
   {
     id: 'vitabella-chia-30g',
     title: 'Granola with Chia & Seeds Organic & Gluten Free',
-    image: '/src/assets/images/vitabella/vitabella-5.jpg',
+    image: '/src/assets/images/vitabella/vitabella-5.webp',
     description: 'Vitabella Granola with Chia & Seeds Organic & Gluten Free 30g',
     packaging: '30g',
     orgin: 'Italy',
@@ -272,7 +272,7 @@ export const products = [
   {
     id: 'vitabella-chia-25g',
     title: 'Granola with Chia, Sunflower & Pumpking Seeds',
-    image: '/src/assets/images/vitabella/vitabella-6.jpg',
+    image: '/src/assets/images/vitabella/vitabella-6.webp',
     description: 'Vitabella Granola with Chia, Sunflower & Pumpking Seeds 25g',
     packaging: '25g',
     orgin: 'Italy',
@@ -300,7 +300,7 @@ export const products = [
   {
     id: 'tradekey-corn-oil-5l-4',
     title: 'Pure Corn Oil',
-    image: '/src/assets/images/tradekey/tradekey.jpeg',
+    image: '/src/assets/images/tradekey/tradekey.webp',
     description:
       'Tradekey Corn Oil is available in a wide range of packaging to meet both household and Horeca needs.Partnered with Al Mauna – Guaranteed availability, reliable supply chain, and responsive customer service in UAE and Qatar.',
     packaging: '5L',
@@ -329,7 +329,7 @@ export const products = [
   {
     id: 'april-mayonnaise-3-7l',
     title: 'Mayonnaise',
-    image: '/src/assets/images/april-mayo/april.jpeg',
+    image: '/src/assets/images/april-mayo/april.webp',
     description: 'Premium mayonnaise crafted with quality ingredients, 3.78L',
     packaging: '3.78L x 4',
     orgin: 'UAE',
@@ -342,7 +342,7 @@ export const products = [
   {
     id: 'shraddha-cow-ghee-1l',
     title: 'Cow Ghee',
-    image: '/src/assets/images/shradha/shradha-ghee.png',
+    image: '/src/assets/images/shradha/shradha-ghee.webp',
     description:
       'Ghee is prepared by melting and simmering unsalted butter until all the water settles at the bottom. Ghee is healthy and used in many traditional Indian dishes, as an ideal for frying.',
     packaging: '15 KG Tin, and 1 Ltr',
@@ -371,7 +371,7 @@ export const products = [
   {
     id: 'shraddha-cow-a2ghee-1l',
     title: 'Cow A2 Ghee',
-    image: '/src/assets/images/shradha/a2-ghee.png',
+    image: '/src/assets/images/shradha/a2-ghee.webp',
     description:
       'Shraddha Premium A2 Ghee is  made through Vedic process of making Ghee from the Gir Cow milk. From procuring the milk to making ghee, at all stages, the process are maintained as per ancient indian vedic method so the virtue of the ghee are maintained.',
     packaging: '1L',
